@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  image_path: MyString
+  colors: MyString
+  attack: 1
+  defense: 1
+  desc: MyString
+
+two:
+  image_path: MyString
+  colors: MyString
+  attack: 1
+  defense: 1
+  desc: MyString

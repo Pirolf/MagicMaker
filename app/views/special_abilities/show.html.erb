@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @special_ability.name %>
+</p>
+
+<p>
+  <strong>Rule:</strong>
+  <%= @special_ability.rule %>
+</p>
+
+<%= link_to 'Edit', edit_special_ability_path(@special_ability) %> |
+<%= link_to 'Back', special_abilities_path %>
