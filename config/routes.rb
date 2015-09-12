@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :decks
   resources :cards
   resources :special_abilities
   # The priority is based upon order of creation: first created -> highest priority.

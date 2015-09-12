@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150911033247) do
+ActiveRecord::Schema.define(version: 20150912020349) do
+
+  create_table "card_enitities", force: :cascade do |t|
+    t.integer  "deck_id"
+    t.integer  "card_id"
+    t.integer  "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "cards", force: :cascade do |t|
     t.string   "image_path"
@@ -23,11 +31,25 @@ ActiveRecord::Schema.define(version: 20150911033247) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "decks", force: :cascade do |t|
+    t.string   "name"
+    t.string   "desc"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "special_abilities", force: :cascade do |t|
     t.string   "name"
     t.string   "rule"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "special_ability_entities", force: :cascade do |t|
+    t.integer  "card_entity_id"
+    t.integer  "special_ability_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
 end
