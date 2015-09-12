@@ -28,7 +28,7 @@ class CardsController < ApplicationController
 
     respond_to do |format|
       if @card.save
-        format.html { redirect_to @card, notice: 'Card was successfully created.' }
+        format.html { redirect_to @card, notice: SpecialAbilityEntity.all.length.to_s + "  successfully created." }
         format.json { render :show, status: :created, location: @card }
       else
         format.html { render :new }
@@ -69,6 +69,6 @@ class CardsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def card_params
-      params.require(:card).permit(:image_path, :colors, :attack, :defense, :desc)
+      params.require(:card).permit(:image_path, :colors, :attack, :defense, :desc, :special_ability_ids => [])
     end
 end

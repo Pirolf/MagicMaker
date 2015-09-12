@@ -10,7 +10,10 @@
       </ul>
     </div>
   <% end %>
-
+  <div class="field">
+      <div>Special Abilities</div>
+        <%= collection_check_boxes('card', :special_ability_ids, SpecialAbility.all, :id, :name) %>
+  </div>
   <div class="field">
     <%= f.label :image_path %><br>
     <%= f.text_field :image_path %>
