@@ -25,11 +25,6 @@ class CardsController < ApplicationController
   # POST /cards.json
   def create
     @card = Card.new(card_params)
-=begin
-    params[:color][:color_ids].each do |color_id|
-      @card.colors.build({:color_id => color_id})
-    end
-=end
     respond_to do |format|
       if @card.save
         success_notice = "success: sae " + SpecialAbilityEntity.all.length.to_s + ', color ' + Color.all.length.to_s
@@ -74,7 +69,7 @@ class CardsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def card_params
-      params.require(:card).permit(:image_path, :attack, :defense, :desc, 
-        :special_ability_ids => [], :color_ids => [])
+      params.require(:card).permit(:image_path, :attack, :defense, :desc, :color,
+        :special_ability_ids => [])
     end
 end

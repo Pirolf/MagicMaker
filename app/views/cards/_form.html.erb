@@ -20,7 +20,7 @@
   </div>
   <div class="field">
     <div>Colors</div>
-    <%= collection_check_boxes('card', :color_ids, Color.all, :id, :color_name) %>
+    <%= collection_select('card', :color, Color.all, :color_name, :color_name) %>
   </div>
   <div class="field">
     <%= f.label :attack %><br>
