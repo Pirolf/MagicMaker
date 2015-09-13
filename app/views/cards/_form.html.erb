@@ -19,8 +19,8 @@
     <%= f.text_field :image_path %>
   </div>
   <div class="field">
-    <%= f.label :colors %><br>
-    <%= f.text_field :colors %>
+    <div>Colors</div>
+    <%= collection_check_boxes('card', :color_ids, Color.all, :id, :color_name) %>
   </div>
   <div class="field">
     <%= f.label :attack %><br>

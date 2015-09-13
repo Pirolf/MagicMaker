@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150912080517) do
+ActiveRecord::Schema.define(version: 20150913062705) do
 
   create_table "card_enitities", force: :cascade do |t|
     t.integer  "deck_id"
@@ -23,12 +23,24 @@ ActiveRecord::Schema.define(version: 20150912080517) do
 
   create_table "cards", force: :cascade do |t|
     t.string   "image_path"
-    t.string   "colors"
     t.integer  "attack"
     t.integer  "defense"
     t.string   "desc"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "color_entities", force: :cascade do |t|
+    t.integer  "color_id"
+    t.integer  "card_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "color_entities", ["color_id"], name: "index_color_entities_on_color_id"
+
+  create_table "colors", force: :cascade do |t|
+    t.string "color_name"
   end
 
   create_table "decks", force: :cascade do |t|
