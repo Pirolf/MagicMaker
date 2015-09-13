@@ -19,8 +19,23 @@
     <%= f.text_field :image_path %>
   </div>
   <div class="field">
-    <div>Colors</div>
+    <div>Color</div>
     <%= collection_select('card', :color, Color.all, :color_name, :color_name) %>
+  </div>
+  <div class="field">
+    <div>Mana Cost</div>
+    <%= f.label 'Red' %>
+    <%= f.number_field :mana_red %>
+    <%= f.label 'Green' %>
+    <%= f.number_field :mana_green %>
+    <%= f.label 'Blue' %>
+    <%= f.number_field :mana_blue %>
+    <%= f.label 'Black' %>
+    <%= f.number_field :mana_black %>
+    <%= f.label 'White' %>
+    <%= f.number_field :mana_white %>
+    <%= f.label 'None' %>
+    <%= f.number_field :mana_none %>
   </div>
   <div class="field">
     <%= f.label :attack %><br>
