@@ -4,11 +4,17 @@
 .card_container{
 	position:relative;
 	margin-left: 50px;
+	.card_art_container{
+		background-size: cover;
+		background-position: center;
+		width:314px;
+		height:230px;
+		position: absolute;
+		top: 60px;
+		left: 30px;
+		.card_art{
+			
+		}
+	}
 }
-.card_art{
-	width:314px;
-	height:230px;
-	position: absolute;
-	top: 60px;
-	left: 30px;
-}
+

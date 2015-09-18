@@ -19,7 +19,7 @@
   </div>
   <div class="card_container">
     <%= image_tag('red/card_frame.jpg', class: "card_frame") %>
-    <%= image_tag @card.image_art.url, alt: "No Image", class: "card_art" %>
+    <%= content_tag(:div, nil, class: "card_art_container", "data-art-url" => @card.image_art.url)%>
   </div>
   <div id="target">
  </div>
