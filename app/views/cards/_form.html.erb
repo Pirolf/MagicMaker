@@ -15,13 +15,19 @@
         <%= collection_check_boxes('card', :special_ability_ids, SpecialAbility.all, :id, :name) %>
   </div>
   <div class="field">
-    <%= f.file_field :image_art %>
+    <%= f.file_field :image_art, id: "card_image_file_field" %>
   </div>
+  <div class="card_container">
+    <%= image_tag('red/card_frame.jpg', class: "card_frame") %>
+    <%= image_tag @card.image_art.url, alt: "No Image", class: "card_art" %>
+  </div>
+  <div id="target">
+ </div>
   <div class="field">
     <div>Color</div>
     <%= collection_select('card', :color, Color.all, :color_name, :color_name) %>
   </div>
-  <%= image_tag @card.image_art.url %>
+  
   <div class="field">
     <div>Mana Cost</div>
     <%= f.label 'Red' %>
