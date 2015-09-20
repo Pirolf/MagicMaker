@@ -17,15 +17,22 @@
   <div class="field">
     <%= f.file_field :image_art, id: "card_image_file_field" %>
   </div>
+
   <div class="card_container">
-    <%= image_tag('red/card_frame.jpg', class: "card_frame") %>
+    <%= image_tag("white/frame.jpg", class: "card_frame", id: "card_frame", "data-image-url" => compute_asset_path('images')) %>
     <%= content_tag(:div, nil, class: "card_art_container", "data-art-url" => @card.image_art.url)%>
+    <div class="attack_defense_container" >
+      <%= image_tag("red/attack_defense_box.png", id: "attack_defense_box") %>
+      <div id="attack_defense">3/4</div>
+    </div>
+    <div id="card_name">Totem-Guide Hartebeest</div>
+    <div id="type_subtype"></div>
+    <p id="card_desc"></p>
   </div>
-  <div id="target">
- </div>
+
   <div class="field">
     <div>Color</div>
-    <%= collection_select('card', :color, Color.all, :color_name, :color_name) %>
+    <%= collection_select('card', :color, Color.all, :color_name, :color_name, id: "card_color") %>
   </div>
   
   <div class="field">

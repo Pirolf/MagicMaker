@@ -1,19 +1,83 @@
 // Place all the styles related to the Cards controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+$card_width: 375px;
+$card_height: 525px;
+$ad_width_ratio: 10.6/63.0;
+$art_width: 307px;
+$art_height: 226px;
+$ad_left_ratio: 285.58/375;
+$ad_bottom_ratio: 72.6/525;
+@font-face {
+	font-family: 'matrixb'; /*a name to be used later*/
+    	src: url('~/public/fonts/matrixb.ttf'); /*URL to font*/
+}
+@font-face{
+	font-family: 'matrix-bold';
+	src: url('~/public/fonts/matrix-bold.ttf'); 
+}
+@font-face{
+	font-family: 'mplain';
+	src: url('~/public/fonts/mplaintin.ttf');
+}
+@font-face{
+	font-family: 'beleren-bold';
+	src: url('~/public/fonts/beleren-bold.ttf');
+}
+@font-face{
+	font-family: 'belerensmallcaps-bold';
+	src: url('~/public/fonts/belerensmallcaps-bold.ttf');
+}
+@font-face{
+	font-family: 'keyrune';
+	src: url('~/public/fonts/keyrune.ttf');
+}
 .card_container{
 	position:relative;
 	margin-left: 50px;
+	#card_frame{
+		width: $card_width;
+	}
 	.card_art_container{
 		background-size: cover;
 		background-position: center;
-		width:314px;
-		height:230px;
+		width: $art_width;
+		height: $art_height;
 		position: absolute;
-		top: 60px;
-		left: 30px;
-		.card_art{
-			
+		top: 63.5px;
+		left: 34px;
+	}
+	#card_name{
+		font-family: 'beleren-bold';
+		font-size: 1.4em;
+		font-weight:bold;
+		color: #000;
+		position: absolute;
+		top: 6%;
+		left: 6.5%;
+	}
+	#attack_defense{
+		font-size: 2em;
+		font-family: 'matrix-bold';
+		color: #000;
+		position: absolute;
+		top: 40%;
+		left: 50%;
+		transform: translate(-50%, -40%);
+	}
+	#attack_defense_box{
+		display: block;
+	}
+	.attack_defense_container{
+		position:relative;
+		width: $ad_width_ratio * $card_width;
+		height: auto;
+		left: $ad_left_ratio* $card_width;
+		bottom: $ad_bottom_ratio * $card_height;
+		//text-align:center;
+		#attack_defense_box{
+			width: inherit;
+			height: auto;
 		}
 	}
 }
