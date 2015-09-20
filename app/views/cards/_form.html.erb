@@ -18,16 +18,17 @@
     <%= f.file_field :image_art, id: "card_image_file_field" %>
   </div>
 
-  <div class="card_container">
-    <%= image_tag("white/frame.jpg", class: "card_frame", id: "card_frame", "data-image-url" => compute_asset_path('images')) %>
+  <div class="card_container" id= "card_container" 
+    data-image-url = <%= compute_asset_path('images') %>>
+    <%= image_tag("white/frame.jpg", class: "card_frame", id: "card_frame") %>
     <%= content_tag(:div, nil, class: "card_art_container", "data-art-url" => @card.image_art.url)%>
     <div class="attack_defense_container" >
-      <%= image_tag("red/attack_defense_box.png", id: "attack_defense_box") %>
+      <%= image_tag("white/attack_defense_box.png", id: "attack_defense_box") %>
       <div id="attack_defense">3/4</div>
     </div>
-    <div id="card_name">Totem-Guide Hartebeest</div>
-    <div id="type_subtype"></div>
-    <p id="card_desc"></p>
+    <div class="type_name_text" id="card_name">Totem-Guide Hartebeest</div>
+    <div class="type_name_text" id="type_subtype">Creature - Human Artificer</div>
+    <p id="card_desc">Spread kitty litter all over house knock over christmas tree for chase red laser dot chirp at birds, yet cough furball, and roll on the floor purring your whiskers off run in circles. Mark territory see owner, run in terror. Make muffins eat grass, throw it back up so caticus cuteicus immediately regret falling into bathtub yet chirp at birds. Give attitude loves cheeseburgers. If it fits, i sits. Get video posted to internet for chasing red dot. Throwup on your pillow play time. Chase red laser dot behind the couch, knock over christmas tree ears back wide eyed hiss at vacuum cleaner caticus cuteicus or hiss at vacuum cleaner. Swat at dog cough furball, chew on cable.</p>
   </div>
 
   <div class="field">

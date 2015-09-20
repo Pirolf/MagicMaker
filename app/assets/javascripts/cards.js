@@ -1,3 +1,5 @@
+var images_path;
+
 $(function() {
   pageReady();
 });
@@ -7,8 +9,10 @@ $(document).on('change', '#card_image_file_field', function(){
 });
 $(document).on('change', '#card_color', function(){
   loadCardFrame();
+  loadAttackDefenseBox();
 });
 function pageReady(){
+  images_path = $('.card_container').attr('data-image-url');
   loadArt();
 }
 function loadArt(){
@@ -32,12 +36,21 @@ function previewImage(fileInput){
 function loadCardFrame(){
   var selectedColor = $('#card_color').val().toLowerCase();
   //get card frame url
-  var cardFrameUrl = $('#card_frame').attr('data-image-url') + '/' + selectedColor + '/frame.jpg';
-  console.log(cardFrameUrl);
+  var cardFrameUrl = images_path + '/' + selectedColor + '/frame.jpg';
   //$('#card_frame').attr('src', cardFrameUrl);
   var frameImage = new Image();
   frameImage.onload = function(){
     $('#card_frame').attr('src', cardFrameUrl);
   }
   frameImage.src = cardFrameUrl;
+}
+
+function loadAttackDefenseBox(){
+  var selectedColor = $('#card_color').val().toLowerCase();
+  var attackDefenseBoxUrl = images_path + '/' + selectedColor + '/attack_defense_box.png';
+  var adImage = new Image();
+  adImage.onload = function(){
+    $('#attack_defense_box').attr('src', attackDefenseBoxUrl);
+  }
+  adImage.src = attackDefenseBoxUrl;
 }

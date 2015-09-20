@@ -4,33 +4,40 @@
 $card_width: 375px;
 $card_height: 525px;
 $ad_width_ratio: 10.6/63.0;
-$art_width: 307px;
-$art_height: 226px;
+$art_width: 310px;
+$art_height: 228px;
 $ad_left_ratio: 285.58/375;
 $ad_bottom_ratio: 72.6/525;
+$desc_height_ratio: 23.3/95.4;
+
+$text_left_align: 36.3px;
 @font-face {
 	font-family: 'matrixb'; /*a name to be used later*/
-    	src: url('~/public/fonts/matrixb.ttf'); /*URL to font*/
+    	src: url('/fonts/matrixb.ttf'); /*URL to font*/
 }
 @font-face{
 	font-family: 'matrix-bold';
-	src: url('~/public/fonts/matrix-bold.ttf'); 
+	src: url('/fonts/matrix-bold.ttf'); 
 }
 @font-face{
-	font-family: 'mplain';
-	src: url('~/public/fonts/mplaintin.ttf');
+	font-family: 'mplantin';
+	src: url('/fonts/mplantin.ttf');
 }
 @font-face{
 	font-family: 'beleren-bold';
-	src: url('~/public/fonts/beleren-bold.ttf');
+	src: url('/fonts/beleren-bold.ttf');
 }
 @font-face{
 	font-family: 'belerensmallcaps-bold';
-	src: url('~/public/fonts/belerensmallcaps-bold.ttf');
+	src: url('/fonts/belerensmallcaps-bold.ttf');
 }
 @font-face{
 	font-family: 'keyrune';
-	src: url('~/public/fonts/keyrune.ttf');
+	src: url('/fonts/keyrune.ttf');
+}
+.type_name_text{
+	font-family: 'beleren-bold';
+	color: #000;
 }
 .card_container{
 	position:relative;
@@ -38,23 +45,39 @@ $ad_bottom_ratio: 72.6/525;
 	#card_frame{
 		width: $card_width;
 	}
+	#card_desc{
+		position: absolute;
+		width:$art_width - 7px; //save some room in right
+		height: $desc_height_ratio * $card_height;
+		left: $text_left_align;
+		top: 320px;
+		font-family: 'mplantin';
+		font-size: 1.1em;
+		color: #000;
+		text-overflow: ellipsis;
+		overflow: hidden;
+	}
+	#type_subtype{
+		position:absolute;
+		left: $text_left_align;
+		bottom: 248px;
+		font-size: 1.15em;
+	}
 	.card_art_container{
 		background-size: cover;
 		background-position: center;
 		width: $art_width;
 		height: $art_height;
 		position: absolute;
-		top: 63.5px;
-		left: 34px;
+		top: 63px;
+		left: 32px;
 	}
 	#card_name{
-		font-family: 'beleren-bold';
 		font-size: 1.4em;
 		font-weight:bold;
-		color: #000;
 		position: absolute;
 		top: 6%;
-		left: 6.5%;
+		left: $text_left_align;
 	}
 	#attack_defense{
 		font-size: 2em;
