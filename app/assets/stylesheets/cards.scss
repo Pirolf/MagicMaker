@@ -3,9 +3,12 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 $card_width: 375px;
 $card_height: 525px;
-$ad_width_ratio: 10.6/63.0;
+
 $art_width: 310px;
 $art_height: 228px;
+$art_left_align: 32px;
+
+$ad_width_ratio: 10.6/63.0;
 $ad_left_ratio: 285.58/375;
 $ad_bottom_ratio: 72.6/525;
 $desc_height_ratio: 23.3/95.4;
@@ -57,6 +60,18 @@ $text_left_align: 36.3px;
 		text-overflow: ellipsis;
 		overflow: hidden;
 	}
+	#mana_symbols_container{
+		position: absolute;
+		top: 33px;
+		left: $art_left_align;
+		width: $art_width;
+	}
+	.mana_symbol{
+		position: absolute;
+		width: 19px;
+		height: auto;
+		right: -2px;
+	}
 	#type_subtype{
 		position:absolute;
 		left: $text_left_align;
@@ -70,7 +85,7 @@ $text_left_align: 36.3px;
 		height: $art_height;
 		position: absolute;
 		top: 63px;
-		left: 32px;
+		left: $art_left_align;
 	}
 	#card_name{
 		font-size: 1.4em;

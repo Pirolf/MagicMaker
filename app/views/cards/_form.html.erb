@@ -29,6 +29,9 @@
     <div class="type_name_text" id="card_name">Totem-Guide Hartebeest</div>
     <div class="type_name_text" id="type_subtype">Creature - Human Artificer</div>
     <p id="card_desc">Spread kitty litter all over house knock over christmas tree for chase red laser dot chirp at birds, yet cough furball, and roll on the floor purring your whiskers off run in circles. Mark territory see owner, run in terror. Make muffins eat grass, throw it back up so caticus cuteicus immediately regret falling into bathtub yet chirp at birds. Give attitude loves cheeseburgers. If it fits, i sits. Get video posted to internet for chasing red dot. Throwup on your pillow play time. Chase red laser dot behind the couch, knock over christmas tree ears back wide eyed hiss at vacuum cleaner caticus cuteicus or hiss at vacuum cleaner. Swat at dog cough furball, chew on cable.</p>
+    <div id="mana_symbols_container">
+      <%= image_tag("symbols/red.png", class: "mana_symbol") %>
+    </div>
   </div>
 
   <div class="field">
@@ -39,17 +42,17 @@
   <div class="field">
     <div>Mana Cost</div>
     <%= f.label 'Red' %>
-    <%= f.number_field :mana_red %>
+    <%= f.number_field :mana_red, min: 0, max: 9 %>
     <%= f.label 'Green' %>
-    <%= f.number_field :mana_green %>
+    <%= f.number_field :mana_green, min: 0, max: 9 %>
     <%= f.label 'Blue' %>
-    <%= f.number_field :mana_blue %>
+    <%= f.number_field :mana_blue, min: 0, max: 9 %>
     <%= f.label 'Black' %>
-    <%= f.number_field :mana_black %>
+    <%= f.number_field :mana_black, min: 0, max: 9 %>
     <%= f.label 'White' %>
-    <%= f.number_field :mana_white %>
-    <%= f.label 'None' %>
-    <%= f.number_field :mana_none %>
+    <%= f.number_field :mana_white, min: 0, max: 9 %>
+    <%= f.label 'Colorless' %>
+    <%= f.number_field :mana_none, min: 0, max: 9%>
   </div>
   <div class="field">
     <%= f.label :attack %><br>
