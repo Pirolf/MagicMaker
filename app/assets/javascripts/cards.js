@@ -3,6 +3,7 @@ MagicMaker.Paths = {
   imagesPath: ''
 }
 MagicMaker.Utils = {
+  isInt: function(n) { return parseInt(n, 10) === n },
   previewImage: function(fileInput, imageContainer){
     if (fileInput && fileInput.files[0]){
       var reader = new FileReader();
@@ -21,6 +22,9 @@ var Card = function(){
   this.colorSelect = $('#card_color');
   this.frameImage = $('#card_frame');
   this.attackDefenseBox = $('#attack_defense_box');
+  this.mana_costs = $('.mana_cost');
+  this.manaSymbolsContainer = $('#mana_symbols_container');
+
   this.loadArt = function(){
     //preload
     var artImage = new Image();
@@ -61,6 +65,55 @@ $(document).on('page:load', pageReady);
 $(document).on('change', '#card_image_file_field', function(){
   MagicMaker.Utils.previewImage(event.target, $('.card_art_container'));
 });
+$(document).on('change', '.mana_cost', function(){
+  console.log("mana changed");
+  //get all mana costs
+  var mana_costs = {};
+  var colorNames = ['red', 'green', 'blue', 'black', 'white', 'colorless'];
+  for (var i=0; i < colorNames.length ;i++){
+    var colorName = colorNames[i];
+    var mana_cost = $('#mana_' + colorName).val();
+    mana_cost = parseInt(mana_cost, 10);
+    if (!isNaN(mana_cost) && mana_cost > 0){
+      mana_costs[colorName] = mana_cost;
+    }
+  }
+  for (var mana_color in mana_costs){
+    if (mana_costs.hasOwnProperty(mana_color)){
+      console.log(mana_color, ': ', mana_costs[mana_color]);
+    }
+  }
+  //build symbols
+  MagicMaker.View.card.manaSymbolsContainer.empty();
+  var symbolsArr = [];
+  var colorlessMana = null;
+  if (mana_costs.hasOwnProperty('colorless')){
+    colorlessMana = mana_costs['colorless'];
+    if (colorlessMana > 0){
+    }
+  }
+  for (var mana_color in mana_costs){
+    if (mana_color !== 'colorless' && mana_costs.hasOwnProperty(mana_color)){
+      var cost = mana_costs[mana_color];
+      //get symbol image
+      var symbolmagePath = MagicMaker.Paths.imagesPath + 'symbols/' + mana_color +'.png';
+      for(var i=0; i < cost; i++){
+        var manaSymbol = jQuery('<img/>', {
+            class: 'mana_symbol',
+            src: symbolmagePath,
+            alt: mana_color,
+        });
+        symbolsArr.push(manaSymbol);
+      }
+    }
+  }//end for
+  for(var i=0; i < symbolsArr.length; i++){
+    var right = (symbolsArr.length - 1 - i) * 21;
+    var symbol = symbolsArr[i];
+    symbol.css('right', right + 'px');
+    MagicMaker.View.card.manaSymbolsContainer.append(symbol);
+  }
+});
 
 $(document).on('change', '#card_color', function(){
   MagicMaker.View.card.loadCardFrame();
@@ -69,7 +122,11 @@ $(document).on('change', '#card_color', function(){
 
 function pageReady(){
   MagicMaker.View.card  = new Card();
-  MagicMaker.Paths.imagesPath = $('.card_container').attr('data-image-url');
+  var imagesPath = $('.card_container').attr('data-image-url');
+  if (imagesPath.charAt(imagesPath.length-1) !== '/'){
+    imagesPath = imagesPath + "/";
+  }
+  MagicMaker.Paths.imagesPath = imagesPath;
   MagicMaker.View.card.loadArt();
   MagicMaker.View.card.loadCardFrame();
   MagicMaker.View.card.loadAttackDefenseBox();
