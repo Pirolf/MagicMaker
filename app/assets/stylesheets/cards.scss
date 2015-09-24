@@ -38,6 +38,21 @@ $text_left_align: 36.3px;
 	font-family: 'keyrune';
 	src: url('/fonts/keyrune.ttf');
 }
+@mixin manaFont{
+	font-family: 'mplantin';
+	font-weight: bold;
+}
+//for [0, 9]
+.smallManaText{
+	font-size: 1.3em;
+	transform: translate(-60%, 5%);
+	@include manaFont;
+}
+.largeManaText{
+    font-size: 1.1em;
+    transform: translate(-15%, 2%);
+    @include manaFont;
+}
 .type_name_text{
 	font-family: 'beleren-bold';
 	color: #000;
@@ -70,7 +85,9 @@ $text_left_align: 36.3px;
 		position: absolute;
 		width: 19px;
 		height: auto;
-		right: 0px;
+	}
+	#symbol_number{
+		position: absolute;
 	}
 	#type_subtype{
 		position:absolute;

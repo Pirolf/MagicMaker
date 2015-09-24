@@ -78,11 +78,6 @@ $(document).on('change', '.mana_cost', function(){
       mana_costs[colorName] = mana_cost;
     }
   }
-  for (var mana_color in mana_costs){
-    if (mana_costs.hasOwnProperty(mana_color)){
-      console.log(mana_color, ': ', mana_costs[mana_color]);
-    }
-  }
   //build symbols
   MagicMaker.View.card.manaSymbolsContainer.empty();
   var symbolsArr = [];
@@ -90,6 +85,27 @@ $(document).on('change', '.mana_cost', function(){
   if (mana_costs.hasOwnProperty('colorless')){
     colorlessMana = mana_costs['colorless'];
     if (colorlessMana > 0){
+      var container = jQuery('<div/>',{
+        id: 'symbol_image_container'
+      });
+      var symbolmagePath = MagicMaker.Paths.imagesPath + 'symbols/colorless.png';
+      var manaSymbol = jQuery('<img/>',{
+        class: 'mana_symbol',
+        src: symbolmagePath,
+        alt: mana_color
+      });
+      var manaCost = jQuery('<div/>',{
+        id: 'symbol_number',
+        text: colorlessMana.toString(10),
+      });
+      if (colorlessMana > 9){
+        manaCost.attr('class', 'largeManaText');
+      }else{
+        manaCost.attr('class', 'smallManaText');
+      }
+      container.append(manaSymbol);
+      container.append(manaCost);
+      symbolsArr.push(container);
     }
   }
   for (var mana_color in mana_costs){
@@ -98,20 +114,28 @@ $(document).on('change', '.mana_cost', function(){
       //get symbol image
       var symbolmagePath = MagicMaker.Paths.imagesPath + 'symbols/' + mana_color +'.png';
       for(var i=0; i < cost; i++){
+        var container = jQuery('<div/>', {
+          id: 'symbol_image_container'
+        });
         var manaSymbol = jQuery('<img/>', {
             class: 'mana_symbol',
             src: symbolmagePath,
             alt: mana_color,
         });
-        symbolsArr.push(manaSymbol);
+        container.append(manaSymbol);
+        symbolsArr.push(container);
       }
     }
   }//end for
   for(var i=0; i < symbolsArr.length; i++){
     var right = (symbolsArr.length - 1 - i) * 21;
-    var symbol = symbolsArr[i];
+    var symbol = symbolsArr[i].find('.mana_symbol');
+    var symbolNumber = symbolsArr[i].find('#symbol_number');
+    if (symbolNumber !== undefined && symbolNumber !== null){
+      symbolNumber.css('right', right + 'px');
+    }
     symbol.css('right', right + 'px');
-    MagicMaker.View.card.manaSymbolsContainer.append(symbol);
+    MagicMaker.View.card.manaSymbolsContainer.append(symbolsArr[i]);
   }
 });
 
