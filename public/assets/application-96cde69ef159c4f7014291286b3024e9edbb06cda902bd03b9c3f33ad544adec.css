@@ -1,0 +1,234 @@
+@font-face {
+  font-family: 'matrixb';
+  /*a name to be used later*/
+  src: url("/fonts/matrixb.ttf");
+  /*URL to font*/
+}
+@font-face {
+  font-family: 'matrix-bold';
+  src: url("/fonts/matrix-bold.ttf");
+}
+@font-face {
+  font-family: 'mplantin';
+  src: url("/fonts/mplantin.ttf");
+}
+@font-face {
+  font-family: 'beleren-bold';
+  src: url("/fonts/beleren-bold.ttf");
+}
+@font-face {
+  font-family: 'belerensmallcaps-bold';
+  src: url("/fonts/belerensmallcaps-bold.ttf");
+}
+@font-face {
+  font-family: 'keyrune';
+  src: url("/fonts/keyrune.ttf");
+}
+/* line 46, /home/mizu/Projects/MagicMaker/app/assets/stylesheets/cards.scss */
+.smallManaText {
+  font-size: 1.3em;
+  transform: translate(-60%, 5%);
+  font-family: 'mplantin';
+  font-weight: bold;
+}
+
+/* line 51, /home/mizu/Projects/MagicMaker/app/assets/stylesheets/cards.scss */
+.largeManaText {
+  font-size: 1.1em;
+  transform: translate(-15%, 2%);
+  font-family: 'mplantin';
+  font-weight: bold;
+}
+
+/* line 56, /home/mizu/Projects/MagicMaker/app/assets/stylesheets/cards.scss */
+.type_name_text {
+  font-family: 'beleren-bold';
+  color: #000;
+}
+
+/* line 60, /home/mizu/Projects/MagicMaker/app/assets/stylesheets/cards.scss */
+.card_container {
+  position: relative;
+  margin-left: 50px;
+}
+/* line 63, /home/mizu/Projects/MagicMaker/app/assets/stylesheets/cards.scss */
+.card_container #card_frame {
+  width: 375px;
+}
+/* line 66, /home/mizu/Projects/MagicMaker/app/assets/stylesheets/cards.scss */
+.card_container #card_desc {
+  position: absolute;
+  width: 303px;
+  height: 128.22327px;
+  left: 36.3px;
+  top: 320px;
+  font-family: 'mplantin';
+  font-size: 1.1em;
+  color: #000;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+/* line 78, /home/mizu/Projects/MagicMaker/app/assets/stylesheets/cards.scss */
+.card_container #mana_symbols_container {
+  position: absolute;
+  top: 33px;
+  left: 32px;
+  width: 310px;
+}
+/* line 84, /home/mizu/Projects/MagicMaker/app/assets/stylesheets/cards.scss */
+.card_container .mana_symbol {
+  position: absolute;
+  width: 19px;
+  height: auto;
+}
+/* line 89, /home/mizu/Projects/MagicMaker/app/assets/stylesheets/cards.scss */
+.card_container #symbol_number {
+  position: absolute;
+}
+/* line 92, /home/mizu/Projects/MagicMaker/app/assets/stylesheets/cards.scss */
+.card_container #type_subtype {
+  position: absolute;
+  left: 36.3px;
+  bottom: 248px;
+  font-size: 1.15em;
+}
+/* line 98, /home/mizu/Projects/MagicMaker/app/assets/stylesheets/cards.scss */
+.card_container .card_art_container {
+  background-size: cover;
+  background-position: center;
+  width: 310px;
+  height: 228px;
+  position: absolute;
+  top: 63px;
+  left: 32px;
+}
+/* line 107, /home/mizu/Projects/MagicMaker/app/assets/stylesheets/cards.scss */
+.card_container #card_name {
+  font-size: 1.4em;
+  font-weight: bold;
+  position: absolute;
+  top: 6%;
+  left: 36.3px;
+}
+/* line 114, /home/mizu/Projects/MagicMaker/app/assets/stylesheets/cards.scss */
+.card_container #attack_defense {
+  font-size: 2em;
+  font-family: 'matrix-bold';
+  color: #000;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+}
+/* line 123, /home/mizu/Projects/MagicMaker/app/assets/stylesheets/cards.scss */
+.card_container #attack_defense_box {
+  display: block;
+}
+/* line 126, /home/mizu/Projects/MagicMaker/app/assets/stylesheets/cards.scss */
+.card_container .attack_defense_container {
+  position: relative;
+  width: 63.09524px;
+  height: auto;
+  left: 285.58px;
+  bottom: 72.6px;
+}
+/* line 133, /home/mizu/Projects/MagicMaker/app/assets/stylesheets/cards.scss */
+.card_container .attack_defense_container #attack_defense_box {
+  width: inherit;
+  height: auto;
+}
+/* line 1, /home/mizu/Projects/MagicMaker/app/assets/stylesheets/scaffolds.scss */
+body {
+  background-color: #fff;
+  color: #333;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+/* line 9, /home/mizu/Projects/MagicMaker/app/assets/stylesheets/scaffolds.scss */
+p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+/* line 15, /home/mizu/Projects/MagicMaker/app/assets/stylesheets/scaffolds.scss */
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+/* line 21, /home/mizu/Projects/MagicMaker/app/assets/stylesheets/scaffolds.scss */
+a {
+  color: #000;
+}
+/* line 24, /home/mizu/Projects/MagicMaker/app/assets/stylesheets/scaffolds.scss */
+a:visited {
+  color: #666;
+}
+/* line 28, /home/mizu/Projects/MagicMaker/app/assets/stylesheets/scaffolds.scss */
+a:hover {
+  color: #fff;
+  background-color: #000;
+}
+
+/* line 35, /home/mizu/Projects/MagicMaker/app/assets/stylesheets/scaffolds.scss */
+div.field, div.actions {
+  margin-bottom: 10px;
+}
+
+/* line 40, /home/mizu/Projects/MagicMaker/app/assets/stylesheets/scaffolds.scss */
+#notice {
+  color: green;
+}
+
+/* line 44, /home/mizu/Projects/MagicMaker/app/assets/stylesheets/scaffolds.scss */
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+/* line 50, /home/mizu/Projects/MagicMaker/app/assets/stylesheets/scaffolds.scss */
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+/* line 58, /home/mizu/Projects/MagicMaker/app/assets/stylesheets/scaffolds.scss */
+#error_explanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  margin-bottom: 0px;
+  background-color: #c00;
+  color: #fff;
+}
+/* line 69, /home/mizu/Projects/MagicMaker/app/assets/stylesheets/scaffolds.scss */
+#error_explanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+
+
+ */
+
