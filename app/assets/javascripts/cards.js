@@ -24,7 +24,8 @@ var Card = function(){
   this.attackDefenseBox = $('#attack_defense_box');
   this.mana_costs = $('.mana_cost');
   this.manaSymbolsContainer = $('#mana_symbols_container');
-
+  //2: spacing, 21= spacing + symbolwidth(19)
+  this.maxManaSymbols = 15;
   this.loadArt = function(){
     //preload
     var artImage = new Image();
@@ -66,7 +67,6 @@ $(document).on('change', '#card_image_file_field', function(){
   MagicMaker.Utils.previewImage(event.target, $('.card_art_container'));
 });
 $(document).on('change', '.mana_cost', function(){
-  console.log("mana changed");
   //get all mana costs
   var mana_costs = {};
   var colorNames = ['red', 'green', 'blue', 'black', 'white', 'colorless'];
@@ -113,7 +113,7 @@ $(document).on('change', '.mana_cost', function(){
       var cost = mana_costs[mana_color];
       //get symbol image
       var symbolmagePath = MagicMaker.Paths.imagesPath + 'symbols/' + mana_color +'.png';
-      for(var i=0; i < cost; i++){
+      for(var i=0; i < cost && symbolsArr.length < MagicMaker.View.card.maxManaSymbols ; i++){
         var container = jQuery('<div/>', {
           id: 'symbol_image_container'
         });
@@ -125,6 +125,9 @@ $(document).on('change', '.mana_cost', function(){
         container.append(manaSymbol);
         symbolsArr.push(container);
       }
+    }
+    if (symbolsArr.length > MagicMaker.View.card.maxManaSymbols){
+      break;
     }
   }//end for
   for(var i=0; i < symbolsArr.length; i++){
