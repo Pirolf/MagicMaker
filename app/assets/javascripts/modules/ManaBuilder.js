@@ -1,4 +1,4 @@
-module.exports = function(magicMaker){
+var ManaBuilder = function(magicMaker){
   //get all mana costs
 	var mana_costs = {};
 	var colorNames = ['red', 'green', 'blue', 'black', 'white', 'colorless'];

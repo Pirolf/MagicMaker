@@ -1,4 +1,4 @@
-module.exports = function(){
+var MagicMaker = function(){
 	var imagesPath;
 	var card;
 }

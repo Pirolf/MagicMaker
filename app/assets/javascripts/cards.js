@@ -1,6 +1,6 @@
-var manaBuilder = require('./modules/ManaBuilder');
-var magicMaker = require('./modules/MagicMaker');
-
+//= require './modules/MagicMaker'
+//= require './modules/ManaBuilder'
+var magicMaker = new MagicMaker();
 var Card = function(){
   this.artContainer = $('.card_art_container');
   this.colorSelect = $('#card_color');
@@ -59,7 +59,7 @@ $(document).on('change', '#card_image_file_field', function(){
   magicMaker.card.previewArt(event.target);
 });
 $(document).on('change', '.mana_cost', function(){
-  manaBuilder(magicMaker);
+  ManaBuilder(magicMaker);
 });
 
 $(document).on('change', '#card_color', function(){
@@ -77,5 +77,5 @@ function pageReady(){
   magicMaker.card.loadArt();
   magicMaker.card.loadCardFrame();
   magicMaker.card.loadAttackDefenseBox();
-  manaBuilder(magicMaker);
+  ManaBuilder(magicMaker);
 }
