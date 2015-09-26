@@ -13,7 +13,8 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 # Use paperclip for image upload
 gem "paperclip", "~> 4.3"
-gem 'aws-sdk'
+# paperclip requires < 2.0 aws sdk
+gem 'aws-sdk',  '< 2.0'
 gem "rmagick", "~> 2.15"
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
