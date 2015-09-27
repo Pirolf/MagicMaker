@@ -6,9 +6,11 @@ var Card = function(){
   this.colorSelect = $('#card_color');
   this.frameImage = $('#card_frame');
   this.attackDefenseBox = $('#attack_defense_box');
+  this.attackDefense = $('#attack_defense');
   this.mana_costs = $('.mana_cost');
   this.manaSymbolsContainer = $('#mana_symbols_container');
   this.desc = $('#card_desc');
+  this.cardName = $('#card_name');
   //2: spacing, 21= spacing + symbolwidth(19)
   this.maxManaSymbols = 15;
   this.loadArt = function(){
@@ -50,7 +52,11 @@ var Card = function(){
     }.bind(this);
     adImage.src = attackDefenseBoxUrl;
   };
-
+  this.updateAttackDefense = function(){
+    var attack = $('#card_attack').val() ;
+    var defense = $('#card_defense').val();
+    this.attackDefense.text(attack + '/' + defense);
+  }
 };
 
 $(function() {
@@ -63,10 +69,15 @@ $(document).on('change', '#card_image_file_field', function(){
 $(document).on('input', '#card_desc_input', function(){
   magicMaker.card.desc.text($(event.target).val());
 });
-$(document).on('change', '.mana_cost', function(){
+$(document).on('input', '#card_name', function(){
+  magicMaker.card.cardName.text($(event.target).val());
+});
+$(document).on('input', '.mana_cost', function(){
   ManaBuilder(magicMaker);
 });
-
+$(document).on('input', '#card_attack, #card_defense', function(){
+  magicMaker.card.updateAttackDefense();
+});
 $(document).on('change', '#card_color', function(){
   magicMaker.card.loadCardFrame();
   magicMaker.card.loadAttackDefenseBox();
