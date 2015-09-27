@@ -57,6 +57,16 @@ $text_left_align: 36.3px;
 	font-family: 'beleren-bold';
 	color: #000;
 }
+#card_desc_input{
+	width:$art_width - 7px; //save some room in right
+	height: $desc_height_ratio * $card_height;
+	font-family: 'mplantin';
+	font-size: 1.1em;
+	color: #000;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	word-wrap: break-word;
+}
 .card_container{
 	position:relative;
 	margin-left: 50px;
@@ -65,16 +75,19 @@ $text_left_align: 36.3px;
 	}
 	#card_desc{
 		position: absolute;
-		width:$art_width - 7px; //save some room in right
-		height: $desc_height_ratio * $card_height;
 		left: $text_left_align;
 		top: 320px;
+
+		width:$art_width - 7px; //save some room in right
+		height: $desc_height_ratio * $card_height;
 		font-family: 'mplantin';
 		font-size: 1.1em;
 		color: #000;
 		text-overflow: ellipsis;
 		overflow: hidden;
+		word-wrap: break-word;
 	}
+
 	#mana_symbols_container{
 		position: absolute;
 		top: 33px;

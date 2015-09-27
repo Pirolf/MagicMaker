@@ -1,4 +1,4 @@
 var MagicMaker = function(){
-	var imagesPath;
+	var imagesPath = '/images/';
 	var card;
 }
