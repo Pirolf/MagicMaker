@@ -33,6 +33,7 @@ var Card = function(){
     }
   };
   this.loadCardFrame = function(){
+    if (this.colorSelect === undefined || this.colorSelect === null)return;
     var selectedColor = this.colorSelect.val().toLowerCase();
     //get card frame url
     var cardFrameUrl = magicMaker.imagesPath + '/' + selectedColor + '/frame.jpg';
@@ -44,6 +45,7 @@ var Card = function(){
   };
 
   this.loadAttackDefenseBox = function(){
+    if (this.colorSelect === undefined || this.colorSelect === null)return;
     var selectedColor = this.colorSelect.val().toLowerCase();
     var attackDefenseBoxUrl = magicMaker.imagesPath + '/' + selectedColor + '/attack_defense_box.png';
     var adImage = new Image();
@@ -59,7 +61,7 @@ var Card = function(){
   }
 };
 
-$(function() {
+$(document).ready(function() {
   pageReady();
 });
 $(document).on('page:load', pageReady);
@@ -84,10 +86,11 @@ $(document).on('change', '#card_color', function(){
 });
 
 function pageReady(){
-  magicMaker.card  = new Card();
-  if ($(".card_container") === null || $(".card_container") === undefined){
+  if (location.pathname === '/cards'){
     return;
   }
+  magicMaker.card  = new Card();
+  
   magicMaker.imagesPath = $(".card_container").attr("data-image-url");
   magicMaker.card.loadArt();
   magicMaker.card.loadCardFrame();

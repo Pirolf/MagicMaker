@@ -105,5 +105,11 @@ RSpec.describe CardsController, type: :controller do
 			expect(@basic_card.save).to eq(false)
 			expect(@basic_card.errors[:image_art]).not_to be_nil
 		end
+		it 'file is not an image' do
+			file = fixture_file_upload('test.txt', 'text/plain')
+			@basic_card.image_art = file
+			expect(@basic_card.save).to eq(false)
+			expect(@basic_card.errors[:image_art]).not_to be_nil
+		end
 	end
 end
