@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ColorsControllerTest < ActionController::TestCase
+class TypeTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

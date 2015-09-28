@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150927040702) do
+ActiveRecord::Schema.define(version: 20150928000942) do
 
   create_table "card_enitities", force: :cascade do |t|
     t.integer  "deck_id"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20150927040702) do
     t.text     "desc",                   limit: 1024
     t.datetime "created_at",                                            null: false
     t.datetime "updated_at",                                            null: false
-    t.string   "name"
+    t.string   "name",                   limit: 64,                     null: false
     t.string   "color",                               default: "White"
     t.integer  "mana_none",                           default: 0
     t.integer  "mana_red",                            default: 0
@@ -65,6 +65,12 @@ ActiveRecord::Schema.define(version: 20150927040702) do
     t.integer  "special_ability_id"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+  end
+
+  create_table "types", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
