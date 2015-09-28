@@ -16,11 +16,15 @@ class Card < ActiveRecord::Base
   	#validations
   	validates :name, presence: true, length: {maximum: 64}
   	validates :desc, allow_blank: true, length: {maximum: 1024}
+  	validates_numericality_of :attack, only_integer: true
   	validates_inclusion_of :attack, in: 0..99
+  	validates_numericality_of :defense, only_integer: true
   	validates_inclusion_of :defense, in: 0..99
-  	validates_inclusion_of :color, in: Color.all.collect{|c| c.color_name}
+  	#validates_inclusion_of :color, in: Color.all.collect{|c| c.color_name}
+  	validates_inclusion_of :color, in: %w(Red Green Blue Black White)
   	[:mana_red, :mana_green, :mana_blue, 
   	:mana_black, :mana_white, :mana_none].each do |mana|
+  		validates_numericality_of mana, only_integer: true
   		validates mana, :inclusion => {in: 0..99}
   	end 
 end

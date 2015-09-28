@@ -38,6 +38,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development, :test do
   gem 'sqlite3',  '1.3.10'
+  gem 'rspec-rails', '~> 3.3.3'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', '3.4.0'
 
