@@ -26,5 +26,13 @@ class Card < ActiveRecord::Base
   	:mana_black, :mana_white, :mana_none].each do |mana|
   		validates_numericality_of mana, only_integer: true
   		validates mana, :inclusion => {in: 0..99}
-  	end 
+  	end
+
+      def get_frame_url
+        color.downcase + '/frame.jpg'
+      end
+
+      def get_attack_defense_box_url
+        color.downcase + '/attack_defense_box.png'
+      end
 end

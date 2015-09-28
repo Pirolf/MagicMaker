@@ -1,29 +1,5 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Image path:</strong>
-  <%= @card.image_path %>
-</p>
-
-<p>
-  <strong>Color:</strong>
-  <%= @card.color%>
-</p>
-
-<p>
-  <strong>Attack:</strong>
-  <%= @card.attack %>
-</p>
-
-<p>
-  <strong>Defense:</strong>
-  <%= @card.defense %>
-</p>
-
-<p>
-  <strong>Desc:</strong>
-  <%= @card.desc %>
-</p>
+<!--% javascript 'cards.js' %-->
+<%= render 'shared/card' %>
 
 <%= link_to 'Edit', edit_card_path(@card) %> |
 <%= link_to 'Back', cards_path %>

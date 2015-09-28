@@ -1,0 +1,21 @@
+<div class="card_container" id= "card_container" 
+    data-image-url = <%= compute_asset_path('images') %>>
+    <%= image_tag(@card.get_frame_url, class: "card_frame", id: "card_frame") %>
+    <%= content_tag(:div, nil, class: "card_art_container", 
+    "data-art-url" => @card.image_art.expiring_url(120), 
+    style: "background-image: url(#{@card.image_art.expiring_url(120)})" )%>
+    
+    <div class="attack_defense_container" >
+      <%= image_tag(@card.get_attack_defense_box_url, id: "attack_defense_box") %>
+      <%= content_tag(:div, "#{@card.attack}/#{@card.defense}", id: 'attack_defense') %>
+    </div>
+    <%= content_tag(:div, @card.name, class: 'type_name_text', id: 'card_name') %>
+    <div class="type_name_text" id="type_subtype">Creature - Human Artificer</div>
+    <%= content_tag(:p, @card.desc, id: 'card_desc') %>
+    <div id="mana_symbols_container">
+      <div id='symbol_image_container'>
+        <!--%= image_tag("symbols/red.png", class: "mana_symbol") %>
+        <div id='symbol_number'></div-->
+      </div>
+    </div>
+</div>

@@ -86,13 +86,10 @@ $(document).on('change', '#card_color', function(){
 });
 
 function pageReady(){
-  if (location.pathname === '/cards'){
-    return;
-  }
+  console.log("page ready");
   magicMaker.card  = new Card();
-  
   magicMaker.imagesPath = $(".card_container").attr("data-image-url");
-  magicMaker.card.loadArt();
+  //magicMaker.card.loadArt();
   magicMaker.card.loadCardFrame();
   magicMaker.card.loadAttackDefenseBox();
   ManaBuilder(magicMaker);
