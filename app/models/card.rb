@@ -11,8 +11,8 @@ class Card < ActiveRecord::Base
 		:default_url => "http://www.nichebuilder.com/Shared/PageBuilder/images/empty-image-placeholder.png"
 		)
   	validates_attachment_content_type :image_art, content_type: /\Aimage\/.*\Z/
-  	validates_attachment_size(:image_art, less_than: 2.megabytes, 
-  		unless: Proc.new {|m| m[:image_art].nil?})
+  	validates_attachment_size(:image_art, less_than: 2.megabytes) 
+  		#unless: Proc.new {|m| m[:image_art].nil?})
   	#validations
   	validates :name, presence: true, length: {maximum: 64}
   	validates :desc, allow_blank: true, length: {maximum: 1024}

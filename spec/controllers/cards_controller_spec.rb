@@ -1,4 +1,5 @@
 require 'rails_helper'
+include ActionDispatch::TestProcess
 RSpec.describe CardsController, type: :controller do
 	before :each do 
 		#the basic success case has only required fields filled
@@ -35,6 +36,12 @@ RSpec.describe CardsController, type: :controller do
 		end
 		it 'mana cost is an int in [0,99]' do 
 			@basic_card.mana_red = 15
+			expect(@basic_card.save).to eq(true)
+		end
+		#test paperclip upload images
+		it 'image has valid image type and is less than 2mb' do 
+			image = fixture_file_upload('blue-marble.png', 'image/png')
+			@basic_card.image_art = image
 			expect(@basic_card.save).to eq(true)
 		end
 	end
@@ -91,6 +98,12 @@ RSpec.describe CardsController, type: :controller do
 			@basic_card.mana_green = 100
 			expect(@basic_card.save).to eq(false)
 			expect(@basic_card.errors[:mana_green]).not_to be_nil
+		end
+		it 'image is over 2mb' do 
+			image = fixture_file_upload('oversized_terrain.jpg', 'image/jpeg')
+			@basic_card.image_art = image
+			expect(@basic_card.save).to eq(false)
+			expect(@basic_card.errors[:image_art]).not_to be_nil
 		end
 	end
 end
