@@ -9,6 +9,8 @@ Rails.application.config.assets.version = '1.0'
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 Rails.application.config.assets.precompile += %w( application.js )
-Rails.application.config.assets.precompile += %w( cards.js )
+Rails.application.config.assets.precompile += %w( card_edit.js )
+Rails.application.config.assets.precompile += %w( card_show.js )
 Rails.application.config.assets.precompile += %w( /modules/MagicMaker.js )
 Rails.application.config.assets.precompile += %w( /modules/ManaBuilder.js )
+Rails.application.config.assets.precompile += %w( /modules/card.js )
