@@ -2,19 +2,19 @@
 var Card = function(){
   this.artContainer = $('.card_art_container');
   this.colorSelect = $('#card_color');
-  this.frameImage = $('#card_frame');
-  this.attackDefenseBox = $('#attack_defense_box');
-  this.attackDefense = $('#attack_defense');
+  this.frameImage = $('.card_frame');
+  this.attackDefenseBox = $('.attack_defense_box');
+  this.attackDefense = $('.attack_defense');
   this.mana_costs = $('.mana_cost');
-  this.manaSymbolsContainer = $('#mana_symbols_container');
-  this.desc = $('#card_desc');
-  this.cardName = $('#card_name');
+  this.manaSymbolsContainer = $('.mana_symbols_container');
+  this.desc = $('.card_desc');
+  this.cardName = $('.card_name');
   //2: spacing, 21= spacing + symbolwidth(19)
   this.maxManaSymbols = 15;
 
   this.updateAttackDefense = function(){
-    var attack = $('#card_attack').val() ;
-    var defense = $('#card_defense').val();
+    var attack = $('.card_attack').val() ;
+    var defense = $('.card_defense').val();
     this.attackDefense.text(attack + '/' + defense);
   }
   this.previewArt = function(fileInput){

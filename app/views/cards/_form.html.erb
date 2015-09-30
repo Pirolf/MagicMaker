@@ -19,7 +19,7 @@
     <%= f.file_field :image_art, id: "card_image_file_field" %>
   </div>
 
-  <%= render 'shared/card' %>
+  <%= render partial: 'shared/card', locals: {card: @card} %>
 
   <div class="field">
     <%= f.label :name %><br>

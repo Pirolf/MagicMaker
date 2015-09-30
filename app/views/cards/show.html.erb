@@ -1,5 +1,5 @@
 <% javascript 'card_show.js' %>
-<%= render 'shared/card' %>
+<%= render partial: 'shared/card', locals: {card: @card} %>
 
 <%= link_to 'Edit', edit_card_path(@card) %> |
 <%= link_to 'Back', cards_path %>
