@@ -45,7 +45,7 @@ $text_left_align: 36.3px;
 //for [0, 9]
 .smallManaText{
 	font-size: 1.3em;
-	transform: translate(-60%, 5%);
+	transform: translate(-60%, 5%);//5*0.8*0.5
 	@include manaFont;
 }
 .largeManaText{
@@ -69,7 +69,6 @@ $text_left_align: 36.3px;
 }
 .card_container{
 	position:relative;
-	margin-left: 50px;
 	.card_frame{
 		width: $card_width;
 	}
