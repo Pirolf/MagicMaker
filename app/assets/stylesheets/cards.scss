@@ -45,7 +45,7 @@ $text_left_align: 36.3px;
 //for [0, 9]
 .smallManaText{
 	font-size: 1.3em;
-	transform: translate(-60%, 5%);//5*0.8*0.5
+	transform: translate(-60%, -2px);//5*0.8*0.5
 	@include manaFont;
 }
 .largeManaText{
@@ -53,6 +53,7 @@ $text_left_align: 36.3px;
     transform: translate(-15%, 2%);
     @include manaFont;
 }
+
 .type_name_text{
 	font-family: 'beleren-bold';
 	color: #000;
@@ -75,7 +76,7 @@ $text_left_align: 36.3px;
 	.card_desc{
 		position: absolute;
 		left: $text_left_align;
-		top: 320px;
+		top: 330px;
 
 		width:$art_width - 7px; //save some room in right
 		height: $desc_height_ratio * $card_height;
@@ -103,7 +104,7 @@ $text_left_align: 36.3px;
 	.type_subtype{
 		position:absolute;
 		left: $text_left_align;
-		bottom: 248px;
+		bottom: 241px;
 		font-size: 1.15em;
 	}
 	.card_art_container{
@@ -119,7 +120,7 @@ $text_left_align: 36.3px;
 		font-size: 1.4em;
 		font-weight:bold;
 		position: absolute;
-		top: 6%;
+		top: 30px;
 		left: $text_left_align;
 	}
 	.attack_defense{
@@ -127,7 +128,7 @@ $text_left_align: 36.3px;
 		font-family: 'matrix-bold';
 		color: #000;
 		position: absolute;
-		top: 40%;
+		top: 35%;
 		left: 50%;
 		transform: translate(-50%, -40%);
 	}
