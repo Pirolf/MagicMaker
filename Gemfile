@@ -7,6 +7,7 @@ gem 'rails', '4.2.3'
 gem 'sass-rails', '~> 5.0'
 
 gem 'bootstrap-sass', '~> 3.3.5.1'
+gem 'bootstrap-will_paginate', '~> 0.0.10'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -15,6 +16,8 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 # Use paperclip for image upload
 gem "paperclip", "~> 4.3"
+
+gem 'will_paginate', '~> 3.0.7'
 # paperclip requires < 2.0 aws sdk
 gem 'aws-sdk',  '< 2.0'
 gem "rmagick", "~> 2.15"
