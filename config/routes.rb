@@ -1,5 +1,19 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {
+      confirmations: 'users/confirmations',
+      #omniauth_callbacks: 'users/omniauth_callbacks',
+      passwords: 'users/passwords',
+      registrations: 'users/registrations',
+      sessions: 'users/sessions',
+      unlocks: 'users/unlocks'
+  }
+=begin
+  devise_scope :users do
+    match 'users/sign_out' => "users/sessions#destroy", via: [:get, :delete], as:  "destroy_user_session"
+    #get '/users/sign_in' => 'devise/sessions#new', as: ''
+  end
+=end
+
   resources :decks
   resources :cards
   resources :special_abilities

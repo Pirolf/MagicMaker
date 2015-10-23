@@ -8,7 +8,7 @@
 </head>
 <body>
 <p class="notice"><%= notice %></p>
-
+<%= link_to 'root', destroy_user_session_path, method: :delete, remote: true %>
 <%= yield %>
 
 </body>

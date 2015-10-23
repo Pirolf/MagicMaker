@@ -6,16 +6,16 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` on Rails 4+ applications as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '2b45cfdf68acaee53b1864ec2541bbd6d9e732f0d2ecf40745a40651d93e9f535a1af08190088dbcfe3b1e849ff515961344f38274579cb07f7280be940bc763'
+  config.secret_key = '2b45cfdf68acaee53b1864ec2541bbd6d9e732f0d2ecf40745a40651d93e9f535a1af08190088dbcfe3b1e849ff515961344f38274579cb07f7280be940bc763'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  config.mailer_sender = 'admin@magicmaker.com'
 
   # Configure the class responsible to send e-mails.
-  # config.mailer = 'Devise::Mailer'
+  config.mailer = 'Devise::Mailer'
 
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
@@ -260,4 +260,6 @@ Devise.setup do |config|
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
+
+  config.sign_out_via = Rails.env.test? ? :get : :delete
 end
