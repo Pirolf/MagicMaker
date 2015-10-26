@@ -13,8 +13,8 @@ var Card = function(){
   this.maxManaSymbols = 15;
 
   this.updateAttackDefense = function(){
-    var attack = $('.card_attack').val() ;
-    var defense = $('.card_defense').val();
+    var attack = $('#card_attack').val() ;
+    var defense = $('#card_defense').val();
     this.attackDefense.text(attack + '/' + defense);
   }
   this.previewArt = function(fileInput){

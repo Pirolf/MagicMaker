@@ -1,7 +1,7 @@
 var ManaBuilder = function(magicMaker){
   //get all mana costs
 	var mana_costs = {};
-	var colorNames = ['red', 'green', 'blue', 'black', 'white', 'colorless'];
+	var colorNames = ['red', 'green', 'blue', 'black', 'white', 'none'];
 	for (var i=0; i < colorNames.length ;i++){
 		var colorName = colorNames[i];
 		var mana_cost = $('#mana_' + colorName).val();
@@ -14,13 +14,13 @@ var ManaBuilder = function(magicMaker){
 	magicMaker.card.manaSymbolsContainer.empty();
 	var symbolsArr = [];
 	var colorlessMana = null;
-	if (mana_costs.hasOwnProperty('colorless')){
-		colorlessMana = mana_costs['colorless'];
+	if (mana_costs.hasOwnProperty('none')){
+		colorlessMana = mana_costs['none'];
 		if (colorlessMana > 0){
 			var container = jQuery('<div/>',{
 				class: 'symbol_image_container'
 			});
-			var symbolmagePath = magicMaker.imagesPath + '/symbols/colorless.png';
+			var symbolmagePath = magicMaker.imagesPath + '/symbols/none.png';
 			var manaSymbol = jQuery('<img/>',{
 				class: 'mana_symbol',
 				src: symbolmagePath,
@@ -41,7 +41,7 @@ var ManaBuilder = function(magicMaker){
 		}
 	}
 	for (var mana_color in mana_costs){
-		if (mana_color !== 'colorless' && mana_costs.hasOwnProperty(mana_color)){
+		if (mana_color !== 'none' && mana_costs.hasOwnProperty(mana_color)){
 			var cost = mana_costs[mana_color];
 			//get symbol image
 			var symbolmagePath = magicMaker.imagesPath + '/symbols/' + mana_color +'.png';

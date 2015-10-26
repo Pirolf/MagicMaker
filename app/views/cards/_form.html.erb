@@ -1,4 +1,5 @@
 <% javascript 'card_edit.js' %>
+<% images_path = compute_asset_path('images') %>
 <%= form_for(@card, multipart: true) do |f| %>
   <% if @card.errors.any? %>
     <div id="error_explanation">
@@ -11,51 +12,52 @@
       </ul>
     </div>
   <% end %>
-  <div class="field">
+  <div class="field form-group">
       <div>Special Abilities</div>
         <%= collection_check_boxes('card', :special_ability_ids, SpecialAbility.all, :id, :name) %>
   </div>
-  <div class="field">
+  <div class="field form-group">
     <%= f.file_field :image_art, id: "card_image_file_field" %>
   </div>
 
-  <%= render partial: 'shared/card', locals: {card: @card} %>
-
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, class: "form-control" %>
   </div>
-  <div class="field">
+  <div class="field form-group">
     <div>Color</div>
     <%= collection_select('card', :color, Color.all, :color_name, :color_name, id: "card_color") %>
   </div>
   
   <div class="field">
     <div>Mana Cost</div>
-    <%= f.label 'Red' %>
-    <%= f.number_field :mana_red, min: 0, max: 9, class: "mana_cost", id:"mana_red" %>
-    <%= f.label 'Green' %>
-    <%= f.number_field :mana_green, min: 0, max: 9, class: "mana_cost", id:"mana_green" %>
-    <%= f.label 'Blue' %>
-    <%= f.number_field :mana_blue, min: 0, max: 9, class: "mana_cost", id:"mana_blue" %>
-    <%= f.label 'Black' %>
-    <%= f.number_field :mana_black, min: 0, max: 9, class: "mana_cost", id: "mana_black" %>
-    <%= f.label 'White' %>
-    <%= f.number_field :mana_white, min: 0, max: 9, class: "mana_cost", id: "mana_white" %>
-    <%= f.label 'Colorless' %>
-    <%= f.number_field :mana_none, min: 0, max: 99, class: "mana_cost", id: "mana_colorless" %>
+    <div class="row">
+      <div class="mana_cost_list">
+        <% Color.all.map do |color| %>
+          <% color_selector = color.color_name.downcase %>
+          <div class="col-sm-2">
+            <div class="form-group">
+              <% symbol_path = images_path + "/symbols_shadowless/" + color_selector + ".png" %>
+              <%= image_tag(symbol_path) %>
+              <%= f.number_field "mana_" + color_selector, min: 0, max: 9, class: "mana_cost form-control", id:"mana_" + color_selector %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
-  <div class="field">
+
+  <div class="field form-group">
     <%= f.label :attack %><br>
-    <%= f.number_field :attack %>
+    <%= f.number_field :attack, class: "form-control" %>
   </div>
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :defense %><br>
-    <%= f.number_field :defense %>
+    <%= f.number_field :defense, class: "form-control" %>
   </div>
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :desc %><br>
-    <%= f.text_area :desc, id: 'card_desc_input'%>
+    <%= f.text_area :desc, class: "form-control", id: 'card_desc_input'%>
   </div>
   <div class="actions">
     <%= f.submit %>

@@ -1,6 +1,15 @@
 <h1>Editing Card</h1>
 
-<%= render 'form' %>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-3 col-sm-push-6">
+			<%= render partial: 'shared/card', locals: {card: @card} %>
+		</div>
+		<div class="col-sm-6 col-sm-pull-3">
+			<%= render 'form' %>
+		</div>
+	</div>
+</div>
 
 <%= link_to 'Show', @card %> |
 <%= link_to 'Back', cards_path %>

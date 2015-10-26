@@ -50,7 +50,7 @@ CardPresenter.prototype.loadManaSymbols = function(imagesUrl){
 			var container = jQuery('<div/>',{
 				class: 'symbol_image_container'
 			});
-			var symbolmagePath = imagesUrl + '/symbols/colorless.png';
+			var symbolmagePath = imagesUrl + '/symbols/none.png';
 			var manaSymbol = jQuery('<img/>',{
 				class: 'mana_symbol',
 				src: symbolmagePath,
