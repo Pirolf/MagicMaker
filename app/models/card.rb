@@ -4,6 +4,8 @@ class Card < ActiveRecord::Base
 	has_many :special_ability_entities
 	has_many :special_abilities, through: :special_ability_entities
 
+  belongs_to :user
+  
 	has_attached_file(
 		:image_art, 
 		styles: { large: "324x237#", medium: "162x118.5#", thumb: "100x100#" }, 

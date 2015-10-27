@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151003044035) do
+ActiveRecord::Schema.define(version: 20151027052823) do
 
   create_table "card_enitities", force: :cascade do |t|
     t.integer  "deck_id"
@@ -26,10 +26,10 @@ ActiveRecord::Schema.define(version: 20151003044035) do
     t.integer  "attack",                              default: 0
     t.integer  "defense",                             default: 0
     t.text     "desc",                   limit: 1024
-    t.datetime "created_at",                                            null: false
-    t.datetime "updated_at",                                            null: false
-    t.string   "name",                   limit: 64,                     null: false
-    t.string   "color",                               default: "White"
+    t.datetime "created_at",                                           null: false
+    t.datetime "updated_at",                                           null: false
+    t.string   "name",                   limit: 64,                    null: false
+    t.string   "color",                               default: "None"
     t.integer  "mana_none",                           default: 0
     t.integer  "mana_red",                            default: 0
     t.integer  "mana_green",                          default: 0
@@ -40,7 +40,10 @@ ActiveRecord::Schema.define(version: 20151003044035) do
     t.string   "image_art_content_type"
     t.integer  "image_art_file_size"
     t.datetime "image_art_updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "cards", ["user_id"], name: "index_cards_on_user_id"
 
   create_table "colors", force: :cascade do |t|
     t.string "color_name"
