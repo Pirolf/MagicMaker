@@ -2,4 +2,5 @@
 <%= render partial: 'shared/card', locals: {card: @card} %>
 
 <%= link_to 'Edit', edit_card_path(@card) %> |
+<%= link_to 'Delete', @card, method: :delete, data: { confirm: 'Are you sure?' } %> |
 <%= link_to 'Back', cards_path %>

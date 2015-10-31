@@ -23,7 +23,7 @@ class Card < ActiveRecord::Base
   	validates_numericality_of :defense, only_integer: true
   	validates_inclusion_of :defense, in: 0..99
   	#validates_inclusion_of :color, in: Color.all.collect{|c| c.color_name}
-  	validates_inclusion_of :color, in: %w(Red Green Blue Black White)
+  	validates_inclusion_of :color, in: Color.all.map{|c| c.color_name }
   	[:mana_red, :mana_green, :mana_blue, 
   	:mana_black, :mana_white, :mana_none].each do |mana|
   		validates_numericality_of mana, only_integer: true

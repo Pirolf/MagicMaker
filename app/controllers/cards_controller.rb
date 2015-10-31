@@ -4,7 +4,11 @@ class CardsController < ApplicationController
   # GET /cards
   # GET /cards.json
   def index
-    @cards = Card.all
+    if user_signed_in?
+      @cards = current_user.cards
+    else
+      redirect_to new_user_session_url
+    end
   end
 
   # GET /cards/1
@@ -27,9 +31,8 @@ class CardsController < ApplicationController
   # POST /cards
   # POST /cards.json
   def create
-    @card = Card.new(card_params)
-    
     if user_signed_in?
+      @card = current_user.cards.build(card_params)
       respond_to do |format|
         if @card.save
           success_notice = "card created"
@@ -77,7 +80,9 @@ class CardsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_card
-      @card = Card.find(params[:id])
+      if user_signed_in?
+        @card = current_user.cards.find(params[:id])
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
