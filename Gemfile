@@ -22,7 +22,6 @@ gem "paperclip", "~> 4.3"
 gem 'will_paginate', '~> 3.0.7'
 # paperclip requires < 2.0 aws sdk
 gem 'aws-sdk',  '< 2.0'
-gem "rmagick", "~> 2.15"
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
