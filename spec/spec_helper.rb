@@ -19,7 +19,13 @@
 require "paperclip/matchers"
 require 'capybara/rspec'
 require 'capybara/rails'
+require 'rubygems'
+require 'factory_girl'
+require 'devise'
+
 RSpec.configure do |config|
+  config.include FactoryGirl::Syntax::Methods
+  config.include Devise::TestHelpers, type: :controller
   config.include Paperclip::Shoulda::Matchers
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
