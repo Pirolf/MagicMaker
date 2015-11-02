@@ -40,7 +40,7 @@ RSpec.describe Users::RegistrationsController, type: :controller do
 				user = User.new(username:@username, email:@email, password:@password, password_confirmation:@password_confirmation)
 				expect(user.save).to eq(true)
 
-				timestamp = Timw.now.to_i
+				timestamp = Time.now.to_i
 				username = "signup#{timestamp}"
 				user = User.new(username:username, email:@email, password:@password, password_confirmation:@password_confirmation)
 				expect(user.save).to eq(false)
@@ -57,13 +57,13 @@ RSpec.describe Users::RegistrationsController, type: :controller do
 		context "Password" do
 			it "Password is too short" do
 				password = "a"*7
-				user = User.new(username:@username, email:@email, password:password, password_confirmation:password_confirmation)
+				user = User.new(username:@username, email:@email, password:password, password_confirmation:password)
 				expect(user.save).to eq(false)
 			end
 
 			it "Password is too long" do
 				password = "a"*65
-				user = User.new(username:@username, email:@email, password:password, password_confirmation:password_confirmation)
+				user = User.new(username:@username, email:@email, password:password, password_confirmation:password)
 				expect(user.save).to eq(false)
 			end
 
