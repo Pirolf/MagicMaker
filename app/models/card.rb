@@ -11,27 +11,28 @@ class Card < ActiveRecord::Base
 		styles: { large: "324x237#", medium: "162x118.5#", thumb: "100x100#" }, 
 		:default_style => :large,
 		:default_url => "http://www.nichebuilder.com/Shared/PageBuilder/images/empty-image-placeholder.png"
-		)
-  	validates_attachment_content_type :image_art, content_type: /\Aimage\/.*\Z/
-  	validates_attachment_size(:image_art, less_than: 2.megabytes)
+	)
 
-    #name should contain only letters, numericals, periods and underscores
-  	validates :name, presence: true, length: { maximum: 64 }, format: { with: /\A[-\w.]*\z/ }
-  	validates :desc, allow_blank: true, length: { maximum: 1024 }
-  	validates_numericality_of :attack, only_integer: true, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 99
-  	validates_numericality_of :defense, only_integer: true, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 99
+	validates_attachment_content_type :image_art, content_type: /\Aimage\/.*\Z/
+	validates_attachment_size(:image_art, less_than: 2.megabytes)
 
-  	validates_inclusion_of :color, in: ["White", "Black", "Red", "Blue", "Green", "None"]
+  #name should contain only letters, numericals, periods and underscores
+	validates :name, presence: true, length: { maximum: 64 }, format: { with: /\A[-\w.]*\z/ }
+	validates :desc, allow_blank: true, length: { maximum: 1024 }
+	validates_numericality_of :attack, :only_integer => true, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 99
+	validates_numericality_of :defense, :only_integer => true, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 99
 
-  	[:mana_red, :mana_green, :mana_blue, :mana_black, :mana_white, :mana_none].each do |mana|
-  		validates_numericality_of mana, only_integer: true, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 99
-  	end
+	validates_inclusion_of :color, in: ["White", "Black", "Red", "Blue", "Green", "None"]
 
-    def get_frame_url
-      color.downcase + '/frame.jpg'
-    end
+	[:mana_red, :mana_green, :mana_blue, :mana_black, :mana_white, :mana_none].each do |mana|
+		validates_numericality_of mana, :only_integer => true, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 9
+	end
 
-    def get_attack_defense_box_url
-      color.downcase + '/attack_defense_box.png'
-    end
+  def get_frame_url
+    color.downcase + '/frame.jpg'
+  end
+
+  def get_attack_defense_box_url
+    color.downcase + '/attack_defense_box.png'
+  end
 end

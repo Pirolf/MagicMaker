@@ -11751,10 +11751,10 @@ module.exports = function(magicMaker){
 			var container = jQuery('<div/>',{
 				id: 'symbol_image_container'
 			});
-			var symbolmagePath = magicMaker.imagesPath + 'symbols/colorless.png';
+			var symbolImagePath = magicMaker.imagesPath + 'symbols/colorless.png';
 			var manaSymbol = jQuery('<img/>',{
 				class: 'mana_symbol',
-				src: symbolmagePath,
+				src: symbolImagePath,
 				alt: mana_color
 			});
 			var manaCost = jQuery('<div/>',{
@@ -11775,14 +11775,14 @@ module.exports = function(magicMaker){
 		if (mana_color !== 'colorless' && mana_costs.hasOwnProperty(mana_color)){
 			var cost = mana_costs[mana_color];
 			//get symbol image
-			var symbolmagePath = magicMaker.imagesPath + 'symbols/' + mana_color +'.png';
+			var symbolImagePath = magicMaker.imagesPath + 'symbols/' + mana_color +'.png';
 			for(var i=0; i < cost && symbolsArr.length < magicMaker.card.maxManaSymbols ; i++){
 				var container = jQuery('<div/>', {
 					id: 'symbol_image_container'
 				});
 				var manaSymbol = jQuery('<img/>', {
 					class: 'mana_symbol',
-					src: symbolmagePath,
+					src: symbolImagePath,
 					alt: mana_color,
 				});
 				container.append(manaSymbol);
@@ -11843,10 +11843,10 @@ module.exports = function(magicMaker){
 			var container = jQuery('<div/>',{
 				id: 'symbol_image_container'
 			});
-			var symbolmagePath = magicMaker.imagesPath + 'symbols/colorless.png';
+			var symbolImagePath = magicMaker.imagesPath + 'symbols/colorless.png';
 			var manaSymbol = jQuery('<img/>',{
 				class: 'mana_symbol',
-				src: symbolmagePath,
+				src: symbolImagePath,
 				alt: mana_color
 			});
 			var manaCost = jQuery('<div/>',{
@@ -11867,14 +11867,14 @@ module.exports = function(magicMaker){
 		if (mana_color !== 'colorless' && mana_costs.hasOwnProperty(mana_color)){
 			var cost = mana_costs[mana_color];
 			//get symbol image
-			var symbolmagePath = magicMaker.imagesPath + 'symbols/' + mana_color +'.png';
+			var symbolImagePath = magicMaker.imagesPath + 'symbols/' + mana_color +'.png';
 			for(var i=0; i < cost && symbolsArr.length < magicMaker.card.maxManaSymbols ; i++){
 				var container = jQuery('<div/>', {
 					id: 'symbol_image_container'
 				});
 				var manaSymbol = jQuery('<img/>', {
 					class: 'mana_symbol',
-					src: symbolmagePath,
+					src: symbolImagePath,
 					alt: mana_color,
 				});
 				container.append(manaSymbol);

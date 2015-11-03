@@ -42,6 +42,11 @@ $text_left_align: 36.3px;
 	font-family: 'mplantin';
 	font-weight: bold;
 }
+
+@mixin smallSymbol{
+	width: 24px;
+	height: auto;
+}
 //for [0, 9]
 .smallManaText{
 	font-size: 1.3em;
@@ -70,10 +75,13 @@ $text_left_align: 36.3px;
 }
 .mana_cost_list{
 	img{
-		width: 24px;
-  		height: auto;
+		@include smallSymbol
 	}
 }
+.insertable_symbol{
+	@include smallSymbol
+}
+
 .card_container{
 	position:relative;
 	.card_frame{

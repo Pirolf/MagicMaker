@@ -50,10 +50,10 @@ CardPresenter.prototype.loadManaSymbols = function(imagesUrl){
 			var container = jQuery('<div/>',{
 				class: 'symbol_image_container'
 			});
-			var symbolmagePath = imagesUrl + '/symbols/none.png';
+			var symbolImagePath = imagesUrl + '/symbols/none.png';
 			var manaSymbol = jQuery('<img/>',{
 				class: 'mana_symbol',
-				src: symbolmagePath,
+				src: symbolImagePath,
 				alt: mana_color
 			});
 			var manaCost = jQuery('<div/>',{
@@ -74,14 +74,14 @@ CardPresenter.prototype.loadManaSymbols = function(imagesUrl){
 		if (mana_color !== 'none' && mana_costs.hasOwnProperty(mana_color)){
 			var cost = mana_costs[mana_color];
 			//get symbol image
-			var symbolmagePath = imagesUrl + '/symbols/' + mana_color +'.png';
+			var symbolImagePath = imagesUrl + '/symbols/' + mana_color +'.png';
 			for(var i=0; i < cost && symbolsArr.length < this.maxManaSymbols ; i++){
 				var container = jQuery('<div/>', {
 					class: 'symbol_image_container'
 				});
 				var manaSymbol = jQuery('<img/>', {
 					class: 'mana_symbol',
-					src: symbolmagePath,
+					src: symbolImagePath,
 					alt: mana_color,
 				});
 				container.append(manaSymbol);

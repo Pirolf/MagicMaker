@@ -20,10 +20,10 @@ var ManaBuilder = function(magicMaker){
 			var container = jQuery('<div/>',{
 				class: 'symbol_image_container'
 			});
-			var symbolmagePath = magicMaker.imagesPath + '/symbols/none.png';
+			var symbolImagePath = magicMaker.imagesPath + '/symbols/none.png';
 			var manaSymbol = jQuery('<img/>',{
 				class: 'mana_symbol',
-				src: symbolmagePath,
+				src: symbolImagePath,
 				alt: mana_color
 			});
 			var manaCost = jQuery('<div/>',{
@@ -44,14 +44,14 @@ var ManaBuilder = function(magicMaker){
 		if (mana_color !== 'none' && mana_costs.hasOwnProperty(mana_color)){
 			var cost = mana_costs[mana_color];
 			//get symbol image
-			var symbolmagePath = magicMaker.imagesPath + '/symbols/' + mana_color +'.png';
+			var symbolImagePath = magicMaker.imagesPath + '/symbols/' + mana_color +'.png';
 			for(var i=0; i < cost && symbolsArr.length < magicMaker.card.maxManaSymbols ; i++){
 				var container = jQuery('<div/>', {
 					class: 'symbol_image_container'
 				});
 				var manaSymbol = jQuery('<img/>', {
 					class: 'mana_symbol',
-					src: symbolmagePath,
+					src: symbolImagePath,
 					alt: mana_color,
 				});
 				container.append(manaSymbol);

@@ -1,4 +1,5 @@
 class CardsController < ApplicationController
+  helper CardsHelper
   before_action :set_card, only: [:show, :edit, :update, :destroy]
 
   # GET /cards

@@ -32,6 +32,7 @@ RSpec.describe CardsController, type: :controller do
 				card = FactoryGirl.build(:card, attack: 1.5)
 				card = @user.cards.build(card.attributes)
 				expect(card.save!).to be true
+				expect(card.attack.class).to be Fixnum
 				expect(card.attack).to eq(1)
 			end
 
@@ -60,8 +61,8 @@ RSpec.describe CardsController, type: :controller do
 				expect(card.save!).to be true
 			end
 
-			it 'mana cost is an int in [0,99]' do
-				card = FactoryGirl.build(:card, mana_none: 99)
+			it 'mana cost is an int in [0,9]' do
+				card = FactoryGirl.build(:card, mana_none: 9)
 				card = @user.cards.build(card.attributes)
 				expect(card.save!).to be true
 			end
@@ -147,7 +148,7 @@ RSpec.describe CardsController, type: :controller do
 				expect(card.errors[:defense]).not_to be_nil
 			end
 
-			it 'defense is a number' do 
+			it 'defense is not a number' do 
 				card = FactoryGirl.build(:card, defense: [])
 				card = @user.cards.build(card.attributes)
 				expect(card.save).to be false
@@ -168,8 +169,8 @@ RSpec.describe CardsController, type: :controller do
 				expect(card.errors[:mana_none]).not_to be_nil
 			end
 
-			it 'mana_cost is not in [0,99]' do 
-				card = FactoryGirl.build(:card, mana_none: 100)
+			it 'mana_cost is not in [0,9]' do 
+				card = FactoryGirl.build(:card, mana_none: 10)
 				card = @user.cards.build(card.attributes)
 				expect(card.save).to be false
 				expect(card.errors[:mana_none]).not_to be_nil

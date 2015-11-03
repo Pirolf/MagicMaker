@@ -1,0 +1,17 @@
+<div class="field">
+  <div>Mana Cost</div>
+  <div class="row">
+    <div class="mana_cost_list">
+      <% Color.all.map do |color| %>
+        <% color_selector = color.color_name.downcase %>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <% symbol_path = images_path + "/symbols_shadowless/" + color_selector + ".png" %>
+            <%= image_tag(symbol_path) %>
+            <%= f.number_field "mana_" + color_selector, min: 0, max: 9, class: "mana_cost form-control", id:"mana_" + color_selector %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

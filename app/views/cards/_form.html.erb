@@ -24,41 +24,34 @@
     <%= f.label :name %><br>
     <%= f.text_field :name, class: "form-control" %>
   </div>
+
   <div class="field form-group">
     <div>Color</div>
     <%= collection_select('card', :color, Color.all, :color_name, :color_name, id: "card_color") %>
   </div>
   
-  <div class="field">
-    <div>Mana Cost</div>
-    <div class="row">
-      <div class="mana_cost_list">
-        <% Color.all.map do |color| %>
-          <% color_selector = color.color_name.downcase %>
-          <div class="col-sm-2">
-            <div class="form-group">
-              <% symbol_path = images_path + "/symbols_shadowless/" + color_selector + ".png" %>
-              <%= image_tag(symbol_path) %>
-              <%= f.number_field "mana_" + color_selector, min: 0, max: 9, class: "mana_cost form-control", id:"mana_" + color_selector %>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
+  <%= render partial: 'mana_field', locals: { images_path: images_path, f: f } %>
 
   <div class="field form-group">
-    <%= f.label :attack %><br>
+    <%= f.label :attack, "Power" %><br>
     <%= f.number_field :attack, class: "form-control" %>
   </div>
   <div class="field form-group">
-    <%= f.label :defense %><br>
+    <%= f.label :defense, "Toughness" %><br>
     <%= f.number_field :defense, class: "form-control" %>
   </div>
+
   <div class="field form-group">
     <%= f.label :desc %><br>
     <%= f.text_area :desc, class: "form-control", id: 'card_desc_input'%>
   </div>
+
+  <div class="insertable_symbol_group">
+    <% CardsHelper::SYMBOL_IMAGE_NAME.each_key do |k| %>
+      <%= image_tag(symbol_to_image_path(k), class:"insertable_symbol") %>
+    <% end %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
