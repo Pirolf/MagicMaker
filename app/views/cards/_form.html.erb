@@ -48,7 +48,7 @@
 
   <div class="insertable_symbol_group">
     <% CardsHelper::SYMBOL_IMAGE_NAME.each_key do |k| %>
-      <%= image_tag(symbol_to_image_path(k), class:"insertable_symbol") %>
+      <%= image_tag(symbol_to_image_path(k), "data-text-key" => k, class:"insertable_symbol") %>
     <% end %>
   </div>
 

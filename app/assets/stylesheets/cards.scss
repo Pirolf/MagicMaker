@@ -43,8 +43,8 @@ $text_left_align: 36.3px;
 	font-weight: bold;
 }
 
-@mixin smallSymbol{
-	width: 24px;
+@mixin smallSymbol($w){
+	width: $w;
 	height: auto;
 }
 //for [0, 9]
@@ -75,13 +75,15 @@ $text_left_align: 36.3px;
 }
 .mana_cost_list{
 	img{
-		@include smallSymbol
+		@include smallSymbol(24px)
 	}
 }
 .insertable_symbol{
-	@include smallSymbol
+	@include smallSymbol(24px)
 }
-
+.embedded_mana_symbol{
+	@include smallSymbol(16px)
+}
 .card_container{
 	position:relative;
 	.card_frame{

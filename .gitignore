@@ -2,6 +2,9 @@
 capybara-*.html
 .rspec
 .env
+#RubyMine
+.idea
+
 /log
 /tmp
 /db/*.sqlite3
