@@ -24,7 +24,7 @@ $(document).on('click', '.insertable_symbol', function(){
   var textKey = $(event.target).attr('data-text-key');
 
   var text = $('#card_desc_input').val();
-  $('#card_desc_input').get(0).val(text + textKey);
+  $('#card_desc_input').val(text + textKey);
   text = $('#card_desc_input').val();
   //update desc presented
   var htmlString = magicMaker.card.parseDesc(text);

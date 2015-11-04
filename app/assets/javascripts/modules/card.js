@@ -81,7 +81,12 @@ var Card = function(){
           returnHtmlString += "<img class='embedded_mana_symbol' src='" + manaInfo.src + "' alt='" + manaInfo.alt + "' />";
         }
         i += 3;
-      }else{
+      }
+      else if (text[i] === '\n'){
+        returnHtmlString += "<br />";
+        i ++;
+      }
+      else{
         returnHtmlString += text[i];
         i ++;
       }

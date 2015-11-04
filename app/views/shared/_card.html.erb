@@ -10,7 +10,7 @@
     </div>
     <%= content_tag(:div, card.name, class: 'type_name_text card_name') %>
     <div class="type_name_text type_subtype">Creature - Human Artificer</div>
-    <%= content_tag(:p, card.desc, class: 'card_desc' ) %>
+    <%= simple_format card.desc, class: 'card_desc' %>
     <div class="mana_symbols_container"
     data-mana-red = <%= card.mana_red %>
     data-mana-green = <%= card.mana_green %>
