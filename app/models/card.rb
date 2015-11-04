@@ -16,9 +16,8 @@ class Card < ActiveRecord::Base
 	validates_attachment_content_type :image_art, content_type: /\Aimage\/.*\Z/
 	validates_attachment_size(:image_art, less_than: 2.megabytes)
 
-  #name should contain only letters, numericals, periods and underscores
-	validates :name, presence: true, length: { maximum: 64 }, format: { with: /\A[-\w.]*\z/ }
-	validates :desc, allow_blank: true, length: { maximum: 1024 }
+	validates :name, presence: true, length: { maximum: 64 }, format: { with: /\A[^\\\/<>$#%^&|@*]*\z/ }
+	validates :desc, allow_blank: true, length: { maximum: 1024 }, format: { with: /\A[^\\\/<>$#%^&|@*]*\z/}
 	validates_numericality_of :attack, :only_integer => true, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 99
 	validates_numericality_of :defense, :only_integer => true, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 99
 

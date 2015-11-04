@@ -8,9 +8,9 @@
       <%= image_tag('', class: 'attack_defense_box', 'data-attack-defense-box-url' =>card.get_attack_defense_box_url) %>
       <%= content_tag(:div, "#{card.attack}/#{card.defense}", class: 'attack_defense' ) %>
     </div>
-    <%= content_tag(:div, card.name, class: 'type_name_text card_name') %>
+    <%= content_tag(:div, sanitize(card.name), class: 'type_name_text card_name') %>
     <div class="type_name_text type_subtype">Creature - Human Artificer</div>
-    <%= simple_format card.desc, class: 'card_desc' %>
+    <%= simple_format(sanitize(card.desc), class: 'card_desc') %>
     <div class="mana_symbols_container"
     data-mana-red = <%= card.mana_red %>
     data-mana-green = <%= card.mana_green %>

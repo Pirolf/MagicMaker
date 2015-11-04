@@ -106,13 +106,6 @@ RSpec.describe CardsController, type: :controller do
 				expect(card.errors[:name]).not_to be_nil
 			end
 
-			it 'name has space' do
-				card = FactoryGirl.build(:card, :name_with_space)
-				card = @user.cards.build(card.attributes)
-				expect(card.save).to be false
-				expect(card.errors[:name]).not_to be_nil
-			end
-
 			it 'name is too long' do
 				card = FactoryGirl.build(:card, :with_name_too_long)
 				card = @user.cards.build(card.attributes)
