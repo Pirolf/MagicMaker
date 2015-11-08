@@ -80,13 +80,12 @@ class CardsController < ApplicationController
 
   # GET /cards/subtypes.json
   def subtypes
-=begin
     if !user_signed_in?
       respond_to do |format|
         format.all { render nothing: true, status: :unauthorized }
       end
     end
-=end
+
     respond_to do |format|
       type_id = params[:type_id]
       type = Type.find(type_id)
@@ -112,7 +111,7 @@ class CardsController < ApplicationController
         :image_path, :image_art,
         :attack, :defense, :name, :desc, :color,
         :mana_red, :mana_green, :mana_blue, :mana_black, :mana_white, :mana_none,
-        :type, :subtype,
+        :type_id, :subtype_id,
         :special_ability_ids => [])
     end
 end

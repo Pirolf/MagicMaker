@@ -9,7 +9,9 @@
       <%= content_tag(:div, "#{card.attack}/#{card.defense}", class: 'attack_defense' ) %>
     </div>
     <%= content_tag(:div, sanitize(card.name), class: 'type_name_text card_name') %>
-    <div class="type_name_text type_subtype">Creature - Human Artificer</div>
+    <div class="type_name_text type_subtype">
+        <span id="type_text"></span><span id="hypen"></span><span id="subtype_text"></span>
+    </div>
     <%= simple_format(sanitize(card.desc), class: 'card_desc') %>
     <div class="mana_symbols_container"
     data-mana-red = <%= card.mana_red %>

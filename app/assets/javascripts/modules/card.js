@@ -53,6 +53,7 @@ var Card = function(){
       src: symbolUrl,
       alt: alt
     });
+    
     this.desc.append(manaSymbol);
   }
 

@@ -2,11 +2,6 @@
 //= require './modules/ManaBuilder'
 //= require './modules/card'
 var magicMaker = new MagicMaker();
-$.valHooks.textarea = {
-  get: function( elem ) {
-    return elem.value.replace( /\r?\n/g, "\r\n" );
-  }
-};
 
 $(document).ready(function() {
   pageReady();
@@ -19,6 +14,17 @@ $(document).on('change', '#card_image_file_field', function(){
 });
 
 $(document).on('change', 'select#card_type', function(){
+  var typeText = $('#card_type>option:selected').text();
+  $('#hypen').empty();
+  $('#subtype_text').empty();
+
+  if ($(event.target).val() === "" || $(event.target).val() === undefined){
+    $('.type_subtype span').empty();
+    return;
+  }
+
+  $('#type_text').text(typeText);
+
   $.ajax({
     method: "GET",
     url: "/cards/subtypes.json",
@@ -34,17 +40,41 @@ $(document).on('change', 'select#card_type', function(){
       });
       subtypesSelect.append(option);
     });
+
+    if (subtypes.length > 0){
+      var subtypeText = $('#card_subtype>option:selected').text();
+      $('#hypen').text(' - ');
+      $('#subtype_text').text(subtypeText);
+    }
   });
+});
+
+$(document).on('change', 'select#card_subtype', function(){
+  if ($(event.target).val() === '' || $(event.target).val() === undefined ){
+    $('#hypen').empty();
+    $('#subtype_text').empty();
+    return;
+  }
+
+  var subtypeText = $('#card_subtype>option:selected').text();
+  $('#hypen').text(' - ');
+  $('#subtype_text').text(subtypeText);
 });
 
 $(document).on('click', '.insertable_symbol', function(){
   var symbolUrl = $(event.target).attr('src');
   var alt = $(event.target).attr('alt');
   var textKey = $(event.target).attr('data-text-key');
+  var descInput = $('#card_desc_input');
 
-  var text = $('#card_desc_input').val();
-  $('#card_desc_input').val(text + textKey);
-  text = $('#card_desc_input').val();
+  var text = descInput.val();
+  var selectionStart = descInput.prop("selectionStart");
+  var selecionEnd = descInput.prop('selectionEnd');
+
+  var textWithSymbolInserted = text.slice(0, selectionStart) + textKey + text.slice(selecionEnd);
+
+  descInput.val(textWithSymbolInserted);
+  text = descInput.val();
   //update desc presented
   var htmlString = magicMaker.card.parseDesc(text);
   magicMaker.card.desc.html(htmlString);

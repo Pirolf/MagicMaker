@@ -2,10 +2,17 @@
   <%= f.label :type %><br>
   <div class="row">
     <div class="col-sm-4">
-      <%= collection_select(:card, :type, Type.all, :id, :name, { prompt: "Select Type"}, { id: "card_type", class: "form-control" }) %>
+      <%= collection_select(:card, :type_id, Type.all, :id, :name, { prompt: "Select Type"}, { id: "card_type", class: "form-control" }) %>
     </div>
     <div class="col-sm-6">
-      <%= collection_select(:card, :subtype, if @card.type != nil then @card.type.subtypes else [] end, :id, :name, { prompt: "Select Subtype"}, { id: "card_subtype", class: "form-control" }) %>
+      <%= collection_select(
+        :card, 
+        :subtype_id, 
+        if @card.subtype != nil then @card.subtype elsif @card.type != nil then @card.type.subtypes else [] end, 
+        :id, :name, 
+        { prompt: "Select Subtype"}, 
+        { id: "card_subtype", class: "form-control" }
+        ) %>
     </div>
   </div>
 </div>
