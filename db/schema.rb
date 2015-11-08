@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151102011805) do
+ActiveRecord::Schema.define(version: 20151108013005) do
 
   create_table "card_enitities", force: :cascade do |t|
     t.integer  "deck_id"
@@ -41,8 +41,12 @@ ActiveRecord::Schema.define(version: 20151102011805) do
     t.integer  "image_art_file_size"
     t.datetime "image_art_updated_at"
     t.integer  "user_id"
+    t.integer  "subtype_id"
+    t.integer  "type_id"
   end
 
+  add_index "cards", ["subtype_id"], name: "index_cards_on_subtype_id"
+  add_index "cards", ["type_id"], name: "index_cards_on_type_id"
   add_index "cards", ["user_id"], name: "index_cards_on_user_id"
 
   create_table "colors", force: :cascade do |t|
@@ -69,6 +73,15 @@ ActiveRecord::Schema.define(version: 20151102011805) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
   end
+
+  create_table "subtypes", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "type_id"
+  end
+
+  add_index "subtypes", ["type_id"], name: "index_subtypes_on_type_id"
 
   create_table "types", force: :cascade do |t|
     t.string   "name"

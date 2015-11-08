@@ -11,3 +11,21 @@ Color.create color_name: 'Blue'
 Color.create color_name: 'Black'
 Color.create color_name: 'White'
 Color.create color_name: 'None'
+
+types = {
+    'Artifact': ['Equipment', 'Fortification'],
+    'Artifact Creature': [],
+    'Creature': ['Advisor', 'Cleric', 'Elemental', 'Illusion', 'Soldier', 'Wall'],
+    'Enchantment': [],
+    'Enchantment Creature': [],
+    'Instant': ['Arcane', 'Trap'],
+    'Land': [],
+    'Basic Land': [],
+    'Sorcery': ['Arcane']
+}
+types.each_pair do |k, v|
+    type = Type.create name: k
+    v.each do |subtype|
+        Subtype.create name: subtype, type: type
+    end
+end

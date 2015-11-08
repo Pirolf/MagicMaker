@@ -20,7 +20,9 @@ Rails.application.routes.draw do
 =end
 
   resources :decks
-  resources :cards
+  resources :cards do 
+    get :subtypes, on: :collection
+  end
   resources :special_abilities
 
   # The priority is based upon order of creation: first created -> highest priority.

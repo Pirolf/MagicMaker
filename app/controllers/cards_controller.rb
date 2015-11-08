@@ -78,6 +78,26 @@ class CardsController < ApplicationController
     end
   end
 
+  # GET /cards/subtypes.json
+  def subtypes
+=begin
+    if !user_signed_in?
+      respond_to do |format|
+        format.all { render nothing: true, status: :unauthorized }
+      end
+    end
+=end
+    respond_to do |format|
+      type_id = params[:type_id]
+      type = Type.find(type_id)
+      if type == nil
+        format.all { render nothing: true, status: :forbidden }
+      end
+
+      format.json { render json: type.subtypes.map{ |s| { id: s.id, name: s.name } }, status: :ok }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_card
@@ -92,6 +112,7 @@ class CardsController < ApplicationController
         :image_path, :image_art,
         :attack, :defense, :name, :desc, :color,
         :mana_red, :mana_green, :mana_blue, :mana_black, :mana_white, :mana_none,
+        :type, :subtype,
         :special_ability_ids => [])
     end
 end

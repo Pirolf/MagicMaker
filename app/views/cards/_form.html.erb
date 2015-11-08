@@ -1,6 +1,7 @@
 <% javascript 'card_edit.js' %>
 <% images_path = compute_asset_path('images') %>
 <%= form_for(@card, multipart: true) do |f| %>
+  <% locals = { images_path: images_path, f: f} %>
   <% if @card.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@card.errors.count, "error") %> prohibited this card from being saved:</h2>
@@ -12,11 +13,12 @@
       </ul>
     </div>
   <% end %>
+  
   <div class="field form-group">
       <div>Special Abilities</div>
         <%= collection_check_boxes('card', :special_ability_ids, SpecialAbility.all, :id, :name) %>
   </div>
-  <div class="field form-group">
+  <div class="field btn btn-default btn-file">
     <%= f.file_field :image_art, id: "card_image_file_field" %>
   </div>
 
@@ -26,20 +28,14 @@
   </div>
 
   <div class="field form-group">
-    <div>Color</div>
-    <%= collection_select('card', :color, Color.all, :color_name, :color_name, id: "card_color") %>
+    <%= f.label :color %><br>
+    <%= collection_select('card', :color, Color.all, :color_name, :color_name, {}, { id: "card_color", class: "form-control" }) %>
   </div>
-  
-  <%= render partial: 'mana_field', locals: { images_path: images_path, f: f } %>
 
-  <div class="field form-group">
-    <%= f.label :attack, "Power" %><br>
-    <%= f.number_field :attack, class: "form-control" %>
-  </div>
-  <div class="field form-group">
-    <%= f.label :defense, "Toughness" %><br>
-    <%= f.number_field :defense, class: "form-control" %>
-  </div>
+  <%= render partial: 'type_subtype', locals: { f: f }%>
+  <%= render partial: 'mana_field', locals: locals %>
+  <%= render partial: 'power_toughness', locals: { f: f } %>
+
 
   <div class="field form-group">
     <%= f.label :desc %><br>

@@ -18,6 +18,25 @@ $(document).on('change', '#card_image_file_field', function(){
   magicMaker.card.previewArt(event.target);
 });
 
+$(document).on('change', 'select#card_type', function(){
+  $.ajax({
+    method: "GET",
+    url: "/cards/subtypes.json",
+    data: { type_id: $(event.target).val() }
+  }).done(function(subtypes){
+    var subtypesSelect = $('select#card_subtype');
+    subtypesSelect.empty();
+    //build new options
+    subtypes.forEach(function(subtype){
+      var option = jQuery("<option />", {
+        value: subtype["id"],
+        text: subtype["name"]
+      });
+      subtypesSelect.append(option);
+    });
+  });
+});
+
 $(document).on('click', '.insertable_symbol', function(){
   var symbolUrl = $(event.target).attr('src');
   var alt = $(event.target).attr('alt');
