@@ -4,8 +4,8 @@ class Card < ActiveRecord::Base
 	has_many :special_ability_entities
 	has_many :special_abilities, through: :special_ability_entities
 
-    has_one :type
-    has_one :subtype
+    belongs_to :type
+    belongs_to :subtype
     
     belongs_to :user
   

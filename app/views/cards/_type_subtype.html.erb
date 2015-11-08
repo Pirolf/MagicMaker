@@ -8,7 +8,7 @@
       <%= collection_select(
         :card, 
         :subtype_id, 
-        if @card.subtype != nil then @card.subtype elsif @card.type != nil then @card.type.subtypes else [] end, 
+        if @card.type != nil then @card.type.subtypes else [] end, 
         :id, :name, 
         { prompt: "Select Subtype"}, 
         { id: "card_subtype", class: "form-control" }
