@@ -1,6 +1,6 @@
 //= require './modules/card_presenter'
 //= require jquery
-function pageReady(){
+$(function(){
 	var cardContainers = $('.card_container');
 	cardContainers.each(function(i, e){
 		var imagesUrl = $(this).attr('data-image-url');
@@ -12,5 +12,4 @@ function pageReady(){
 		card.loadAttackDefenseBox(imagesUrl);
 		card.loadManaSymbols(imagesUrl);
 	});
-}
-$(document).ready(pageReady);
+});
