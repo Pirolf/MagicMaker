@@ -15,3 +15,51 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+@mixin backdrop{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: #000;
+}
+@mixin lightbox{
+    background: #ffffff;
+    z-index: 51;
+
+    position: absolute;
+    top: 10%;
+    left: 20%;
+    width: 60%;
+    height: 60%;
+    
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px #444444;
+}
+.medium-glyph{
+    font-size: 2.2em;
+}
+
+.backdrop{
+    @include backdrop;
+    opacity: 0;
+    display: none;
+}
+.backdrop-active{
+    @include backdrop;
+    opacity: 0.5;
+    display: block;
+    z-index: 50;
+}
+.lightbox{
+    @include lightbox;
+    opacity: 0;
+    display: none;
+}
+.lightbox-active{
+    @include lightbox;
+    opacity: 1;
+    display: block;
+}

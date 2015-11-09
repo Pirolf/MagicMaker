@@ -1,6 +1,7 @@
 // Place all the styles related to the Cards controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
 $card_width: 375px;
 $card_height: 525px;
 
@@ -48,6 +49,7 @@ $text_left_align: 36.3px;
 	width: $w;
 	height: auto;
 }
+
 //for [0, 9]
 .smallManaText{
 	font-size: 1.3em;

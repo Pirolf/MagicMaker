@@ -12,6 +12,16 @@ $(function(){
     ManaBuilder(magicMaker);
   };
 
+  var exitLightBoxHandler = function(event){
+    var backdrop = $('.backdrop-active');
+    var lightbox = $('.lightbox-active');
+
+    backdrop.removeClass('backdrop-active');
+    backdrop.addClass('backdrop');
+    lightbox.removeClass('lightbox-active');
+    lightbox.addClass('lightbox');
+  };
+
   pageReady();
 
   $('#card_image_file_field').change(function(event){
@@ -72,6 +82,29 @@ $(function(){
     var subtypeText = $('#card_subtype>option:selected').text();
     $('#hypen').text(' - ');
     $('#subtype_text').text(subtypeText);
+  });
+
+  $('#add-types').click(function(event){
+    var backdrop = $('.backdrop');
+    var lightbox = $('.lightbox');
+
+    backdrop.removeClass('backdrop');
+    backdrop.addClass('backdrop-active');
+    lightbox.removeClass('lightbox');
+    lightbox.addClass('lightbox-active');
+
+    backdrop.on('click', exitLightBoxHandler);
+  });
+
+  $('.backdrop-active').click(function(event){
+    console.log('clicked on active backdrop')
+    var backdrop = $('.backdrop-active');
+    var lightbox = $('.lightbox-active');
+
+    backdrop.removeClass('backdrop-active');
+    backdrop.addClass('backdrop');
+    lightbox.removeClass('lightbox-active');
+    lightbox.addClass('lightbox');
   });
 
   $('.insertable_symbol').click(function(event){

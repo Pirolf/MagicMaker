@@ -22,7 +22,8 @@ module MagicMaker
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
-
+    config.assets.paths << Rails.root.join("vendor","assets", "fonts")
+    
     config.generators do |g|
       g.factory_girl dir: 'spec/factories'
     end
