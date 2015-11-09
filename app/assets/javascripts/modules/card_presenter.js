@@ -11,23 +11,24 @@ function CardPresenter(cardContainer){
 	this.desc = this.cardContainer.find('.card_desc');
 	this.cardName = this.cardContainer.find('.card_name');
 }
+
 CardPresenter.prototype = Object.create(Card.prototype);
 CardPresenter.prototype.constructor = CardPresenter;
 CardPresenter.prototype.loadCardFrame = function (imagesUrl){
 	var frameUrl =  imagesUrl + '/' +this.frameImage.attr('data-frame-url');
 	var frameImage = new Image();
-    	frameImage.onload = function(){
-      	this.frameImage.attr('src', frameUrl);
-    	}.bind(this);
-    	frameImage.src = frameUrl;
+	frameImage.onload = function(){
+  		this.frameImage.attr('src', frameUrl);
+	}.bind(this);
+	frameImage.src = frameUrl;
 }
 CardPresenter.prototype.loadAttackDefenseBox = function (imagesUrl){
-    	var attackDefenseBoxUrl = imagesUrl + '/' + this.attackDefenseBox.attr('data-attack-defense-box-url');
-    	var adImage = new Image();
-    	adImage.onload = function(){
-      	this.attackDefenseBox.attr('src', attackDefenseBoxUrl);
-    	}.bind(this);
-    	adImage.src = attackDefenseBoxUrl;
+	var attackDefenseBoxUrl = imagesUrl + '/' + this.attackDefenseBox.attr('data-attack-defense-box-url');
+	var adImage = new Image();
+	adImage.onload = function(){
+  		this.attackDefenseBox.attr('src', attackDefenseBoxUrl);
+	}.bind(this);
+	adImage.src = attackDefenseBoxUrl;
 }
 CardPresenter.prototype.loadManaSymbols = function(imagesUrl){
 	var mana_costs = {};

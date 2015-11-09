@@ -10,7 +10,13 @@
     </div>
     <%= content_tag(:div, sanitize(card.name), class: 'type_name_text card_name') %>
     <div class="type_name_text type_subtype">
-        <span id="type_text"></span><span id="hypen"></span><span id="subtype_text"></span>
+        <span id="type_text"><%= sanitize(Type.find(card.type_id).name) if card.type_id != nil %></span>
+        <span id="hypen">
+            <% if card.subtype_id != nil %>
+                <%= ' - ' %>
+            <% end %>
+        </span>
+        <span id="subtype_text"><%= sanitize(Subtype.find(card.subtype_id).name) if card.subtype_id != nil %></span>
     </div>
     <%= simple_format(sanitize(card.desc), class: 'card_desc') %>
     <div class="mana_symbols_container"

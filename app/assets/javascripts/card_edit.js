@@ -8,6 +8,7 @@ $(function(){
     magicMaker.card.loadArt();
     magicMaker.card.loadCardFrame();
     magicMaker.card.loadAttackDefenseBox();
+    magicMaker.card.updateDescWithSymbols();
     ManaBuilder(magicMaker);
   };
 
@@ -19,11 +20,17 @@ $(function(){
 
   $('select#card_type').change(function(event){
     var typeText = $('#card_type>option:selected').text();
+    var emptyOption = jQuery("<option />", {
+        value: ""
+    });
     $('#hypen').empty();
     $('#subtype_text').empty();
 
     if ($(event.target).val() === "" || $(event.target).val() === undefined){
       $('.type_subtype span').empty();
+      $('select#card_subtype').empty();
+      $('select#card_subtype').append(emptyOption);
+      $('select#card_subtype').val("");
       return;
     }
 
@@ -44,6 +51,8 @@ $(function(){
         });
         subtypesSelect.append(option);
       });
+
+      subtypesSelect.append(emptyOption);
 
       if (subtypes.length > 0){
         var subtypeText = $('#card_subtype>option:selected').text();
@@ -78,17 +87,14 @@ $(function(){
     var textWithSymbolInserted = text.slice(0, selectionStart) + textKey + text.slice(selecionEnd);
 
     descInput.val(textWithSymbolInserted);
-    text = descInput.val();
     //update desc presented
-    var htmlString = magicMaker.card.parseDesc(text);
-    magicMaker.card.desc.html(htmlString);
+    //var htmlString = magicMaker.card.parseDesc(text);
+    //magicMaker.card.desc.html(htmlString);
+    magicMaker.card.updateDescWithSymbols();
   });
 
   $('#card_desc_input').on('input', function(event){
-    var text = $(event.target).val();
-    //update the desc presented
-    var htmlString = magicMaker.card.parseDesc(text);
-    magicMaker.card.desc.html(htmlString);
+    magicMaker.card.updateDescWithSymbols();
   });
 
   $('#card_name').on('input', function(event){

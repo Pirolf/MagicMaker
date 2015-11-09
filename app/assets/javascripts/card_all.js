@@ -10,6 +10,7 @@ $(function(){
 		card.loadArt();
 		card.loadCardFrame(imagesUrl);
 		card.loadAttackDefenseBox(imagesUrl);
+		card.updateDescWithSymbols(card.desc.text());
 		card.loadManaSymbols(imagesUrl);
 	});
 });
