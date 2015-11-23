@@ -15,7 +15,19 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
-
+$light-navy: #5D6884;
+$medium-navy: #424F6F;
+/* bootstrap */
+.btn-primary {
+    background: $light-navy;
+    border-color: $light-navy;
+    color: #ffffff;
+}
+.btn-primary:hover{
+    background: $medium-navy;
+    border-color: $medium-navy;
+}
+/* backdrop */
 @mixin backdrop{
     position: absolute;
     top: 0px;

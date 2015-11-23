@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151108013005) do
+ActiveRecord::Schema.define(version: 20151110003510) do
 
   create_table "card_enitities", force: :cascade do |t|
     t.integer  "deck_id"
@@ -79,15 +79,20 @@ ActiveRecord::Schema.define(version: 20151108013005) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "type_id"
+    t.integer  "user_id"
   end
 
   add_index "subtypes", ["type_id"], name: "index_subtypes_on_type_id"
+  add_index "subtypes", ["user_id"], name: "index_subtypes_on_user_id"
 
   create_table "types", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "user_id"
   end
+
+  #add_index "types", ["user_id"], name: "index_types_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                             default: "", null: false

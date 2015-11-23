@@ -15,6 +15,9 @@ class CardsController < ApplicationController
   # GET /cards/1
   # GET /cards/1.json
   def show
+    if !user_signed_in?
+      redirect_to new_user_session_url
+    end
   end
 
   # GET /cards/new
@@ -63,14 +66,21 @@ class CardsController < ApplicationController
         end
       end
     else
-      redirect_to new_user_session_url
+      respond_to do |format|
+        format.all { render nothing: true, status: :unauthorized }
+      end
     end
   end
 
   # DELETE /cards/1
   # DELETE /cards/1.json
   def destroy
-    redirect_to new_user_session_url if !user_signed_in?
+    if !user_signed_in?
+      respond_to do |format|
+        format.all { render nothing: true, status: :unauthorized }
+      end
+    end
+    
     @card.destroy
     respond_to do |format|
       format.html { redirect_to cards_url, notice: 'Card was successfully destroyed.' }

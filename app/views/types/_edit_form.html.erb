@@ -1,0 +1,89 @@
+<div class="row">
+  <%= form_for(@type, multipart: true) do |f| %>
+    <div class="col-sm-3">
+      <div class="field form-group">
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+    </div>
+
+    <% if @type.errors.any? %>
+      <div class="col-sm-4">
+        <div id="error_explanation">
+          <h2><%= pluralize(@type.errors.count, "error") %> prohibited this type from being saved:</h2>
+          <ul>
+            <% @type.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+    <div class="col-sm-1">
+      <div class="actions">
+        <%= f.submit class: "btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<h2>Subtypes</h2>
+<div class="row">
+  <%= form_for(@subtype) do |f| %>
+    <div class="col-sm-3">
+      <div class="field form-group">
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+    </div>
+
+    <% if @subtype.errors.any? %>
+      <div class="col-sm-4">
+        <div id="error_explanation">
+          <h2><%= pluralize(@subtype.errors.count, "error") %> prohibited this subtype from being saved:</h2>
+          <ul>
+          <% @subtype.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="col-sm-1">
+      <div class="actions">
+        <%= f.submit 'Add Subtype', class: "btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<% @type.subtypes.each do |s| %>
+  <div class="row">
+    <%= form_for(s, url: edit_subtype_path(s), method: :patch, remote: true) do |f| %>
+      <div class="col-sm-3">
+        <div class="field form-group">
+          <%= f.text_field :name, class: "form-control" %>
+        </div>
+      </div>
+      <% if s.errors.any? %>
+        <div class="col-sm-4">
+          <div id="error_explanation">
+            <h2><%= pluralize(s.errors.count, "error") %> prohibited this subtype from being saved:</h2>
+            <ul>
+            <% s.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+      <div class="col-sm-1">
+        <div class="actions">
+          <%= f.submit 'Update', class: "btn btn-primary" %>
+        </div>
+      </div>
+    <% end %>
+    <div class="col-sm-1">
+      <span class="glyphicon glyphicon-remove-sign medium-glyph" />
+    </div>
+  </div>
+<% end %>
