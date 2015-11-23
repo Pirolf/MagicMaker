@@ -11,7 +11,7 @@ Color.create color_name: 'Blue'
 Color.create color_name: 'Black'
 Color.create color_name: 'White'
 Color.create color_name: 'None'
-
+=begin
 types = {
     'Artifact': ['Equipment', 'Fortification'],
     'Artifact Creature': [],
@@ -29,3 +29,4 @@ types.each_pair do |k, v|
         Subtype.create name: subtype, type: type
     end
 end
+=end

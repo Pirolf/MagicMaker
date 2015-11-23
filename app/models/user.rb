@@ -30,9 +30,10 @@ class User < ActiveRecord::Base
     def create_default_types
         DEFAULT_TYPES.each_pair do |k, v|
             type = self.types.create({ name: k })
-            v.each do |subtype|
-                subtype = type.subtypes.create({ name: v })
-                self.subtypes.create({ name: v })
+            v.each do |s|
+                subtype = type.subtypes.create({ name: s })
+                subtype.user = self
+                subtype.save
             end
         end
     end
