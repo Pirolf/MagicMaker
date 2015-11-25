@@ -23,6 +23,11 @@
         <%= f.submit class: "btn btn-primary" %>
       </div>
     </div>
+    <div class="col-sm-1">
+        <%= link_to @type, method: :delete, data: { confirm: 'Are you sure'} do %>
+          <span class="glyphicon glyphicon-remove-sign medium-glyph" />
+        <% end %>
+    </div>
   <% end %>
 </div>
 
@@ -83,7 +88,9 @@
       </div>
     <% end %>
     <div class="col-sm-1">
-      <span class="glyphicon glyphicon-remove-sign medium-glyph" />
+        <%= link_to s, method: :delete, data: { confirm: 'Are you sure'} do %>
+          <span class="glyphicon glyphicon-remove-sign medium-glyph" />
+        <% end %>
     </div>
   </div>
 <% end %>
