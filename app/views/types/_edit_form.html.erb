@@ -20,11 +20,11 @@
     <% end %>
     <div class="col-sm-1">
       <div class="actions">
-        <%= f.submit class: "btn btn-primary" %>
+        <%= f.submit 'update', class: "btn btn-primary" %>
       </div>
     </div>
     <div class="col-sm-1">
-        <%= link_to @type, method: :delete, data: { confirm: 'Are you sure'} do %>
+        <%= link_to @type, method: :delete, data: { confirm: 'Are you sure'}, class: 'delete-btn' do %>
           <span class="glyphicon glyphicon-remove-sign medium-glyph" />
         <% end %>
     </div>
@@ -88,7 +88,7 @@
       </div>
     <% end %>
     <div class="col-sm-1">
-        <%= link_to s, method: :delete, data: { confirm: 'Are you sure'} do %>
+        <%= link_to s, method: :delete, data: { confirm: 'Are you sure'}, class: 'delete-btn' do %>
           <span class="glyphicon glyphicon-remove-sign medium-glyph" />
         <% end %>
     </div>
