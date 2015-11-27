@@ -93,8 +93,7 @@ class TypesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_type
       if user_signed_in?
-        #@type = current_user.types.find(params[:id])
-        @type = Type.find(3)
+        @type = current_user.types.find(params[:id])
         @subtype = Subtype.new
       end
     end
