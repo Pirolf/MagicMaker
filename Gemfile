@@ -25,6 +25,7 @@ gem 'aws-sdk',  '< 2.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
+gem 'react-rails', '~> 1.5.0'
 #gem "browserify-rails", "~> 1.4.0"
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 #gem 'turbolinks'

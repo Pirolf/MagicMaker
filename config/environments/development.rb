@@ -60,4 +60,6 @@ Rails.application.configure do
       :secret_access_key => ENV['MAGIC_MAKER_AWS_SECRET_ACCESS_KEY']
     }
   }
+  
+  config.react.variant = :development
 end
