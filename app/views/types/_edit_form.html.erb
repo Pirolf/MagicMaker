@@ -1,23 +1,12 @@
-<div class="row">
-  <%= form_for(@type, multipart: true) do |f| %>
+<p class='notice' id='update-notice'></p>
+<%= form_for(@type, multipart: true) do |f| %>
+  <%= react_component('Errors', { errorCount: @type.errors.count, messages: @type.errors.full_messages }) %>
+  <div class="row">
     <div class="col-sm-3">
       <div class="field form-group">
-        <%= f.text_field :name, class: "form-control" %>
+        <%= react_component('Type', name: @type.name) %>
       </div>
     </div>
-
-    <% if @type.errors.any? %>
-      <div class="col-sm-4">
-        <div id="error_explanation">
-          <h2><%= pluralize(@type.errors.count, "error") %> prohibited this type from being saved:</h2>
-          <ul>
-            <% @type.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-      </div>
-    <% end %>
     <div class="col-sm-1">
       <div class="actions">
         <%= f.submit 'update', class: "btn btn-primary" %>
@@ -28,30 +17,18 @@
           <span class="glyphicon glyphicon-remove-sign medium-glyph" />
         <% end %>
     </div>
-  <% end %>
-</div>
+  </div>
+<% end %>
 
 <h2>Subtypes</h2>
 <div class="row">
   <%= form_for(@subtype) do |f| %>
+    <%= react_component('Errors', { errorCount: @subtype.errors.count, messages: @subtype.errors.full_messages }) %>
     <div class="col-sm-3">
       <div class="field form-group">
         <%= f.text_field :name, class: "form-control" %>
       </div>
     </div>
-
-    <% if @subtype.errors.any? %>
-      <div class="col-sm-4">
-        <div id="error_explanation">
-          <h2><%= pluralize(@subtype.errors.count, "error") %> prohibited this subtype from being saved:</h2>
-          <ul>
-          <% @subtype.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-          </ul>
-        </div>
-      </div>
-    <% end %>
 
     <div class="col-sm-1">
       <div class="actions">
@@ -63,30 +40,21 @@
 
 <% @type.subtypes.each do |s| %>
   <div class="row">
-    <%= form_for(s, url: edit_subtype_path(s), method: :patch, remote: true) do |f| %>
+    <%= form_for(s, url: "/subtypes/#{s.id}", method: :patch, remote: true) do |f| %>
+      <%= react_component('Errors', { errorCount: s.errors.count, messages: s.errors.full_messages }) %>
       <div class="col-sm-3">
         <div class="field form-group">
           <%= f.text_field :name, class: "form-control" %>
         </div>
       </div>
-      <% if s.errors.any? %>
-        <div class="col-sm-4">
-          <div id="error_explanation">
-            <h2><%= pluralize(s.errors.count, "error") %> prohibited this subtype from being saved:</h2>
-            <ul>
-            <% s.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-            </ul>
-          </div>
-        </div>
-      <% end %>
+
       <div class="col-sm-1">
         <div class="actions">
-          <%= f.submit 'Update', class: "btn btn-primary" %>
+          <%= f.submit 'Update', class: "btn btn-primary update-btn" %>
         </div>
       </div>
     <% end %>
+    
     <div class="col-sm-1">
         <%= link_to s, method: :delete, data: { confirm: 'Are you sure'}, class: 'delete-btn' do %>
           <span class="glyphicon glyphicon-remove-sign medium-glyph" />
@@ -94,3 +62,22 @@
     </div>
   </div>
 <% end %>
+<script>
+  $(function() {
+    console.log("qowu")
+    $('.edit_subtype').on('ajax:complete', function(evt, data, status) {
+      var errors
+      try {
+        errors = JSON.parse(data.responseText)
+      } catch(e) {
+        errors = null
+      }
+
+      if (errors !== null) {
+        errors.forEach(function(error) {
+          console.log(error)
+        })
+      }
+    })
+  })
+</script>

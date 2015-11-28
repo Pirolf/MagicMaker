@@ -42,10 +42,13 @@ class SubtypesController < ApplicationController
   def update
     respond_to do |format|
       if @subtype.update(subtype_params)
-        format.html { redirect_to @subtype, notice: 'Subtype was successfully updated.' }
-        format.json { render :show, status: :ok, location: @subtype }
+        #flash[:notice] = 'Subtype was successfully updated.'
+        format.html { redirect_to :back, notice: "biuasd" }
+        format.js   { }
+        #format.json { render :show, status: :ok, location: @subtype }
       else
-        format.html { render :edit }
+        format.html { render json: @subtype.errors.full_messages }
+        format.js  { render json: @subtype.errors.full_messages }
         format.json { render json: @subtype.errors, status: :unprocessable_entity }
       end
     end
@@ -69,6 +72,6 @@ class SubtypesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def subtype_params
-      params[:subtype]
+      params.require(:subtype).permit(:name)
     end
 end

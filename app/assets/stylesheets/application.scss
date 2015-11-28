@@ -75,3 +75,23 @@ $medium-navy: #424F6F;
     opacity: 1;
     display: block;
 }
+
+/* Errors */
+.error-explanation {
+    width: 50%;
+    margin-bottom: 15px;
+    background-color: #F5D9B3;
+    border-radius: 4px;
+    padding: 5px 8px 5px 8px;
+
+    .error-notice {
+        color: #AE030F;
+        font-size: 18px;
+    }
+
+    .error {
+        color: #AE4B50;
+        font-size: 16px;
+        margin-top: 5px;
+    }
+}
