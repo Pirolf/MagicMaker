@@ -42,14 +42,12 @@ class SubtypesController < ApplicationController
   def update
     respond_to do |format|
       if @subtype.update(subtype_params)
-        #flash[:notice] = 'Subtype was successfully updated.'
-        format.html { redirect_to :back, notice: "biuasd" }
-        format.js   { }
+        #format.html { render json: {status: "ok"} }
+        format.json   { render json: {status: "ok"} }
         #format.json { render :show, status: :ok, location: @subtype }
       else
-        format.html { render json: @subtype.errors.full_messages }
-        format.js  { render json: @subtype.errors.full_messages }
-        format.json { render json: @subtype.errors, status: :unprocessable_entity }
+        #format.html { render json: {errors: @subtype.errors.full_messages }, status: :unprocessable_entity}
+        format.json  { render json: {errors: @subtype.errors.full_messages }, status: :ok}
       end
     end
   end

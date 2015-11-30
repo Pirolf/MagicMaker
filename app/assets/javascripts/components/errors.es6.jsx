@@ -1,18 +1,41 @@
 class Errors extends React.Component {
+  constructor () {
+    super()
+    this.state = { errors: [] }
+  }
+
+  componentDidMount () {
+    this.state = { errors: [] }
+    window.events.addListener('errors-'.concat(this.props.id), this.handleErrors.bind(this))
+  }
+
+  componentWillUnmount () {
+    console.log("removing listener")
+    window.events.removeListener('errors-'.concat(this.props.id), this.handleErrors.bind(this))
+  }
+
+  handleErrors (data) {
+    this.setState({errors: data.errors})
+    if (this.state.errors.length > 0) {
+      setTimeout(function() {
+        this.setState({errors: []})
+      }.bind(this), 5000)
+    }
+  }
+
   render () {
-    
-    if (this.props.errorCount == 0) {
+    if (this.state.errors.length == 0) {
         return false
     }
     
     var errorsList = []
-    this.props.messages.forEach(function(m, index) {
+    this.state.errors.forEach(function(m, index) {
         errorsList.push(<div key={ index } className='error'>{ m }</div>)
     })
 
     return (
-        <div className="error-explanation">
-          <div className='error-notice'>{ this.props.errorCount } errors prohibited this type from being saved:</div>
+        <div className='error-explanation' key="error-explanation">
+          <div className='error-notice'>{ this.state.errors.length } errors prohibited this type from being saved:</div>
           <div className='errors-list'>{ errorsList }</div>
         </div>
     )
@@ -20,6 +43,5 @@ class Errors extends React.Component {
 }
 
 Errors.propTypes = {
-  errorCount: React.PropTypes.number,
-  messages: React.PropTypes.array
+  id: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string])
 }

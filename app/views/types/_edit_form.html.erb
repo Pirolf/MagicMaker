@@ -1,6 +1,5 @@
 <p class='notice' id='update-notice'></p>
 <%= form_for(@type, multipart: true) do |f| %>
-  <%= react_component('Errors', { errorCount: @type.errors.count, messages: @type.errors.full_messages }) %>
   <div class="row">
     <div class="col-sm-3">
       <div class="field form-group">
@@ -23,7 +22,6 @@
 <h2>Subtypes</h2>
 <div class="row">
   <%= form_for(@subtype) do |f| %>
-    <%= react_component('Errors', { errorCount: @subtype.errors.count, messages: @subtype.errors.full_messages }) %>
     <div class="col-sm-3">
       <div class="field form-group">
         <%= f.text_field :name, class: "form-control" %>
@@ -39,45 +37,8 @@
 </div>
 
 <% @type.subtypes.each do |s| %>
+  <%= react_component('Errors', { id: s.id }) %>
   <div class="row">
-    <%= form_for(s, url: "/subtypes/#{s.id}", method: :patch, remote: true) do |f| %>
-      <%= react_component('Errors', { errorCount: s.errors.count, messages: s.errors.full_messages }) %>
-      <div class="col-sm-3">
-        <div class="field form-group">
-          <%= f.text_field :name, class: "form-control" %>
-        </div>
-      </div>
-
-      <div class="col-sm-1">
-        <div class="actions">
-          <%= f.submit 'Update', class: "btn btn-primary update-btn" %>
-        </div>
-      </div>
-    <% end %>
-    
-    <div class="col-sm-1">
-        <%= link_to s, method: :delete, data: { confirm: 'Are you sure'}, class: 'delete-btn' do %>
-          <span class="glyphicon glyphicon-remove-sign medium-glyph" />
-        <% end %>
-    </div>
+    <%= react_component('SubtypeForm', { name: s.name, record_id: s.id, auth_token: form_authenticity_token}) %>
   </div>
 <% end %>
-<script>
-  $(function() {
-    console.log("qowu")
-    $('.edit_subtype').on('ajax:complete', function(evt, data, status) {
-      var errors
-      try {
-        errors = JSON.parse(data.responseText)
-      } catch(e) {
-        errors = null
-      }
-
-      if (errors !== null) {
-        errors.forEach(function(error) {
-          console.log(error)
-        })
-      }
-    })
-  })
-</script>
