@@ -78,27 +78,38 @@ $medium-navy: #424F6F;
     display: block;
 }
 
-@mixin fade ($duration){
+@mixin fade ($duration) {
     transition: opacity $duration ease-out;
     -webkit-transition: opacity $duration ease-out;
     -moz-transition: opacity $duration ease-out;
 }
+/* Error and Success */
+@mixin messageText($color) {
+    font-size: 16px;
+    color: $color;
+}
 
-.error-explanation {
+@mixin messageContainer($backgroundColor) {
     width: 50%;
     margin-bottom: 15px;
-    background-color: #F5D9B3;
     border-radius: 4px;
     padding: 5px 8px 5px 8px;
-
+    background-color: $backgroundColor
+}
+.error-explanation {
+    @include messageContainer(#F5D9B3);
     .error-notice {
         color: #AE030F;
         font-size: 18px;
     }
 
     .error {
-        color: #AE4B50;
-        font-size: 16px;
         margin-top: 5px;
+        @include messageText(#AE4B50);
     }
+}
+
+.success-msg {
+    @include messageContainer(#679359);
+    @include messageText(#124A00);
 }

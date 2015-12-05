@@ -5,7 +5,7 @@ class Errors extends React.Component {
   }
 
   componentDidMount () {
-    this.state = { errors: [] }
+    this.setState({errors: []})
     window.events.addListener('errors-'.concat(this.props.id), this.handleErrors.bind(this))
   }
 
