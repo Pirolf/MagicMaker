@@ -60,6 +60,7 @@ $medium-navy: #424F6F;
     opacity: 0;
     display: none;
 }
+
 .backdrop-active{
     @include backdrop;
     opacity: 0.5;
