@@ -1,44 +1,47 @@
 <p class='notice' id='update-notice'></p>
-<%= form_for(@type, multipart: true) do |f| %>
-  <div class="row">
-    <div class="col-sm-3">
-      <div class="field form-group">
-        <%= react_component('Type', name: @type.name) %>
+<div class="container">
+  <%= form_for(@type, multipart: true) do |f| %>
+    <div class="row">
+      <div class="col-xs-8 small-padding">
+        <div class="field form-group">
+          <%= react_component('Type', name: @type.name) %>
+        </div>
       </div>
-    </div>
-    <div class="col-sm-1">
-      <div class="actions">
-        <%= f.submit 'update', class: "btn btn-primary" %>
+      <div class="col-xs-2 small-padding">
+        <div class="actions">
+          <%= f.submit 'update', class: "btn btn-primary" %>
+        </div>
       </div>
-    </div>
-    <div class="col-sm-1">
-        <%= link_to @type, method: :delete, data: { confirm: 'Are you sure'}, class: 'delete-btn' do %>
-          <span class="glyphicon glyphicon-remove-sign medium-glyph" />
-        <% end %>
-    </div>
-  </div>
-<% end %>
-
-<h2>Subtypes</h2>
-<div class="row">
-  <%= form_for(@subtype) do |f| %>
-    <div class="col-sm-3">
-      <div class="field form-group">
-        <%= f.text_field :name, class: "form-control" %>
-      </div>
-    </div>
-
-    <div class="col-sm-1">
-      <div class="actions">
-        <%= f.submit 'Add Subtype', class: "btn btn-primary" %>
+      <div class="col-xs-1 small-padding">
+          <%= link_to @type, method: :delete, data: { confirm: 'Are you sure'}, class: 'delete-btn' do %>
+            <span class="glyphicon glyphicon-remove-sign medium-glyph"></span>
+          <% end %>
       </div>
     </div>
   <% end %>
-</div>
-<% @type.subtypes.each do |s| %>
-  <%= react_component('Success', { id: s.id }) %>
-  <%= react_component('Errors', { id: s.id }) %>
+
+  <h2>Subtypes</h2>
   <div class="row">
-    <%= react_component('SubtypeForm', { name: s.name, record_id: s.id, auth_token: form_authenticity_token}) %>
+    <%= form_for(@subtype) do |f| %>
+      <div class="col-sm-3">
+        <div class="field form-group">
+          <%= f.text_field :name, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="col-sm-1">
+        <div class="actions">
+          <%= f.submit 'Add Subtype', class: "btn btn-primary" %>
+        </div>
+      </div>
+    <% end %>
   </div>
-<% end %>
+
+  <% @type.subtypes.each do |s| %>
+    <%= react_component('Success', { id: s.id }) %>
+    <%= react_component('Errors', { id: s.id }) %>
+    <div class="row">
+      <%= react_component('SubtypeForm', { name: s.name, record_id: s.id, auth_token: form_authenticity_token}) %>
+    </div>
+  <% end %>
+</div>

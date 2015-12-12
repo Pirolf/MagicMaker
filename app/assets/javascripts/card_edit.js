@@ -101,6 +101,12 @@ $(function(){
     backdrop.on('click', exitLightBoxHandler);
   });
 
+  $('iframe').load(function() {
+    var exitTypesBtn = $('iframe').contents().find('.types-cancel')
+    console.log('bind iframe handler')
+    exitTypesBtn.click(exitLightBoxHandler);
+  })
+  
   $('.backdrop-active').click(function(event){
     console.log('clicked on active backdrop')
     var backdrop = $('.backdrop-active');

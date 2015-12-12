@@ -1,4 +1,5 @@
 <% javascript 'card_edit.js' %>
+<% javascript 'types.js' %>
 <% images_path = compute_asset_path('images') %>
 <%= form_for(@card, multipart: true) do |f| %>
   <% locals = { images_path: images_path, f: f} %>

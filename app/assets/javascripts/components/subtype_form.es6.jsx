@@ -99,7 +99,6 @@ class SubtypeForm extends React.Component {
           this.setState({name: newName})
           window.events.emit('errors-'.concat(this.props.record_id), { errors: [] })
           window.events.emit('success-'.concat(this.props.record_id), { itemName: 'subtype'})
-          //events.emit('subtype-updated', {component: SuccessFlash, props: {}, open: true})
         }
       }.bind(this),
       error: function(xhr, status, err) {

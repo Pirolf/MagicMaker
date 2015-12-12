@@ -15,21 +15,88 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
+/* media query */
+@mixin mobile {
+    @media (max-width: 700px) {
+        @content;
+    }
+}
+
+@mixin mini {
+    @media (max-width: 500px) {
+        @content;
+    }
+}
+/* custom responsive stuff */
+.small-padding {
+    padding-left: 5px;
+    padding-right: 5px;
+    &:first-child {
+        padding-left: 15px;
+    }
+
+    &:last-child {
+        padding-right: 15px;
+    }
+}
+
+.row {
+    .column {
+        position: relative;
+        min-height: 1px;
+        padding-left: 5px;
+        padding-right: 5px;
+        float: left;
+        &:first-child {
+            padding-left: 15px;
+        }
+        &:last-child {
+            padding-right: 15px;
+        }
+    }
+    .column-80 {
+        @extend .column;
+        width: 80%;
+    }
+
+    .column-60 {
+        @extend .column;
+        width: 60%;
+    }
+
+    .column-10 {
+        @extend .column;
+        width: 10%;
+    }
+}
+
+
+/* bootstrap */
 $light-navy: #5D6884;
 $medium-navy: #424F6F;
-/* bootstrap */
+
 .btn-primary {
     background: $light-navy;
     border-color: $light-navy;
     color: #ffffff;
+    &:hover {
+        background: $medium-navy;
+        border-color: $medium-navy;
+    }
 }
-.btn-primary:hover{
-    background: $medium-navy;
-    border-color: $medium-navy;
+
+.btn-cancel {
+    background: #AA3939;
+    border-color: #AA3939;
+    color: #ffffff;
+    &:hover {
+        background: #801515;
+        border-color: #801515;
+    }
 }
 /* backdrop */
 @mixin backdrop{
-    position: absolute;
+    position: fixed;
     top: 0px;
     left: 0px;
     width: 100%;
@@ -40,11 +107,21 @@ $medium-navy: #424F6F;
     background: #ffffff;
     z-index: 51;
 
-    position: absolute;
+    position: fixed;
     top: 10%;
     left: 20%;
     width: 60%;
     height: 60%;
+    @include mobile {
+        left: 14%;
+        width: 72%;
+    }
+    @include mini {
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+    }
     
     padding: 10px;
     border-radius: 5px;
@@ -67,6 +144,7 @@ $medium-navy: #424F6F;
     display: block;
     z-index: 50;
 }
+
 .lightbox{
     @include lightbox;
     opacity: 0;
