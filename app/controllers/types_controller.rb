@@ -9,6 +9,10 @@ class TypesController < ApplicationController
     else
       redirect_to new_user_session_url
     end
+
+    respond_to do |format|
+      format.html { render partial: '/types/index' }
+    end
   end
 
   # GET /types/1

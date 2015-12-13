@@ -29,7 +29,6 @@ $(function(){
     magicMaker.card.previewArt(event.target);
   });
 
-  var selectedTypeId
   $('select#card_type').change(function(event){
     var typeText = $('#card_type>option:selected').text()
     var emptyOption = jQuery("<option />", {
@@ -74,8 +73,6 @@ $(function(){
         $('#subtype_text').text(subtypeText);
       }
     })
-
-    selectedTypeId = typeId
   });
 
   $('select#card_subtype').change(function(event){
@@ -102,10 +99,12 @@ $(function(){
     backdrop.on('click', exitLightBoxHandler);
     //request type and subtypes partial
     var url
-    if (selectedTypeId === undefined) {
-      url = '/types/3/edit'
+    var selectedTypeId = $('select#card_type').val()
+    if (selectedTypeId === undefined || selectedTypeId === '' || selectedTypeId === null) {
+      //if no type is selected, show all types
+      url = '/types'
     } else {
-      url = '/types/'.concat(typeId).concat('/edit') 
+      url = '/types/'.concat(selectedTypeId).concat('/edit') 
     }
 
     $.ajax({
