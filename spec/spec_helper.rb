@@ -26,7 +26,11 @@ require 'devise'
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   config.include Devise::TestHelpers, type: :controller
+  config.include Devise::TestHelpers, type: :feature
   config.include Paperclip::Shoulda::Matchers
+
+  config.example_status_persistence_file_path = "spec/examples.txt"
+  config.color = true
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
@@ -49,22 +53,20 @@ RSpec.configure do |config|
     # `true` in RSpec 4.
     mocks.verify_partial_doubles = true
   end
-  
-  
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
-=begin
   # These two settings work together to allow you to limit a spec run
   # to individual examples or groups you care about by tagging them with
   # `:focus` metadata. When nothing is tagged with `:focus`, all examples
   # get run.
+=begin
   config.filter_run :focus
   config.run_all_when_everything_filtered = true
 
   # Allows RSpec to persist some state between runs in order to support
   # the `--only-failures` and `--next-failure` CLI options. We recommend
   # you configure your source control system to ignore this file.
-  config.example_status_persistence_file_path = "spec/examples.txt"
+  
 
   # Limits the available syntax to the non-monkey patched syntax that is
   # recommended. For more details, see:

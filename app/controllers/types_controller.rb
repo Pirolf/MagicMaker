@@ -33,6 +33,10 @@ class TypesController < ApplicationController
     if !user_signed_in?
       redirect_to new_user_session_url
     end
+
+    respond_to do |format|
+      format.html { render partial: '/types/edit'}
+    end
   end
 
   # POST /types

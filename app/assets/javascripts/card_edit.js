@@ -13,6 +13,7 @@ $(function(){
   };
 
   var exitLightBoxHandler = function(event){
+    console.log("click")
     var backdrop = $('.backdrop-active');
     var lightbox = $('.lightbox-active');
 
@@ -28,6 +29,7 @@ $(function(){
     magicMaker.card.previewArt(event.target);
   });
 
+  var selectedTypeId
   $('select#card_type').change(function(event){
     var typeText = $('#card_type>option:selected').text()
     var emptyOption = jQuery("<option />", {
@@ -71,10 +73,9 @@ $(function(){
         $('#hypen').text(' - ');
         $('#subtype_text').text(subtypeText);
       }
-    });
+    })
 
-    //update iframe src
-    $('iframe.edit-type').attr('src', '/types/'.concat(typeId).concat('/edit'));
+    selectedTypeId = typeId
   });
 
   $('select#card_subtype').change(function(event){
@@ -86,10 +87,10 @@ $(function(){
 
     var subtypeText = $('#card_subtype>option:selected').text();
     $('#hypen').text(' - ');
-    $('#subtype_text').text(subtypeText);
+    $('#subtype_text').text(subtypeText)
   });
 
-  $('#add-types').click(function(event){
+  $('#add-types').click(function(event) {
     var backdrop = $('.backdrop');
     var lightbox = $('.lightbox');
 
@@ -99,12 +100,25 @@ $(function(){
     lightbox.addClass('lightbox-active');
 
     backdrop.on('click', exitLightBoxHandler);
-  });
+    //request type and subtypes partial
+    var url
+    if (selectedTypeId === undefined) {
+      url = '/types/3/edit'
+    } else {
+      url = '/types/'.concat(typeId).concat('/edit') 
+    }
 
-  $('iframe').load(function() {
-    var exitTypesBtn = $('iframe').contents().find('.types-cancel')
-    console.log('bind iframe handler')
-    exitTypesBtn.click(exitLightBoxHandler);
+    $.ajax({
+      method: "GET",
+      url: url,
+      dataType: 'html'
+    }).done(function(types) {
+      $('div.edit-type').html(types)
+      ReactRailsUJS.mountComponents()
+      $(types).ready(function() {
+        $('.btn-cancel').click(exitLightBoxHandler)
+      }).bind(this)
+    })
   })
   
   $('.backdrop-active').click(function(event){

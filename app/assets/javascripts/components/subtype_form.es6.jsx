@@ -9,10 +9,11 @@ class SubtypeName extends React.Component {
   }
 
   render() {
+    var id = "subtype_name_".concat(this.props.subtype_id)
     return (
       <div className="col-sm-3">
         <div className="field form-group">
-          <input className="form-control" type="text" onChange={this.props.onChange} value={ this.state.name } name="subtype[name]" id="subtype_name" />
+          <input className="form-control" type="text" onChange={this.props.onChange} value={ this.state.name } name="subtype[name]" id={id} />
         </div>
       </div>
     )
@@ -21,6 +22,7 @@ class SubtypeName extends React.Component {
 
 SubtypeName.propTypes = {
   subtype_name: React.PropTypes.string,
+  subtype_id: React.PropTypes.number,
   onChange: React.PropTypes.func
 }
 
@@ -116,7 +118,7 @@ class SubtypeForm extends React.Component {
       <form className="edit_subtype" id={id} onSubmit={this.handleSubmit.bind(this)} action={action} acceptCharset="UTF-8" method="patch">
         <input name="utf8" type="hidden" value="✓" />
         <input type="hidden" name="authenticity_token" value={this.props.auth_token}/>
-        <SubtypeName subtype_name={this.state.name} onChange={this.handleNameChange.bind(this)}/>
+        <SubtypeName subtype_name={this.state.name} subtype_id={this.props.record_id} onChange={this.handleNameChange.bind(this)}/>
         <UpdateBtn />
         <DeleteBtn record_id={this.props.record_id}/>
       </form>

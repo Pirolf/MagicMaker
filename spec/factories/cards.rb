@@ -1,6 +1,5 @@
 FactoryGirl.define do
     colors = ["White", "Black", "Red", "Blue", "Green", "None"]
-    prng = Random.new
 
     sequence :name do |n|
         "testcard#{n}"
