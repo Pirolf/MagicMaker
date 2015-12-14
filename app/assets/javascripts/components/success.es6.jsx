@@ -5,11 +5,11 @@ class Success extends React.Component {
     }
 
     componentDidMount () {
-        window.events.addListener('success-'.concat(this.props.id), this.handleSuccess.bind(this))
+        window.events.addListener('success-'.concat(this.props.type).concat('-').concat(this.props.id), this.handleSuccess.bind(this))
     }
 
     componentWillUnmount () {
-        window.events.removeListener('errors-'.concat(this.props.id), this.handleSuccess.bind(this))
+        window.events.removeListener('success-'.concat(this.props.type).concat('-').concat(this.props.id), this.handleSuccess.bind(this))
     }
 
     handleSuccess (data) {
@@ -37,5 +37,6 @@ class Success extends React.Component {
 }
 
 Success.propTypes = {
-  id: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string])
+  id: React.PropTypes.number,
+  type: React.PropTypes.string
 }

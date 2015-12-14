@@ -1,25 +1,9 @@
 <p class='notice' id='update-notice'></p>
 <div class="container">
-  <%= form_for(@type, multipart: true) do |f| %>
-    <div class="row">
-      <div class="col-xs-8 small-padding">
-        <div class="field form-group">
-          <%= react_component('Type', name: @type.name) %>
-        </div>
-      </div>
-      <div class="col-xs-2 small-padding">
-        <div class="actions">
-          <%= f.submit 'update', class: "btn btn-primary" %>
-        </div>
-      </div>
-      <div class="col-xs-1 small-padding">
-          <%= link_to @type, method: :delete, data: { confirm: 'Are you sure'}, class: 'delete-btn' do %>
-            <span class="glyphicon glyphicon-remove-sign medium-glyph"></span>
-          <% end %>
-      </div>
-    </div>
-  <% end %>
-
+  <%= react_component('Success', { id: @type.id, type: 'type' }) %>
+  <%= react_component('Errors', { id: @type.id, type: 'type' }) %>
+  <%= react_component('TypeForm', { name: @type.name, record_id: @type.id, auth_token: form_authenticity_token}) %>
+  
   <h2>Subtypes</h2>
   <div class="row">
     <%= form_for(@subtype) do |f| %>
@@ -38,8 +22,8 @@
   </div>
 
   <% @type.subtypes.each do |s| %>
-    <%= react_component('Success', { id: s.id }) %>
-    <%= react_component('Errors', { id: s.id }) %>
+    <%= react_component('Success', { id: s.id, type: 'subtype' }) %>
+    <%= react_component('Errors', { id: s.id, type: 'subtype' }) %>
     <div class="row">
       <%= react_component('SubtypeForm', { name: s.name, record_id: s.id, auth_token: form_authenticity_token}) %>
     </div>

@@ -60,26 +60,14 @@ class SubtypeForm extends React.Component {
     this.state = {name: props.name}
   }
 
-  reloadNameFromServer () {
-    $.ajax({
-      url: "/subtypes/".concat(this.props.record_id),
-      dataType: 'json',
-      type: 'GET',
-      success: function(data) {
-        this.setState({name: data.name})
-      }.bind(this)
-    })
-  }
-
   handleNameChange (e) {
     this.setState({name: e.target.value});
   }
 
   handleSubmit (e) {
-    e.preventDefault();
-    console.log(this.state)
+    e.preventDefault()
     
-    var newName = this.state.name.trim();
+    var newName = this.state.name.trim()
     /*
     if (!newName) {
       return;
@@ -90,17 +78,24 @@ class SubtypeForm extends React.Component {
       url: "/subtypes/".concat(this.props.record_id),
       dataType: 'json',
       type: 'PATCH',
-      data: {subtype: {name: newName}, commit: 'update', utf8: "✓", "authenticity_token": this.props.auth_token },
+      data: { 
+        subtype: {
+          name: newName
+        }, 
+        commit: 'update', 
+        utf8: "✓", 
+        "authenticity_token": this.props.auth_token 
+      },
       success: function(data) {
         var errors = data.errors
         if (errors) {
-          window.events.emit('errors-'.concat(this.props.record_id), { errors: errors })
-          window.events.emit('success-'.concat(this.props.record_id), { itemName: null })
-          this.reloadNameFromServer()
+          window.events.emit('errors-subtype-'.concat(this.props.record_id), { errors: errors })
+          window.events.emit('success-subtype-'.concat(this.props.record_id), { itemName: null })
+          this.setState({name: this.props.name})
         } else {
           this.setState({name: newName})
-          window.events.emit('errors-'.concat(this.props.record_id), { errors: [] })
-          window.events.emit('success-'.concat(this.props.record_id), { itemName: 'subtype'})
+          window.events.emit('errors-subtype-'.concat(this.props.record_id), { errors: [] })
+          window.events.emit('success-subtype-'.concat(this.props.record_id), { itemName: 'subtype'})
         }
       }.bind(this),
       error: function(xhr, status, err) {
@@ -115,9 +110,7 @@ class SubtypeForm extends React.Component {
     var id = "edit_subtype_".concat(this.props.record_id)
     var action = "/subtypes/".concat(this.props.record_id)
     return (
-      <form className="edit_subtype" id={id} onSubmit={this.handleSubmit.bind(this)} action={action} acceptCharset="UTF-8" method="patch">
-        <input name="utf8" type="hidden" value="✓" />
-        <input type="hidden" name="authenticity_token" value={this.props.auth_token}/>
+      <form className="edit_subtype" id={id} onSubmit={this.handleSubmit.bind(this)}>
         <SubtypeName subtype_name={this.state.name} subtype_id={this.props.record_id} onChange={this.handleNameChange.bind(this)}/>
         <UpdateBtn />
         <DeleteBtn record_id={this.props.record_id}/>

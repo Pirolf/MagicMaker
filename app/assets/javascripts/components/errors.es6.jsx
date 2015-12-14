@@ -6,12 +6,12 @@ class Errors extends React.Component {
 
   componentDidMount () {
     this.setState({errors: []})
-    window.events.addListener('errors-'.concat(this.props.id), this.handleErrors.bind(this))
+    window.events.addListener('errors-'.concat(this.props.type).concat('-').concat(this.props.id), this.handleErrors.bind(this))
   }
 
   componentWillUnmount () {
     console.log("removing listener")
-    window.events.removeListener('errors-'.concat(this.props.id), this.handleErrors.bind(this))
+    window.events.removeListener('errors-'.concat(this.props.type).concat('-').concat(this.props.id), this.handleErrors.bind(this))
   }
 
   handleErrors (data) {
@@ -43,5 +43,6 @@ class Errors extends React.Component {
 }
 
 Errors.propTypes = {
-  id: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string])
+  id: React.PropTypes.number,
+  type: React.PropTypes.string
 }
