@@ -87,7 +87,27 @@ $(function(){
     $('#subtype_text').text(subtypeText)
   });
 
-  $('#add-types').click(function(event) {
+  var requestTypes = function(url) {
+    $.ajax({
+      method: "GET",
+      url: url,
+      dataType: 'html'
+    }).done(function(types) {
+      $('div.edit-type').html(types)
+      ReactRailsUJS.mountComponents()
+      $(types).ready(function() {
+        $('.btn-cancel').click(exitLightBoxHandler)
+      }).bind(this)
+    })
+  }
+
+  $('.more-subtypes').click(function(event) {
+    var url = '/types/'.concat($(event.target).attr('type-id')).concat('/edit')
+    console.log(url)
+    requestTypes(url)
+  })
+
+  $('#add-types').click(function() {
     var backdrop = $('.backdrop');
     var lightbox = $('.lightbox');
 
@@ -106,18 +126,7 @@ $(function(){
     } else {
       url = '/types/'.concat(selectedTypeId).concat('/edit') 
     }
-
-    $.ajax({
-      method: "GET",
-      url: url,
-      dataType: 'html'
-    }).done(function(types) {
-      $('div.edit-type').html(types)
-      ReactRailsUJS.mountComponents()
-      $(types).ready(function() {
-        $('.btn-cancel').click(exitLightBoxHandler)
-      }).bind(this)
-    })
+    requestTypes(url)
   })
   
   $('.backdrop-active').click(function(event){
