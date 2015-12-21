@@ -9,43 +9,9 @@
         <%= react_component('TypeForm', { name: type.name, record_id: type.id, auth_token: form_authenticity_token }) %>
     </div>
     <div class="col-xs-2">
-        <span type-id=<%= type.id %> class="glyphicon glyphicon-menu-hamburger medium-glyph more-subtypes" />
+        <%= react_component 'LightboxLink', { url: edit_type_path(type), link_type: "more_subtypes" } %>
     </div>
   </div>
 <% end %>
 
 <%= link_to 'New Type', new_type_path %>
-<script>
-$(function() {
-    var requestTypes = function(url) {
-        $.ajax({
-            method: "GET",
-            url: url,
-            dataType: 'html'
-        }).done(function(types) {
-            $('div.edit-type').html(types)
-            ReactRailsUJS.mountComponents()
-            $(types).ready(function() {
-                $('.btn-cancel').click(exitLightBoxHandler)
-            }).bind(this)
-        })
-    }
-  
-    var exitLightBoxHandler = function(event){
-        console.log("click")
-        var backdrop = $('.backdrop-active');
-        var lightbox = $('.lightbox-active');
-
-        backdrop.removeClass('backdrop-active');
-        backdrop.addClass('backdrop');
-        lightbox.removeClass('lightbox-active');
-        lightbox.addClass('lightbox');
-    }
-  
-    $('.more-subtypes').click(function(event) {
-        var url = '/types/'.concat($(event.target).attr('type-id')).concat('/edit')
-        console.log(url)
-        requestTypes(url)
-    })    
-})
-</script>

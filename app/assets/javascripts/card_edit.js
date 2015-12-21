@@ -12,17 +12,6 @@ $(function(){
     ManaBuilder(magicMaker);
   };
 
-  var exitLightBoxHandler = function(event){
-    console.log("click")
-    var backdrop = $('.backdrop-active');
-    var lightbox = $('.lightbox-active');
-
-    backdrop.removeClass('backdrop-active');
-    backdrop.addClass('backdrop');
-    lightbox.removeClass('lightbox-active');
-    lightbox.addClass('lightbox');
-  };
-
   pageReady();
 
   $('#card_image_file_field').change(function(event){
@@ -85,59 +74,6 @@ $(function(){
     var subtypeText = $('#card_subtype>option:selected').text();
     $('#hypen').text(' - ');
     $('#subtype_text').text(subtypeText)
-  });
-
-  var requestTypes = function(url) {
-    $.ajax({
-      method: "GET",
-      url: url,
-      dataType: 'html'
-    }).done(function(types) {
-      $('div.edit-type').html(types)
-      ReactRailsUJS.mountComponents()
-      $(types).ready(function() {
-        $('.btn-cancel').click(exitLightBoxHandler)
-      }).bind(this)
-    })
-  }
-
-  $('.more-subtypes').click(function(event) {
-    var url = '/types/'.concat($(event.target).attr('type-id')).concat('/edit')
-    console.log(url)
-    requestTypes(url)
-  })
-
-  $('#add-types').click(function() {
-    var backdrop = $('.backdrop');
-    var lightbox = $('.lightbox');
-
-    backdrop.removeClass('backdrop');
-    backdrop.addClass('backdrop-active');
-    lightbox.removeClass('lightbox');
-    lightbox.addClass('lightbox-active');
-
-    backdrop.on('click', exitLightBoxHandler);
-    //request type and subtypes partial
-    var url
-    var selectedTypeId = $('select#card_type').val()
-    if (selectedTypeId === undefined || selectedTypeId === '' || selectedTypeId === null) {
-      //if no type is selected, show all types
-      url = '/types'
-    } else {
-      url = '/types/'.concat(selectedTypeId).concat('/edit') 
-    }
-    requestTypes(url)
-  })
-  
-  $('.backdrop-active').click(function(event){
-    console.log('clicked on active backdrop')
-    var backdrop = $('.backdrop-active');
-    var lightbox = $('.lightbox-active');
-
-    backdrop.removeClass('backdrop-active');
-    backdrop.addClass('backdrop');
-    lightbox.removeClass('lightbox-active');
-    lightbox.addClass('lightbox');
   });
 
   $('.insertable_symbol').click(function(event){

@@ -10,46 +10,10 @@
             </div>
         </div>
         <div class="col-xs-3 col-xs-offset-5">
-            <div class="btn btn-primary btn-cancel">
-                <div class="types-cancel">Cancel</div>
-            </div>
+            <%= react_component('ExitLightboxBtn') %>
         </div>
     </div>
 </div>
 <%= render 'edit_form' %>
 
 <%= link_to 'Back', types_path %>
-<script>
-    $(function() {
-        var requestTypes = function(url) {
-            $.ajax({
-                method: "GET",
-                url: url,
-                dataType: 'html'
-            }).done(function(types) {
-                $('div.edit-type').html(types)
-                ReactRailsUJS.mountComponents()
-                $(types).ready(function() {
-                    $('.btn-cancel').click(exitLightBoxHandler)
-                }).bind(this)
-            })
-        }
-  
-        var exitLightBoxHandler = function(event){
-            console.log("click")
-            var backdrop = $('.backdrop-active');
-            var lightbox = $('.lightbox-active');
-
-            backdrop.removeClass('backdrop-active');
-            backdrop.addClass('backdrop');
-            lightbox.removeClass('lightbox-active');
-            lightbox.addClass('lightbox');
-        }
-      
-        $('.types-back').click(function(event) {
-            var url = $(event.target).attr('url')
-            console.log(url)
-            requestTypes(url)
-        })
-    })
-</script>
