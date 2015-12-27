@@ -21,11 +21,6 @@ var Card = function(){
   };
   this.artContainer = $('.card_art_container');
   this.colorSelect = $('#card_color');
-  this.typeSelect = $('select#card_type');
-  this.subtypeSelect = $('select#card_subtype');
-  this.typeSpan = $('span#type_text');
-  this.hypenSpan = $('span#hypen');
-  this.subtypeSpan = $('span#subtype_text');
   this.frameImage = $('.card_frame');
   this.attackDefenseBox = $('.attack_defense_box');
   this.attackDefense = $('.attack_defense');

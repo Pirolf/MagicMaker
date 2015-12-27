@@ -9,15 +9,9 @@
       <%= content_tag(:div, "#{card.attack}/#{card.defense}", class: 'attack_defense' ) %>
     </div>
     <%= content_tag(:div, sanitize(card.name), class: 'type_name_text card_name') %>
-    <div class="type_name_text type_subtype">
-        <span id="type_text"><%= sanitize(card.type.name) if card.type != nil %></span>
-        <span id="hypen">
-            <% if card.subtype_id != nil %>
-                <%= ' - ' %>
-            <% end %>
-        </span>
-        <span id="subtype_text"><%= sanitize(card.subtype.name) if card.subtype != nil %></span>
-    </div>
+
+    <%= react_component('CardTypeSection', { type: name_or_nil(card.type), subtype: name_or_nil(card.subtype) }) %>
+    
     <%= simple_format(sanitize(card.desc), class: 'card_desc') %>
     <div class="mana_symbols_container"
     data-mana-red = <%= card.mana_red %>

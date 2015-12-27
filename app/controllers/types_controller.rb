@@ -23,6 +23,20 @@ class TypesController < ApplicationController
     end
   end
 
+  # GET /types/subtypes.json 
+  def subtypes
+    type = Type.find(params[:id])
+    if type == nil || type.user != current_user
+      respond_to do |format|
+        format.all { render nothing: true, status: :forbidden }
+      end
+    end
+
+    respond_to do |format|
+      format.json { render json: type.subtypes.map{ |s| { id: s.id, name: s.name } }, status: :ok }
+    end
+  end
+
   # GET /types/new
   def new
     if !user_signed_in?

@@ -5,13 +5,13 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-Color.create color_name: 'Red'
-Color.create color_name: 'Green'
-Color.create color_name: 'Blue'
-Color.create color_name: 'Black'
-Color.create color_name: 'White'
-Color.create color_name: 'None'
-=begin
+colors = ['Red', 'Green', 'Blue', 'Black', 'White', 'None']
+colors.each do |c|
+    if Color.find_by(color_name: c).nil?
+        Color.create color_name: c
+    end
+end
+
 types = {
     'Artifact': ['Equipment', 'Fortification'],
     'Artifact Creature': [],
@@ -23,10 +23,17 @@ types = {
     'Basic Land': [],
     'Sorcery': ['Arcane']
 }
+
 types.each_pair do |k, v|
-    type = Type.create name: k
-    v.each do |subtype|
-        Subtype.create name: subtype, type: type
+    if !Type.find_by(name: k).nil?
+        next
+    end
+
+    type = Type.create({name: k, user_id: -1})
+    v.each do |s|
+        if Subtype.find_by(name: s).nil?
+            subtype = type.subtypes.create({name: s, user_id: -1})
+            subtype.save
+        end
     end
 end
-=end

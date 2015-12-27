@@ -2,17 +2,10 @@
   <%= f.label :type %><br>
   <div class="row">
     <div class="col-sm-4">
-      <%= collection_select(:card, :type_id, Type.all, :id, :name, { include_blank: true }, { id: "card_type", class: "form-control" }) %>
+      <%= react_component('TypeSelect', { types: Type.get_by_user(current_user), selected: @card.type }) %>
     </div>
     <div class="col-sm-6">
-      <%= collection_select(
-        :card, 
-        :subtype_id, 
-        if @card.type != nil then @card.type.subtypes else [] end, 
-        :id, :name, 
-        { include_blank: true }, 
-        { id: "card_subtype", class: "form-control" }
-        ) %>
+      <%= react_component('SubtypeSelect', { subtypes: Subtype.get(@card.type), selected: @card.subtype }) %>
     </div>
     <div class="col-sm-1">
       <%= react_component('LightboxLink', { url: types_path, link_type: 'add_types' }) %>

@@ -17,65 +17,7 @@ $(function(){
   $('#card_image_file_field').change(function(event){
     magicMaker.card.previewArt(event.target);
   });
-
-  $('select#card_type').change(function(event){
-    var typeText = $('#card_type>option:selected').text()
-    var emptyOption = jQuery("<option />", {
-        value: ""
-    })
-    var typeId = $(event.target).val()
-
-    $('#hypen').empty()
-    $('#subtype_text').empty()
-
-    if (typeId === "" || typeId === undefined){
-      $('.type_subtype span').empty();
-      $('select#card_subtype').empty();
-      $('select#card_subtype').append(emptyOption);
-      $('select#card_subtype').val("");
-      return;
-    }
-
-    $('#type_text').text(typeText);
-
-    $.ajax({
-      method: "GET",
-      url: "/cards/subtypes.json",
-      data: { type_id: typeId }
-    }).done(function(subtypes){
-      var subtypesSelect = $('select#card_subtype');
-      subtypesSelect.empty();
-      //build new options
-      subtypes.forEach(function(subtype){
-        var option = jQuery("<option />", {
-          value: subtype["id"],
-          text: subtype["name"]
-        });
-        subtypesSelect.append(option);
-      });
-
-      subtypesSelect.append(emptyOption);
-
-      if (subtypes.length > 0){
-        var subtypeText = $('#card_subtype>option:selected').text();
-        $('#hypen').text(' - ');
-        $('#subtype_text').text(subtypeText);
-      }
-    })
-  });
-
-  $('select#card_subtype').change(function(event){
-    if ($(event.target).val() === '' || $(event.target).val() === undefined ){
-      $('#hypen').empty();
-      $('#subtype_text').empty();
-      return;
-    }
-
-    var subtypeText = $('#card_subtype>option:selected').text();
-    $('#hypen').text(' - ');
-    $('#subtype_text').text(subtypeText)
-  });
-
+  
   $('.insertable_symbol').click(function(event){
     var symbolUrl = $(event.target).attr('src');
     var alt = $(event.target).attr('alt');

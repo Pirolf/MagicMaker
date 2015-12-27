@@ -1,5 +1,5 @@
 class CardsController < ApplicationController
-  helper CardsHelper
+  helper CardsHelper, TypesHelper
   before_action :set_card, only: [:show, :edit, :update, :destroy]
 
   # GET /cards
@@ -85,25 +85,6 @@ class CardsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to cards_url, notice: 'Card was successfully destroyed.' }
       format.json { head :no_content }
-    end
-  end
-
-  # GET /cards/subtypes.json
-  def subtypes
-    if !user_signed_in?
-      respond_to do |format|
-        format.all { render nothing: true, status: :unauthorized }
-      end
-    end
-
-    respond_to do |format|
-      type_id = params[:type_id]
-      type = Type.find(type_id)
-      if type == nil
-        format.all { render nothing: true, status: :forbidden }
-      end
-
-      format.json { render json: type.subtypes.map{ |s| { id: s.id, name: s.name } }, status: :ok }
     end
   end
 
