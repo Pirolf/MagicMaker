@@ -10,6 +10,9 @@ capybara-*.html
 /db/*.sqlite3
 /db/*.sqlite3-journal
 /public/system
+/public/assets/bootstrap/
+/public/assets/*.css
+/public/assets/*.js
 /node_modules/
 /coverage/
 /spec/tmp
