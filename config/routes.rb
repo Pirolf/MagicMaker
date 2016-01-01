@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :subtypes
+  
   # You can have the root of your site routed with "root"
   root 'cards#new'
 
@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   resources :types do
     get :subtypes, on: :collection
   end
-  
+  resources :subtypes
   resources :special_abilities
 
   # The priority is based upon order of creation: first created -> highest priority.

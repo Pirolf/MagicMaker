@@ -9,4 +9,8 @@ class Type < ActiveRecord::Base
         return self.where(user_id: -1) if user == nil
         user.types
     end
+
+    def ordered_subtypes
+        subtypes.order("LOWER(name)")
+    end
 end

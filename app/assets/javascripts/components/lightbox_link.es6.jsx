@@ -28,6 +28,20 @@ LightboxLink.props = {
     link_type: React.PropTypes.string
 }
 
+class BackBtn extends LightboxLink {
+    render() {
+        return (
+            <div className="btn btn-primary">
+                <div className="types-back" onClick={this.requestHtml.bind(this)}>Back</div>
+            </div>
+        )
+    }
+}
+
+BackBtn.props = {
+    url: React.PropTypes.string
+}
+
 class Glyphicon extends React.Component {
     render() {
         if (this.props.type === 'more_subtypes') {

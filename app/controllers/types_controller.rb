@@ -33,7 +33,7 @@ class TypesController < ApplicationController
     end
 
     respond_to do |format|
-      format.json { render json: type.subtypes.map{ |s| { id: s.id, name: s.name } }, status: :ok }
+      format.json { render json: type.ordered_subtypes, status: :ok }
     end
   end
 

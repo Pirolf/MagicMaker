@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151125062639) do
+ActiveRecord::Schema.define(version: 20151231224335) do
 
   create_table "card_enitities", force: :cascade do |t|
     t.integer  "deck_id"
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 20151125062639) do
     t.integer  "user_id"
   end
 
+  add_index "subtypes", ["name"], name: "index_subtypes_on_name"
   add_index "subtypes", ["type_id"], name: "index_subtypes_on_type_id"
   add_index "subtypes", ["user_id"], name: "index_subtypes_on_user_id"
 

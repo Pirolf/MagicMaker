@@ -5,9 +5,7 @@
             <h1>Type</h1>
         </div>
         <div class="col-xs-3 col-xs-offset-5">
-            <div class="btn btn-primary">
-                <div url=<%= types_path %> class="types-back">Back</div>
-            </div>
+            <%= react_component('BackBtn', { url: types_path }) %>
         </div>
         <div class="col-xs-3 col-xs-offset-5">
             <%= react_component('ExitLightboxBtn') %>

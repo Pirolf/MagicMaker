@@ -13,14 +13,14 @@ class Success extends React.Component {
     }
 
     handleSuccess (data) {
-        this.setState({itemName: data.itemName})
-        /*
-        if (this.state.itemName !== null) {
-          setTimeout(function() {
-            this.setState({itemName: null})
-          }.bind(this), 5000)
-        }
-        */
+        this.setState({ itemName: data.itemName }, function() {
+            if (data.itemName !== null) {
+                setTimeout(function() {
+                    this.setState({itemName: null})
+                }.bind(this), 5000)
+            }
+        })
+        
     }
 
     render () {
@@ -37,6 +37,9 @@ class Success extends React.Component {
 }
 
 Success.propTypes = {
-  id: React.PropTypes.number,
+  id: React.PropTypes.oneOfType([
+    React.PropTypes.number,
+    React.PropTypes.string
+    ]),
   type: React.PropTypes.string
 }

@@ -24,15 +24,18 @@ class SubtypesController < ApplicationController
   # POST /subtypes
   # POST /subtypes.json
   def create
-    @subtype = Subtype.new(subtype_params)
+    if !user_signed_in?
+      redirect_to new_user_session_url
+    end
 
+    @subtype = current_user.subtypes.build(subtype_params)
     respond_to do |format|
       if @subtype.save
-        format.html { redirect_to @subtype, notice: 'Subtype was successfully created.' }
-        format.json { render :show, status: :created, location: @subtype }
+        #format.html { redirect_to @subtype, notice: 'Subtype was successfully created.' }
+        #format.json { render :show, status: :created, location: @subtype }
+        format.json   { render json: { subtype: @subtype, status: "ok" } }
       else
-        format.html { render :new }
-        format.json { render json: @subtype.errors, status: :unprocessable_entity }
+        format.json  { render json: { errors: @subtype.errors.full_messages }, status: :ok}
       end
     end
   end
@@ -40,14 +43,15 @@ class SubtypesController < ApplicationController
   # PATCH/PUT /subtypes/1
   # PATCH/PUT /subtypes/1.json
   def update
+    if !user_signed_in?
+      redirect_to new_user_session_url
+    end
+
     respond_to do |format|
       if @subtype.update(subtype_params)
-        #format.html { render json: {status: "ok"} }
         format.json   { render json: {status: "ok"} }
-        #format.json { render :show, status: :ok, location: @subtype }
       else
-        #format.html { render json: {errors: @subtype.errors.full_messages }, status: :unprocessable_entity}
-        format.json  { render json: {errors: @subtype.errors.full_messages }, status: :ok}
+        format.json  { render json: { errors: @subtype.errors.full_messages }, status: :ok}
       end
     end
   end
@@ -70,6 +74,6 @@ class SubtypesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def subtype_params
-      params.require(:subtype).permit(:name)
+      params.require(:subtype).permit(:name, :type_id)
     end
 end

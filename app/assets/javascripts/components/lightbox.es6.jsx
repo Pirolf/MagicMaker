@@ -40,7 +40,6 @@ class Lightbox extends React.Component {
         })
     }
 
-
     componentDidMount() {
         window.events.addListener('lightbox-update', this.updateView.bind(this))
         window.events.addListener('lightbox-exit', this.exitLightBoxHandler.bind(this))

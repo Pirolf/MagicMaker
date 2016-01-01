@@ -22,8 +22,13 @@ class TypeSelect extends React.Component {
                 return type.id === this.props.selected.id
             }, this)
         }
+
+        var selectedId
+        if (selectedType){
+            selectedId = selectedType.id
+        }
         return (
-            <select className="form-control" defaultValue={selectedType.id} onChange={this.typeChangeHandler.bind(this)} id="card_type" name="card[type_id]">
+            <select className="form-control" defaultValue={selectedId} onChange={this.typeChangeHandler.bind(this)} id="card_type" name="card[type_id]">
                 {options}
             </select>
         )
@@ -85,8 +90,13 @@ class SubtypeSelect extends React.Component {
                 return subtype.id === this.props.selected.id
             }, this)
         }
+
+        var selectedId
+        if (selectedSubtype){
+            selectedId = selectedSubtype.id
+        }
         return (
-            <select className="form-control" defaultValue={selectedSubtype.id} onChange={this.subtypeSelectionChangeHandler.bind(this)} id="card_subtype" name="card[subtype_id]">
+            <select className="form-control" defaultValue={selectedId} onChange={this.subtypeSelectionChangeHandler.bind(this)} id="card_subtype" name="card[subtype_id]">
                 {options}
             </select>
         )
