@@ -21,7 +21,7 @@ class Success extends React.Component {
             if (itemName === null) return
             clearTimeout(timer)
             this.setState({
-                timer: setTimeout(() => {this.setState({itemName: null})}.bind(this), 5000)
+                timer: setTimeout(() => {this.setState({itemName: null})}, 5000).bind(this)
             })
         })
         
@@ -44,3 +44,4 @@ Success.propTypes = {
     ]),
   type: React.PropTypes.string
 }
+module.exports = Success
