@@ -25,4 +25,3 @@ SubtypeName.propTypes = {
   subtype_id: React.PropTypes.number.isRequired,
   onChange: React.PropTypes.func.isRequired
 }
-module.exports = SubtypeName

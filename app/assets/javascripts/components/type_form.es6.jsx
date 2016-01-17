@@ -74,5 +74,3 @@ TypeForm.propTypes = {
     record_id: React.PropTypes.number,
     auth_token: React.PropTypes.string
 }
-
-module.exports = TypeForm

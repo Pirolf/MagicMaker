@@ -13,4 +13,3 @@ class DeleteBtn extends React.Component {
 DeleteBtn.propTypes = {
   record_id: React.PropTypes.number.isRequired
 }
-module.exports = DeleteBtn
