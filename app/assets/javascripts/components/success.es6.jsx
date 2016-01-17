@@ -1,36 +1,37 @@
 class Success extends React.Component {
     constructor () {
         super()
-        this.state = { itemName: null }
+        this.state = {itemName: null, timer: null}
     }
 
     componentDidMount () {
-        window.events.addListener('success-'.concat(this.props.type).concat('-').concat(this.props.id), this.handleSuccess.bind(this))
+        const {id, type} = this.props
+        window.events.addListener(`success-${type}-${id}`, this.handleSuccess.bind(this))
     }
 
     componentWillUnmount () {
-        window.events.removeListener('success-'.concat(this.props.type).concat('-').concat(this.props.id), this.handleSuccess.bind(this))
+        const {id, type} = this.props
+        window.events.removeListener(`success-${type}-${id}`, this.handleSuccess.bind(this))
     }
 
     handleSuccess (data) {
-        this.setState({ itemName: data.itemName }, function() {
-            if (data.itemName !== null) {
-                setTimeout(function() {
-                    this.setState({itemName: null})
-                }.bind(this), 5000)
-            }
+        const {itemName} = data
+        const {timer} = this.state
+        this.setState({itemName}, () => {
+            if (itemName === null) return
+            clearTimeout(timer)
+            this.setState({
+                timer: setTimeout(() => {this.setState({itemName: null})}.bind(this), 5000)
+            })
         })
         
     }
 
     render () {
-        if (this.state.itemName === null) {
-            return false
-        }
-
+        if (this.state.itemName === null) return false
         return (
             <div className='success-msg'>
-                Successfully updated {this.state.itemName}!
+                <img src='/images/preloader_update.gif' />
             </div>
         )
     }
