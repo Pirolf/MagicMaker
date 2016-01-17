@@ -43,3 +43,5 @@ CardTypeSection.props = {
     type: React.PropTypes.string,
     subtype: React.PropTypes.string
 }
+
+module.exports = CardTypeSection
