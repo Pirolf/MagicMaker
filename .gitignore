@@ -5,6 +5,8 @@ capybara-*.html
 #RubyMine
 .idea
 
+/app/assets/javascripts/bundle.js
+/app/assets/javascripts/bundle.js.map
 /log
 /tmp
 /db/*.sqlite3
