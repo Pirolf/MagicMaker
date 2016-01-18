@@ -63,4 +63,4 @@ AddSubtypeForm.propTypes = {
   auth_token: React.PropTypes.string
 };
 
-module.exports = AddSubtypeForm
+window.AddSubtypeForm = AddSubtypeForm

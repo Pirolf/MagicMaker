@@ -1,3 +1,7 @@
+const DeleteBtn = require('./delete_btn.es6.jsx')
+const SubtypeName = require('./subtype_name.es6.jsx')
+const UpdateBtn = require('./update_btn.es6.jsx')
+
 class SubtypeForm extends React.Component {
   constructor(props) {
     super(props)
@@ -48,9 +52,9 @@ class SubtypeForm extends React.Component {
           this.setState({name, submission: 'error'})
         } else {
           this.setState({name: newName, submission: 'success'}, () => {
-            const timer = setTimeout(() => { this.setState({submission: 'idle'})}, 1000)
+            const timer = setTimeout(() => { this.setState({submission: 'idle'})}, 1000).bind(this)
             this.setState({timer})
-          }.bind(this))
+          }).bind(this)
           window.events.emit(errorEvent, { errors: [] })
           window.events.emit(successEvent, { itemName: 'subtype'})
         }
@@ -80,3 +84,5 @@ SubtypeForm.propTypes = {
   record_id: React.PropTypes.number,
   auth_token: React.PropTypes.string
 };
+
+module.exports = SubtypeForm

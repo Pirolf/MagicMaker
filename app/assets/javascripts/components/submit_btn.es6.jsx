@@ -1,4 +1,4 @@
-'use strict'
+const classname = require('classname')
 class SubmitBtn extends React.Component {
   constructor(props) {
     super(props)
@@ -6,9 +6,10 @@ class SubmitBtn extends React.Component {
   }
 
   render() {
-    let spinnerClasses = classname('btn', 'btn-primary', 'has-spinner', {active: submission === 'sending'})
     const {submission} = this.state
     console.log(submission)
+    let spinnerClasses = classname('btn', 'btn-primary', 'has-spinner', {active: submission === 'sending'})
+    
     let spinner
     switch (submission) {
       case 'sending':
@@ -48,5 +49,4 @@ SubmitBtn.props = {
   value: React.PropTypes.string,
   submission: React.PropTypes.string
 }
-
 module.exports = SubmitBtn

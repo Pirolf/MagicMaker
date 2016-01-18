@@ -1,3 +1,4 @@
+const Glyphicon = require('./glyphicon.es6.jsx')
 class LightboxLink extends React.Component {
     constructor(props) {
         super(props)
@@ -28,37 +29,5 @@ LightboxLink.props = {
     link_type: React.PropTypes.string
 }
 
-class BackBtn extends LightboxLink {
-    render() {
-        return (
-            <div className="btn btn-primary">
-                <div className="types-back" onClick={this.requestHtml.bind(this)}>Back</div>
-            </div>
-        )
-    }
-}
-
-BackBtn.props = {
-    url: React.PropTypes.string
-}
-
-class Glyphicon extends React.Component {
-    render() {
-        if (this.props.type === 'more_subtypes') {
-           return (
-            <span className='glyphicon glyphicon-menu-hamburger medium-glyph more-subtypes'></span>
-            ) 
-        }
-
-        if (this.props.type === 'add_types') {
-            return (
-                <div className="glyphicon glyphicon-plus-sign medium-glyph" id="add-types"></div>
-            )
-        }
-        return false
-    }
-}
-
-Glyphicon.props = {
-    type: React.PropTypes.string
-}
+module.exports = LightboxLink
+window.LightboxLink = LightboxLink

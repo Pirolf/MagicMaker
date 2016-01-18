@@ -1,3 +1,7 @@
+const Errors = require('./errors.es6.jsx')
+const SubtypeForm = require('./subtype_form.es6.jsx')
+const Success = require('./success.es6.jsx')
+
 class SubtypeFormList extends React.Component {
     constructor(props) {
         super(props)
@@ -48,3 +52,5 @@ SubtypeFormList.props = {
     subtypes: React.PropTypes.array,
     auth_token: React.PropTypes.string
 }
+
+window.SubtypeFormList = SubtypeFormList
