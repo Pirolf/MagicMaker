@@ -1,3 +1,4 @@
+const AddBtn = require('./add_btn.es6.jsx')
 class AddSubtypeForm extends React.Component {
   constructor(props) {
     super(props)

@@ -8,5 +8,4 @@ class Type extends React.Component {
 
 Type.propTypes = {
   name: React.PropTypes.string
-}
-module.exports = Type
+};
