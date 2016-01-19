@@ -19,11 +19,9 @@ class SubtypeForm extends React.Component {
     const {record_id, auth_token} = this.props
 
     const errorEvent = `errors-subtype-${record_id}`
-    const successEvent = `success-subtype-${record_id}`
     
     if (!newName) {
       window.events.emit(errorEvent, { errors: ['Subtype name cannot be empty!'] })
-      window.events.emit(successEvent, { itemName: null })
       this.setState({name: this.props.name})
       return;
     }
@@ -49,15 +47,12 @@ class SubtypeForm extends React.Component {
         const {name} = this.props
         if (errors) {
           window.events.emit(errorEvent, {errors})
-          window.events.emit(successEvent, {itemName: null})
           this.setState({name, submission: 'error'})
         } else {
           this.setState({name: newName, submission: 'success'}, () => {
-            const timer = setTimeout(() => { this.setState({submission: 'idle', timer: null})}, 10000)
+            const timer = setTimeout(() => { this.setState({submission: 'idle', timer: null})}, 1000000)
             this.setState({timer})
           })
-          window.events.emit(errorEvent, { errors: [] })
-          window.events.emit(successEvent, { itemName: 'subtype'})
         }
       })
     })

@@ -41,20 +41,40 @@
 }
 
 .spinner {
-  display: inline-block;
-  opacity: 0;
-  width: 0;
+    $duration: 1000ms;
+    -webkit-animation-name: spin;
+    -webkit-animation-duration: $duration;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
 
-  -webkit-transition: opacity 0.25s, width 0.25s;
-  -moz-transition: opacity 0.25s, width 0.25s;
-  -o-transition: opacity 0.25s, width 0.25s;
-  transition: opacity 0.25s, width 0.25s;
-}
-.has-spinner.active .spinner {
-  opacity: 1;
-  width: 16px;; /* This doesn't work, just fix for unkown width elements */
-}
+    -moz-animation-name: spin;
+    -moz-animation-duration: $duration;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
 
+    -ms-animation-name: spin;
+    -ms-animation-duration: $duration;
+    -ms-animation-iteration-count: infinite;
+    -ms-animation-timing-function: linear;
+    
+    animation-name: spin;
+    animation-duration: $duration;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+
+    @-moz-keyframes spin {
+        from { -moz-transform: rotate(0deg); }
+        to { -moz-transform: rotate(360deg); }
+    }
+    @-webkit-keyframes spin {
+        from { -webkit-transform: rotate(0deg); }
+        to { -webkit-transform: rotate(360deg); }
+    }
+    @keyframes spin {
+        from {transform:rotate(0deg);}
+        to {transform:rotate(360deg);}
+    }
+}
 /* bootstrap */
 $light-navy: #5D6884;
 $medium-navy: #424F6F;
@@ -114,6 +134,14 @@ $medium-navy: #424F6F;
 
 .medium-glyph{
     font-size: 2.2em;
+}
+
+.small-glyph {
+    font-size: 1em;
+}
+
+.ok {
+    padding-left: 2px;
 }
 
 .backdrop{

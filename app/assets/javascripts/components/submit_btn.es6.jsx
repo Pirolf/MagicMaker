@@ -8,13 +8,11 @@ class SubmitBtn extends React.Component {
     switch (submission) {
       case 'sending':
         spinner = (
-          <div className={spinnerClasses} >
-            <span className="spinner"><i className="icon-spin icon-refresh"></i></span>
-          </div>
+            <span className="spinner"><span className="glyphicon glyphicon-refresh small-glyph" /></span>
         )
         break
       case 'success':
-        spinner = (<span className="glyphicon glyphicon-ok medium-glyph" />)
+        spinner = (<span className="ok"><span className="glyphicon glyphicon-ok small-glyph" /></span>)
         break
       case 'error':
         break
@@ -25,7 +23,7 @@ class SubmitBtn extends React.Component {
     }
 
     return (
-      <div className="col-sm-1">
+      <div className="col-sm-2">
         <div className="actions">
           <div className='btn btn-primary'>
             <span>
