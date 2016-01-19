@@ -21,7 +21,7 @@ class Errors extends React.Component {
       if (errors.length === 0)return
       clearTimeout(timer)
       this.setState({
-        timer: setTimeout(() => {this.setState({errors: []})}, 5000).bind(this)
+        timer: setTimeout(() => {this.setState({errors: []})}, 5000)
       })
     })
   }

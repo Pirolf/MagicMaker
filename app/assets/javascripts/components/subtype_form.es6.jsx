@@ -24,6 +24,7 @@ class SubtypeForm extends React.Component {
     if (!newName) {
       window.events.emit(errorEvent, { errors: ['Subtype name cannot be empty!'] })
       window.events.emit(successEvent, { itemName: null })
+      this.setState({name: this.props.name})
       return;
     }
     
@@ -52,9 +53,9 @@ class SubtypeForm extends React.Component {
           this.setState({name, submission: 'error'})
         } else {
           this.setState({name: newName, submission: 'success'}, () => {
-            const timer = setTimeout(() => { this.setState({submission: 'idle'})}, 1000).bind(this)
+            const timer = setTimeout(() => { this.setState({submission: 'idle', timer: null})}, 10000)
             this.setState({timer})
-          }).bind(this)
+          })
           window.events.emit(errorEvent, { errors: [] })
           window.events.emit(successEvent, { itemName: 'subtype'})
         }
@@ -63,17 +64,17 @@ class SubtypeForm extends React.Component {
   }
 
   render () {
-    const {name, record_id} = this.props
-    const {submission} = this.state
+    const {record_id} = this.props
+    const {name, submission} = this.state
     const id = `edit_subtype_${record_id}`
     const action = `/subtypes/${record_id}`
     return (
-      <form className="edit_subtype" id={id} >
+      <form className="edit_subtype" {...{id}} >
         <SubtypeName subtype_name={name} subtype_id={record_id} onChange={this.handleNameChange.bind(this)}/>
         <div onClick={this.handleSubmit.bind(this)}>
-          <UpdateBtn submission={submission}/>
+          <UpdateBtn {...{submission}}/>
         </div>
-        <DeleteBtn record_id={record_id}/>
+        <DeleteBtn {...{record_id}}/>
       </form>
     );
   }

@@ -1,15 +1,9 @@
 const classname = require('classname')
 class SubmitBtn extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {submission: 'idle'}
-  }
-
   render() {
-    const {submission} = this.state
-    console.log(submission)
+    const {submission} = this.props
     let spinnerClasses = classname('btn', 'btn-primary', 'has-spinner', {active: submission === 'sending'})
-    
+
     let spinner
     switch (submission) {
       case 'sending':

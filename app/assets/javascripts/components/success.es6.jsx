@@ -21,7 +21,7 @@ class Success extends React.Component {
             if (itemName === null) return
             clearTimeout(timer)
             this.setState({
-                timer: setTimeout(() => {this.setState({itemName: null})}, 5000).bind(this)
+                timer: setTimeout(() => {this.setState({itemName: null})}, 5000)
             })
         })
         
