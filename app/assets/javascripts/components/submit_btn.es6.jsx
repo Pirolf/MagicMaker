@@ -1,8 +1,8 @@
-const classname = require('classname')
+const classname = require('classname');
 class SubmitBtn extends React.Component {
   render() {
     const {submission} = this.props;
-    let spinnerClasses = classname('btn', 'btn-primary', 'has-spinner', {active: submission === 'sending'});
+    var spinnerClasses = classname('btn', 'btn-primary', 'has-spinner', {active: submission === 'sending'});
 
     let spinner;
     switch (submission) {
