@@ -1,8 +1,8 @@
 class SubmitBtn extends React.Component {
   render() {
     const {submission} = this.props;
-    let spinner = '';
-    
+    var spinner = '';
+
     switch (submission) {
       case 'sending':
         spinner = (
