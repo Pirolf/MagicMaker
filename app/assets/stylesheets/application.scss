@@ -166,6 +166,7 @@ $medium-navy: #424F6F;
     @include lightbox;
     opacity: 1;
     display: block;
+    overflow: scroll;
 }
 
 @mixin fade ($duration) {

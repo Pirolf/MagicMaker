@@ -7,7 +7,7 @@ describe 'sign up', type: :feature, js:true do
 		page.find('#sign_up').click
 		within 'form#new_user' do
 			fill_in 'Username', with: "testSignUp_#{Time.now.to_i}"
-			fill_in 'Email', with: 'biubiu@biu.com'
+			fill_in 'Email', with: "biu#{Time.now.to_i}@biu.com"
 			fill_in 'Password', with: 'null123!'
 			fill_in 'Password confirmation', with: 'null123!'
 		end

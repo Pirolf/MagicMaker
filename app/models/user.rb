@@ -14,25 +14,24 @@ class User < ActiveRecord::Base
     validates :password_confirmation, length: { maximum: 64, minimum: 8}
 
     after_create :create_default_types
-
-    DEFAULT_TYPES = {
-    'Artifact': ['Equipment', 'Fortification'],
-    'Artifact Creature': [],
-    'Creature': ['Advisor', 'Cleric', 'Elemental', 'Illusion', 'Soldier', 'Wall'],
-    'Enchantment': [],
-    'Enchantment Creature': [],
-    'Instant': ['Arcane', 'Trap'],
-    'Land': [],
-    'Basic Land': [],
-    'Sorcery': ['Arcane']
-    }
     
     def active_for_authentication?
         true
     end
-    
+
     private
-    
+        DEFAULT_TYPES = {
+        'Artifact': ['Equipment', 'Fortification'],
+        'Artifact Creature': [],
+        'Creature': ['Advisor', 'Cleric', 'Elemental', 'Illusion', 'Soldier', 'Wall'],
+        'Enchantment': [],
+        'Enchantment Creature': [],
+        'Instant': ['Arcane', 'Trap'],
+        'Land': [],
+        'Basic Land': [],
+        'Sorcery': ['Arcane']
+        }
+        
         def create_default_types
             DEFAULT_TYPES.each_pair do |k, v|
                 type = self.types.create({ name: k })
