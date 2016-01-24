@@ -16,12 +16,11 @@
 # users commonly want.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
-require "paperclip/matchers"
-require 'capybara/rspec'
-require 'capybara/rails'
 require 'rubygems'
 require 'factory_girl'
 require 'devise'
+require "paperclip/matchers"
+require 'capybara/rspec'
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods

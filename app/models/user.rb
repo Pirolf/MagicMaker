@@ -26,15 +26,21 @@ class User < ActiveRecord::Base
     'Basic Land': [],
     'Sorcery': ['Arcane']
     }
-
-    def create_default_types
-        DEFAULT_TYPES.each_pair do |k, v|
-            type = self.types.create({ name: k })
-            v.each do |s|
-                subtype = type.subtypes.create({ name: s })
-                subtype.user = self
-                subtype.save
+    
+    def active_for_authentication?
+        true
+    end
+    
+    private
+    
+        def create_default_types
+            DEFAULT_TYPES.each_pair do |k, v|
+                type = self.types.create({ name: k })
+                v.each do |s|
+                    subtype = type.subtypes.create({ name: s })
+                    subtype.user = self
+                    subtype.save
+                end
             end
         end
-    end
 end

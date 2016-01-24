@@ -34,11 +34,10 @@ class Lightbox extends React.Component {
     }
 
     render() {
-        var lightboxClasses = this.state.lightboxClass.concat(' edit-type')
         return (
             <div>
                 <div className={this.state.backdropClass}></div>
-                <div className={lightboxClasses} dangerouslySetInnerHTML={{__html: this.state.html}}>
+                <div className={this.state.lightboxClass} dangerouslySetInnerHTML={{__html: this.state.html}}>
                 </div>
             </div>
         )

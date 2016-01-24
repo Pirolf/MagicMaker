@@ -11,6 +11,18 @@ class Glyphicon extends React.Component {
                 <div className="glyphicon glyphicon-plus-sign medium-glyph" id="add-types"></div>
             )
         }
+
+        if (this.props.type === 'sign_up') {
+            return (
+                <div id="sign_up">Sign up</div>
+            );
+        }
+
+        if (this.props.type === 'log_in') {
+            return (
+                <div id="log_in">Log in</div>
+            );
+        }
         return false
     }
 }

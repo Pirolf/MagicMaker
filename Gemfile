@@ -49,6 +49,7 @@ group :development, :test do
   gem 'sqlite3',  '1.3.10'
   gem 'selenium-webdriver', '~> 2.48'
   gem 'database_cleaner', '~> 1.5'
+  gem 'rspec', '3.3.0'
   gem 'rspec-rails', '~> 3.3.3'
   gem 'factory_girl_rails', '~> 4.5'
   gem 'capybara', '~> 2.5'
