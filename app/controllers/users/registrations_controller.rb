@@ -13,27 +13,26 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     saved = resource.save
     if !saved
-      redirect_to root_url
+      #redirect_to root_url
+      render json: { errors: resource.errors.full_messages }, status: :ok
     else
       yield resource if block_given?
       if resource.persisted?
         if resource.active_for_authentication?
           set_flash_message :notice, :signed_up if is_flashing_format?
           sign_up(resource_name, resource)
-          p 'asd'
-          p after_sign_up_path_for(resource)
-          respond_with resource, location: after_sign_up_path_for(resource)
+          render json: { user: resource, active_for_authentication: true }
+          #respond_with resource, location: after_sign_up_path_for(resource)
         else
           set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_flashing_format?
           expire_data_after_sign_in!
-          p after_inactive_sign_up_path_for(resource)
-          respond_with resource, location: after_inactive_sign_up_path_for(resource)
+          #respond_with resource, location: after_inactive_sign_up_path_for(resource)
+          render json: { user: resource, active_for_authentication: false }
         end
       else
         clean_up_passwords resource
         set_minimum_password_length
-        p resource
-        respond_with resource
+        render json: {user: resource}
       end
     end
   end

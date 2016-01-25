@@ -39,4 +39,4 @@ SubmitBtn.props = {
   value: React.PropTypes.string,
   submission: React.PropTypes.string
 }
-module.exports = SubmitBtn
+module.exports = SubmitBtn;
