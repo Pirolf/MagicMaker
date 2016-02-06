@@ -11,6 +11,8 @@ FactoryGirl.define do
         email
         password "null123!"
         password_confirmation "null123!"
+        confirmed_at Time.now
+        
         after(:create) do |user|
             create(:type, user: user)
         end

@@ -1,4 +1,5 @@
 class TypesController < ApplicationController
+  before_action :authenticate_user!, only: [:new]
   before_action :set_type, only: [:show, :edit, :update, :destroy]
 
   # GET /types
@@ -39,10 +40,6 @@ class TypesController < ApplicationController
 
   # GET /types/new
   def new
-    if !user_signed_in?
-      redirect_to new_user_session_url
-    end
-
     @type = Type.new
   end
 

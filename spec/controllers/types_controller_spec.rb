@@ -53,9 +53,20 @@ RSpec.describe TypesController, type: :controller do
   end
 
   describe "GET #new" do
-    it "assigns a new type as @type" do
-      get :new, {}, valid_session
-      expect(assigns(:type)).to be_a_new(Type)
+    describe "authenticated" do
+      it "assigns a new type as @type" do
+        sign_in
+        get :new
+        expect(assigns(:type)).to be_a_new(Type)
+      end
+    end
+
+    describe "unauthenticated" do
+      it 'redirects to sign in page' do
+        sign_in nil
+        get :new
+        expect(response).to redirect_to '/users/sign_in'
+      end
     end
   end
 

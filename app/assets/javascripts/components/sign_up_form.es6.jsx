@@ -6,9 +6,7 @@ class SignUpForm extends React.Component {
     }
 
     handleChange(key, e) {
-        console.log(`{"${key}": "${e.target.value}}"`)
         const kv = JSON.parse(`{"${key}": "${e.target.value}"}`);
-        console.log(kv);
         this.setState(kv);
     }
 
@@ -34,7 +32,11 @@ class SignUpForm extends React.Component {
             }
         })
         .done((data) => {
-            console.log(data)
+            if (data.errors) {
+
+            } else {
+               window.location = data.redirect_url; 
+            }
         });
     }
 
@@ -55,7 +57,7 @@ class SignUpForm extends React.Component {
                 <input onChange={this.handleChange.bind(this, "password_confirmation")}  className="form-control" value={password_confirmation} id="user_password_confirmation" name="user[password_confirmation]" type="password"></input>
                 
                 <div onClick={this.handleSubmit.bind(this)}>
-                    <SubmiteBtn value="Sign up"/>
+                    <SubmiteBtn btnId='sign-up-btn' value="Sign up"/>
                 </div>
             </form>
         );
