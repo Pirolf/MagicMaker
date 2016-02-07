@@ -1,16 +1,11 @@
 class TypesController < ApplicationController
-  before_action :authenticate_user!, only: [:new]
+  before_action :authenticate_user!, only: [:create, :destroy, :index, :show, :update, :set_type]
   before_action :set_type, only: [:show, :edit, :update, :destroy]
 
   # GET /types
   # GET /types.json
   def index
-    if user_signed_in?
-      @types = current_user.types
-    else
-      redirect_to new_user_session_url
-    end
-
+    @types = current_user.types
     respond_to do |format|
       format.html { render partial: '/types/index' }
     end
@@ -19,7 +14,7 @@ class TypesController < ApplicationController
   # GET /types/1
   # GET /types/1.json
   def show
-    if !user_signed_in?
+    if @type == nil
       redirect_to new_user_session_url
     end
   end
@@ -45,29 +40,23 @@ class TypesController < ApplicationController
 
   # GET /types/1/edit
   def edit
-    if !user_signed_in?
+    if @type == nil
       redirect_to new_user_session_url
-    end
-
-    respond_to do |format|
-      format.html { render partial: '/types/edit'}
+    else
+      respond_to do |format|
+        format.html { render partial: '/types/edit'}
+      end
     end
   end
 
   # POST /types
   # POST /types.json
   def create
-    if !user_signed_in?
-      redirect_to new_user_session_url
-    end
-
     @type = current_user.types.build(type_params)
     respond_to do |format|
       if @type.save
-        format.html { redirect_to @type, notice: 'Type was successfully created.' }
-        format.json { render :show, status: :created, location: @type }
+        format.json { render json: @type, status: :created, location: @type }
       else
-        format.html { render :new }
         format.json { render json: @type.errors, status: :unprocessable_entity }
       end
     end
@@ -76,18 +65,15 @@ class TypesController < ApplicationController
   # PATCH/PUT /types/1
   # PATCH/PUT /types/1.json
   def update
-    if !user_signed_in?
-      respond_to do |format|
-        format.all { render nothing: true, status: :unauthorized }
-      end
+    if @type == nil
+      redirect_to new_user_session_url
+      return
     end
 
     respond_to do |format|
       if @type.update(type_params)
-        #format.html { redirect_to @type, notice: 'Type was successfully updated.' }
-        format.json   { render json: { status: "ok" } }
+        format.json  { render json: @type, status: :ok }
       else
-        #format.html { render :edit }
         format.json  { render json: { errors: @type.errors.full_messages }, status: :ok}
       end
     end
@@ -96,23 +82,23 @@ class TypesController < ApplicationController
   # DELETE /types/1
   # DELETE /types/1.json
   def destroy
-    if !user_signed_in?
-      respond_to do |format|
-        format.all { render nothing: true, status: :unauthorized }
-      end
+    if @type == nil
+      redirect_to new_user_session_url
+      return
     end
+    
     @type.destroy
     respond_to do |format|
-      format.html { redirect_to types_url, notice: 'Type was successfully destroyed.' }
-      format.json { head :no_content }
+      format.json { render json: @type, status: :ok }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_type
-      if user_signed_in?
-        @type = current_user.types.find(params[:id])
+      type = Type.find(params[:id])
+      if type.user == current_user
+        @type = type
         @subtype = Subtype.new
       end
     end

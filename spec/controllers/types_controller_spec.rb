@@ -19,16 +19,8 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe TypesController, type: :controller do
-
-  # This should return the minimal set of attributes required to create a valid
-  # Type. As you add validations to Type, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
-
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { something: 'abc'}
   }
 
   # This should return the minimal set of values that should be in the session
@@ -37,18 +29,58 @@ RSpec.describe TypesController, type: :controller do
   let(:valid_session) { {} }
 
   describe "GET #index" do
-    it "assigns all types as @types" do
-      type = Type.create! valid_attributes
-      get :index, {}, valid_session
-      expect(assigns(:types)).to eq([type])
+    before(:each) do
+      @user = FactoryGirl.create(:user)
+      @types = @user.types
+    end
+    
+    describe "authenticated" do
+      it "assigns all types as @types" do
+        sign_in @user 
+        get :index
+        expect(assigns(:types)).to eq(@types)
+        expect(response).to render_template('types/_index')
+      end
+    end
+    
+    describe "unauthenticated" do
+      it 'redirects to sign in page' do
+        sign_in nil
+        get :index
+        expect(response).to redirect_to '/users/sign_in'
+      end
     end
   end
 
   describe "GET #show" do
-    it "assigns the requested type as @type" do
-      type = Type.create! valid_attributes
-      get :show, {:id => type.to_param}, valid_session
-      expect(assigns(:type)).to eq(type)
+    before(:each) do
+      @user = FactoryGirl.create(:user)
+      @type = @user.types.first
+    end
+    
+    describe "authenticated" do
+      it "assigns the requested type as @type" do
+        sign_in @user 
+        get :show, {id: @type.to_param}
+        expect(assigns(:type)).to eq(@type)
+        expect(response).to render_template(:show)
+      end
+    end
+
+    describe "authenticated as other user" do
+      it 'redirects to sign in page' do 
+        sign_in FactoryGirl.create(:user)
+        get :show, {id: @type.to_param}
+        expect(response).to redirect_to '/users/sign_in'
+      end
+    end
+    
+    describe "unauthenticated" do
+      it 'redirects to sign in page' do
+        sign_in nil
+        get :show, {id: @type.to_param}
+        expect(response).to redirect_to '/users/sign_in'
+      end
     end
   end
 
@@ -58,113 +90,200 @@ RSpec.describe TypesController, type: :controller do
         sign_in
         get :new
         expect(assigns(:type)).to be_a_new(Type)
+        expect(response).to render_template(:new)
       end
     end
 
     describe "unauthenticated" do
-      it 'redirects to sign in page' do
+      it 'assigns a new type as @type' do
         sign_in nil
         get :new
-        expect(response).to redirect_to '/users/sign_in'
+        expect(assigns(:type)).to be_a_new(Type)
+        expect(response).to render_template(:new)
       end
     end
   end
 
   describe "GET #edit" do
-    it "assigns the requested type as @type" do
-      type = Type.create! valid_attributes
-      get :edit, {:id => type.to_param}, valid_session
-      expect(assigns(:type)).to eq(type)
+    before(:each) do
+      @user = FactoryGirl.create(:user)
+      @type = @user.types.first
+    end
+    
+    describe "authenticated" do
+      it "assigns the requested type as @type" do
+        sign_in @user
+        get :edit, { id: @type.to_param }
+        expect(assigns(:type)).to eq(@type)
+        expect(response).to render_template('types/_edit')
+      end
+    end
+
+    describe "authenticated as other user" do
+      it 'redirects to sign in page' do
+        sign_in FactoryGirl.create(:user)
+        get :edit, { id: @type.to_param }
+        expect(response).to redirect_to '/users/sign_in'
+      end
+    end
+    
+    describe "unauthenticated" do
+      it 'redirects to sign in page' do
+        sign_in nil
+        get :edit, { id: @type.to_param}
+        expect(response).to redirect_to '/users/sign_in'
+      end
     end
   end
 
   describe "POST #create" do
-    context "with valid params" do
-      it "creates a new Type" do
-        expect {
-          post :create, {:type => valid_attributes}, valid_session
-        }.to change(Type, :count).by(1)
-      end
-
-      it "assigns a newly created type as @type" do
-        post :create, {:type => valid_attributes}, valid_session
-        expect(assigns(:type)).to be_a(Type)
-        expect(assigns(:type)).to be_persisted
-      end
-
-      it "redirects to the created type" do
-        post :create, {:type => valid_attributes}, valid_session
-        expect(response).to redirect_to(Type.last)
+    describe 'unauthenticated' do
+      it 'redirects to sign up page' do
+        sign_in nil
+        type = FactoryGirl.build(:type)
+        expect { post :create, type: type.attributes }.to change(Type, :count).by(0)
+        expect(response).to redirect_to new_user_session_url
       end
     end
 
-    context "with invalid params" do
-      it "assigns a newly created but unsaved type as @type" do
-        post :create, {:type => invalid_attributes}, valid_session
-        expect(assigns(:type)).to be_a_new(Type)
+    describe 'authenticated' do
+      before(:each) do
+        @user = FactoryGirl.create(:user)
+        @type = FactoryGirl.build(:type)
+        sign_in @user
       end
 
-      it "re-renders the 'new' template" do
-        post :create, {:type => invalid_attributes}, valid_session
-        expect(response).to render_template("new")
+      describe 'with valid params' do
+        it 'creates a new type' do
+          expect { post :create, type: @type.attributes, format: :json }.to change(Type, :count).by(1)
+        end
+
+        it "assigns a newly created type as @type" do
+          post :create, { type: @type.attributes, format: :json }
+          expect(assigns(:type)).to be_a(Type)
+          expect(assigns(:type)).to be_persisted
+        end
+
+        it "responds with newly created type" do
+          post :create, { type: @type.attributes, format: :json }
+          require 'json'
+          type = JSON.parse(response.body)
+          expect(response).to have_http_status(:created)
+          expect(type['name']).to eq(@type.name)
+        end
+      end
+
+      describe 'with invalid params' do
+        it "assigns a newly created but unsaved type as @type" do
+          post :create, { type: invalid_attributes, format: :json }
+          expect(assigns(:type)).to be_a_new(Type)
+        end
+
+        it "returns errors" do
+          post :create, { type: invalid_attributes, format: :json }
+          require 'json'
+          errors = JSON.parse(response.body)
+          expect(errors).to include('name')
+          expect(response).to have_http_status(:unprocessable_entity)
+        end
       end
     end
   end
 
   describe "PUT #update" do
-    context "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+    before(:each) do
+      @user = FactoryGirl.create(:user)
+      @type = @user.types.first
+      @new_attributes = { name: "fur_#{Time.now}"}
+    end
 
-      it "updates the requested type" do
-        type = Type.create! valid_attributes
-        put :update, {:id => type.to_param, :type => new_attributes}, valid_session
-        type.reload
-        skip("Add assertions for updated state")
-      end
-
-      it "assigns the requested type as @type" do
-        type = Type.create! valid_attributes
-        put :update, {:id => type.to_param, :type => valid_attributes}, valid_session
-        expect(assigns(:type)).to eq(type)
-      end
-
-      it "redirects to the type" do
-        type = Type.create! valid_attributes
-        put :update, {:id => type.to_param, :type => valid_attributes}, valid_session
-        expect(response).to redirect_to(type)
+    describe 'unauthenticated' do
+      it 'redirects to sign up page' do
+        sign_in nil
+        put :update, { id: @type.to_param, type: @new_attributes, format: :json }
+        expect(response).to redirect_to new_user_session_url
       end
     end
 
-    context "with invalid params" do
-      it "assigns the type as @type" do
-        type = Type.create! valid_attributes
-        put :update, {:id => type.to_param, :type => invalid_attributes}, valid_session
-        expect(assigns(:type)).to eq(type)
+    describe 'authenticated as other user' do
+      it 'redirects to sign up page' do
+        sign_in FactoryGirl.create(:user)
+        put :update, { id: @type.to_param, type: @new_attributes, format: :json }
+        expect(response).to redirect_to new_user_session_url
+      end
+    end
+
+    describe 'authenticated' do
+      before(:each) do
+        sign_in @user
       end
 
-      it "re-renders the 'edit' template" do
-        type = Type.create! valid_attributes
-        put :update, {:id => type.to_param, :type => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
+      describe "with valid params" do
+        it "updates the requested type" do
+          put :update, { id: @type.to_param, type: @new_attributes, format: :json }
+          require 'json'
+          type = JSON.parse(response.body)
+          expect(type['name']).to eq(@new_attributes[:name])
+          expect(response).to have_http_status(:ok)
+        end
+
+        it "assigns the requested type as @type" do
+          put :update, { id: @type.to_param, type: @new_attributes, format: :json }
+          expect(assigns(:type)).to eq(@type)
+        end
+      end
+
+      describe "with invalid params" do
+        it "assigns the type as @type" do
+          put :update, { id: @type.to_param, type: { name: '' }, format: :json }
+          expect(assigns(:type)).to eq(@type)
+        end
+
+        it "returns errors" do
+          put :update, { id: @type.to_param, type: { name: '' }, format: :json }
+          require 'json'
+          errors = JSON.parse(response.body)
+          expect(errors).to include('errors')
+          expect(response).to have_http_status(:ok)
+        end
       end
     end
   end
 
   describe "DELETE #destroy" do
-    it "destroys the requested type" do
-      type = Type.create! valid_attributes
-      expect {
-        delete :destroy, {:id => type.to_param}, valid_session
-      }.to change(Type, :count).by(-1)
+    before(:each) do
+      @user = FactoryGirl.create(:user)
+      @type = @user.types.first
     end
 
-    it "redirects to the types list" do
-      type = Type.create! valid_attributes
-      delete :destroy, {:id => type.to_param}, valid_session
-      expect(response).to redirect_to(types_url)
+    describe 'unauthenticated' do
+      it 'redirects to sign up page' do
+        sign_in nil
+        delete :destroy, { id: @type.to_param, format: :json }
+        expect(response).to redirect_to new_user_session_url
+      end
+    end
+
+    describe 'authenticated as other user' do
+      it 'redirects to sign up page' do
+        sign_in FactoryGirl.create(:user)
+        delete :destroy, { id: @type.to_param, format: :json}
+        expect(response).to redirect_to new_user_session_url
+      end
+    end
+
+    describe 'authenticated' do
+      it "destroys the requested type" do
+        sign_in @user
+        expect {
+          delete :destroy, { id: @type.to_param, format: :json }
+        }.to change(Type, :count).by(-1)
+
+        require 'json'
+        deleted_type = JSON.parse(response.body)
+        expect(deleted_type['id']).to eq(@type.id)
+        expect(response).to have_http_status(:ok)
+      end
     end
   end
-
 end
