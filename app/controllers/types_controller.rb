@@ -22,14 +22,14 @@ class TypesController < ApplicationController
   # GET /types/subtypes.json 
   def subtypes
     type = Type.find(params[:id])
-    if type == nil || type.user != current_user
+    if type == nil || (type.user != nil && type.user != current_user)
       respond_to do |format|
-        format.all { render nothing: true, status: :forbidden }
+        format.json { render nothing: true, status: :forbidden }
       end
-    end
-
-    respond_to do |format|
-      format.json { render json: type.ordered_subtypes, status: :ok }
+    else
+      respond_to do |format|
+        format.json { render json: type.ordered_subtypes, status: :ok }
+      end
     end
   end
 
@@ -86,7 +86,7 @@ class TypesController < ApplicationController
       redirect_to new_user_session_url
       return
     end
-    
+
     @type.destroy
     respond_to do |format|
       format.json { render json: @type, status: :ok }
