@@ -2,6 +2,7 @@ FactoryGirl.define do
     sequence :username do |n|
         "testuser#{n}"
     end
+
     sequence :email do |n|
         "#{n}@miao.com"
     end
@@ -11,8 +12,14 @@ FactoryGirl.define do
         email
         password "null123!"
         password_confirmation "null123!"
-        after(:create) do |user|
-            create(:type, user: user)
+        confirmed_at Time.now
+        
+        transient do
+            types_count 3
+        end
+
+        after(:create) do |user, evaluator|
+            create_list(:type, evaluator.types_count, user: user)
         end
 
         factory :user_with_card do

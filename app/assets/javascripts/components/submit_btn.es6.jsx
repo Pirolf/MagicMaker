@@ -1,6 +1,6 @@
 class SubmitBtn extends React.Component {
   render() {
-    const {submission} = this.props;
+    const {submission, btnId} = this.props;
     var spinner = '';
 
     switch (submission) {
@@ -23,7 +23,7 @@ class SubmitBtn extends React.Component {
     return (
       <div className="col-sm-2">
         <div className="actions">
-          <div className='btn btn-primary'>
+          <div className='btn btn-primary' id={btnId}>
             <span>
             {this.props.value}
             </span>
@@ -37,6 +37,7 @@ class SubmitBtn extends React.Component {
 
 SubmitBtn.props = {
   value: React.PropTypes.string,
-  submission: React.PropTypes.string
+  submission: React.PropTypes.string,
+  btnId: React.PropTypes.string
 }
-module.exports = SubmitBtn
+module.exports = SubmitBtn;

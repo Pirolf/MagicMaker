@@ -28,7 +28,7 @@ class Lightbox extends React.Component {
         window.events.addListener('lightbox-exit', this.exitLightBoxHandler.bind(this))
     }
 
-    componentWIllUnmount() {
+    componentWillUnmount() {
         window.events.removeListener('lightbox-update', this.updateView.bind(this))
         window.events.removeListener('lightbox-exit', this.exitLightBoxHandler.bind(this))
     }
