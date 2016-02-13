@@ -4,11 +4,19 @@
     <div class="col-sm-4">
       <%= react_component('TypeSelect', { types: Type.get_by_user(current_user), selected: @card.type }) %>
     </div>
-    <div class="col-sm-6">
+
+    <% if user_signed_in? %>
+      <div class="col-sm-6">
+    <% else %>
+      <div class="col-sm-8">
+    <% end %>
       <%= react_component('SubtypeSelect', { subtypes: Subtype.get(@card.type), selected: @card.subtype }) %>
     </div>
-    <div class="col-sm-1">
-      <%= react_component('LightboxLink', { url: types_path, link_type: 'add_types' }) %>
-    </div>
+    
+    <% if user_signed_in? %>
+      <div class="col-sm-1">
+        <%= react_component('LightboxLink', { url: types_path, link_type: 'add_types' }) %>
+      </div>
+    <% end %>
   </div>
 </div>
