@@ -1,10 +1,8 @@
 const gulp = require('gulp');
-const babel = require('gulp-babel');
 const jasmineBrowser = require('gulp-jasmine-browser');
-const browserify = require('gulp-browserify');
 const webpack = require('webpack-stream');
 
-gulp.task('default', function() {
+gulp.task('default', () => {
     return gulp.src(['app/**/*.jsx', 'spec/**/*_spec.jsx'])   
         .pipe(webpack({
             watch: true, 
