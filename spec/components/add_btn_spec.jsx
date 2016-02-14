@@ -1,11 +1,11 @@
+require('../support/helpers/spec_helper.jsx');
 describe('AddBtn', () => {
 	const AddBtn = require('../../app/assets/javascripts/components/add_btn.es6.jsx');
 	const ReactDOM = require('react-dom');
-	const ReactTestUtils = require('react-addons-test-utils');
 	let spy;
 	beforeEach(() => {
 		spy = spyOn(AddBtn.prototype, 'render').and.callThrough();
-		ReactTestUtils.renderIntoDocument(<AddBtn />);
+		ReactDOM.render(<AddBtn />, root);
 	});
 
 	it('renders submit button', () => {
