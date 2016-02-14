@@ -1,3 +1,5 @@
+const {Happens} = require('../components.js');
+
 class Errors extends React.Component {
   constructor () {
     super()
@@ -7,12 +9,12 @@ class Errors extends React.Component {
   componentDidMount () {
     this.setState({errors: []})
     const {id, type} = this.props
-    window.events.addListener(`errors-${type}-${id}`, this.handleErrors.bind(this))
+    Happens.on(`errors-${type}-${id}`, this.handleErrors.bind(this))
   }
 
   componentWillUnmount () {
     const {id, type} = this.props
-    window.events.removeListener(`errors-${type}-${id}`, this.handleErrors.bind(this))
+    Happens.off(`errors-${type}-${id}`, this.handleErrors.bind(this))
   }
 
   handleErrors (data) {

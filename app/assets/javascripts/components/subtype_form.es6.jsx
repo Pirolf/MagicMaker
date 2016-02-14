@@ -1,6 +1,8 @@
-const DeleteBtn = require('./delete_btn.es6.jsx')
-const SubtypeName = require('./subtype_name.es6.jsx')
-const UpdateBtn = require('./update_btn.es6.jsx')
+const DeleteBtn = require('./delete_btn.es6.jsx');
+const SubtypeName = require('./subtype_name.es6.jsx');
+const UpdateBtn = require('./update_btn.es6.jsx');
+
+const {Happens} = require('../components.js');
 
 class SubtypeForm extends React.Component {
   constructor(props) {
@@ -13,23 +15,23 @@ class SubtypeForm extends React.Component {
   }
 
   handleSubmit (e) {
-    e.preventDefault()
+    e.preventDefault();
 
-    var newName = this.state.name.trim()
-    const {record_id, auth_token} = this.props
+    var newName = this.state.name.trim();
+    const {record_id, auth_token} = this.props;
 
-    const errorEvent = `errors-subtype-${record_id}`
+    const errorEvent = `errors-subtype-${record_id}`;
     
     if (!newName) {
-      window.events.emit(errorEvent, { errors: ['Subtype name cannot be empty!'] })
-      this.setState({name: this.props.name})
+      Happens.emit(errorEvent, { errors: ['Subtype name cannot be empty!'] });
+      this.setState({name: this.props.name});
       return;
     }
     
-    const {submission} = this.state
-    if (submission === 'sending') return
+    const {submission} = this.state;
+    if (submission === 'sending') return;
 
-    clearTimeout(this.state.timer)
+    clearTimeout(this.state.timer);
     this.setState({timer: null, submission: 'sending'}, () => {
       $.ajax({
         url: `/subtypes/${record_id}`,
@@ -43,26 +45,27 @@ class SubtypeForm extends React.Component {
         }
       })
       .done((data) => {
-        const {errors} = data
-        const {name} = this.props
+        const {errors} = data;
+        const {name} = this.props;
         if (errors) {
-          window.events.emit(errorEvent, {errors})
-          this.setState({name, submission: 'error'})
-        } else {
-          this.setState({name: newName, submission: 'success'}, () => {
-            const timer = setTimeout(() => { this.setState({submission: 'idle', timer: null})}, 1000000)
-            this.setState({timer})
-          })
+          Happens.emit(errorEvent, {errors});
+          this.setState({name, submission: 'error'});
+          return;
         }
-      })
+         
+        this.setState({name: newName, submission: 'success'}, () => {
+          const timer = setTimeout(() => { this.setState({submission: 'idle', timer: null})}, 5000);
+          this.setState({timer});
+        });
+      });
     })
   }
 
   render () {
-    const {record_id} = this.props
-    const {name, submission} = this.state
-    const id = `edit_subtype_${record_id}`
-    const action = `/subtypes/${record_id}`
+    const {record_id} = this.props;
+    const {name, submission} = this.state;
+    const id = `edit_subtype_${record_id}`;
+    const action = `/subtypes/${record_id}`;
     return (
       <form className="edit_subtype" {...{id}} >
         <SubtypeName subtype_name={name} subtype_id={record_id} onChange={this.handleNameChange.bind(this)}/>

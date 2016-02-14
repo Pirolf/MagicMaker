@@ -1,6 +1,8 @@
 const Errors = require('./errors.es6.jsx')
 const SubtypeForm = require('./subtype_form.es6.jsx')
 
+const {Happens} = require('../components.js');
+
 class SubtypeFormList extends React.Component {
     constructor(props) {
         super(props)
@@ -13,11 +15,11 @@ class SubtypeFormList extends React.Component {
     }
 
     componentDidMount() {
-        window.events.addListener('subtype-created', this.addNewSubtypeToList.bind(this))
+        Happens.on('subtype-created', this.addNewSubtypeToList.bind(this))
     }
 
     componentWillUnmount() {
-        window.events.removeListener('subtype-created', this.addNewSubtypeToList.bind(this))
+        Happens.off('subtype-created', this.addNewSubtypeToList.bind(this))
     }
 
     render() {
@@ -43,4 +45,4 @@ SubtypeFormList.props = {
     auth_token: React.PropTypes.string
 }
 
-window.SubtypeFormList = SubtypeFormList
+window.SubtypeFormList = SubtypeFormList;

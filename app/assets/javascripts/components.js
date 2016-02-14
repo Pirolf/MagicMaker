@@ -1,3 +1,10 @@
 //= require_tree ./components
-window.EventEmitter = require('events').EventEmitter;
-window.events = new EventEmitter();
+const EventEmitter = require('events').EventEmitter;
+const events = new EventEmitter();
+const Happens = require('happens')();
+
+window.events = events;
+
+module.exports = {
+	Happens
+};

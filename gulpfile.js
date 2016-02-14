@@ -3,12 +3,12 @@ const jasmineBrowser = require('gulp-jasmine-browser');
 const webpack = require('webpack-stream');
 
 gulp.task('default', () => {
-    return gulp.src(['app/**/*.jsx', 'spec/**/*_helper.jsx', 'spec/**/*_spec.jsx'])
+    return gulp.src(['app/**/*.jsx', 'app/javascripts/components.js', 'spec/**/*_helper.jsx', 'spec/**/*_spec.jsx'])
         .pipe(webpack({
             watch: true, 
             module: {
                 loaders: [{ 
-                    test: /\.jsx$/, 
+                    test: /\.jsx$|\.js/, 
                     exclude: /node_modules/, 
                     loader: 'babel',
                     query: {

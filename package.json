@@ -14,6 +14,7 @@
     "browserify": "~> 10.2.4",
     "browserify-incremental": "^3.0.1",
     "classname": "^0.0.0",
+    "happens": "^0.6.0",
     "reactify": "^1.1.1"
   },
   "license": "MIT",
