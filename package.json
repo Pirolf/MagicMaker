@@ -2,7 +2,12 @@
   "name": "magic",
   "browserify": {
     "transform": [
-      ["reactify", {"es6": true}]
+      [
+        "reactify",
+        {
+          "es6": true
+        }
+      ]
     ]
   },
   "dependencies": {
@@ -19,9 +24,10 @@
     "babel-core": "^6.5.2",
     "babel-loader": "^6.2.2",
     "babel-plugin-transform-react-require": "^1.0.1",
-    "babel-preset-react": "^6.5.0",
     "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.5.0",
     "gulp-jasmine-browser": "^1.0.0",
+    "jquery": "^2.2.0",
     "react": "^0.14.7",
     "react-addons-test-utils": "^0.14.7",
     "react-dom": "^0.14.7",
