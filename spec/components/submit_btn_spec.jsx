@@ -3,7 +3,6 @@ describe('SubmitBtn', () => {
 	const SubmitBtn = require('../../app/assets/javascripts/components/submit_btn.es6.jsx');
 	const ReactDOM = require('react-dom');
 	const {setProps} = require('../support/helpers/react_helper.jsx');
-	const $ = require('jquery');
 	let subject, spy;
 	beforeEach(() => {
 		spy = spyOn(SubmitBtn.prototype, 'render').and.callThrough();

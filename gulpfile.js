@@ -3,7 +3,7 @@ const jasmineBrowser = require('gulp-jasmine-browser');
 const webpack = require('webpack-stream');
 
 gulp.task('default', () => {
-    return gulp.src(['app/**/*.jsx', 'spec/**/*_helper.jsx', 'spec/**/*_spec.jsx'])   
+    return gulp.src(['app/**/*.jsx', 'spec/**/*_helper.jsx', 'spec/**/*_spec.jsx'])
         .pipe(webpack({
             watch: true, 
             module: {
@@ -17,8 +17,11 @@ gulp.task('default', () => {
                     }
                 }]
             },
-            output: {filename: 'spec.js'}
+            output: {
+                filename: 'bundle.js'
+            }
         }))
+    .pipe(gulp.dest('dist/'))
     .pipe(jasmineBrowser.specRunner())
     .pipe(jasmineBrowser.server({port: 8888}));
 });

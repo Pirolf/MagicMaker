@@ -5,6 +5,7 @@ capybara-*.html
 #RubyMine
 .idea
 
+/dist
 /log
 /tmp
 /db/*.sqlite3

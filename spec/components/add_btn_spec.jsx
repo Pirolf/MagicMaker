@@ -9,7 +9,6 @@ describe('AddBtn', () => {
 	});
 
 	it('renders submit button', () => {
-		expect(1).toBe(1);
 		expect(spy).toHaveBeenCalled();
 	});
 });
