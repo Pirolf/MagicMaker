@@ -10,9 +10,9 @@ class LightboxLink extends React.Component {
             dataType: 'html'
         }).done(function(html) {
             //emit event to lightbox
-            window.events.emit('lightbox-update', { html: html })
-            ReactRailsUJS.mountComponents()
-            window.events.emit('bind-exit-lightbox-btn')
+            window.events.emit('lightbox-update', { html: html });
+            ReactRailsUJS.mountComponents();
+            window.events.emit('bind-exit-lightbox-btn');
         })
     }
     render() {

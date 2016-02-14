@@ -2,11 +2,12 @@ require('../support/helpers/spec_helper.jsx');
 describe('TypeFormList', () => {
 	const TypeFormList = require('../../app/assets/javascripts/components/type_form_list.es6.jsx');
 	const TypeForm = require('../../app/assets/javascripts/components/type_form.es6.jsx');
+	const LightboxLink = require('../../app/assets/javascripts/components/lightbox_link.es6.jsx');
 	const ReactDOM = require('react-dom');
 	const {setProps} = require('../support/helpers/react_helper.jsx');
 	const type = {name: 'new-type', id: 3};
 
-	let subject, spy, props, addNewTypeToListSpy, typeFormSpy;
+	let subject, spy, props, addNewTypeToListSpy, lightboxLinkSpy, typeFormSpy;
 	props = {
 		types: [	
 			{name: 'type1', id: 1},
@@ -17,16 +18,12 @@ describe('TypeFormList', () => {
 	beforeEach(() => {
 		addNewTypeToListSpy = spyOn(TypeFormList.prototype, 'addNewTypeToList').and.callThrough();
 		spy = spyOn(TypeFormList.prototype, 'render').and.callThrough();
+		lightboxLinkSpy = spyOn(LightboxLink.prototype, 'render').and.callThrough();
 		typeFormSpy = spyOn(TypeForm.prototype, 'render').and.callThrough();
 		subject = ReactDOM.render(<TypeFormList {...props}/>, root);
 	});
 
-	it('renders correct number of type forms', () => {
-		const renderCalls = typeFormSpy.calls.all();
-		expect(renderCalls.length).toBe(2);
-	});
-
-	it('passes the correct props to type forms', () => {
+	it('renders type forms', () => {
 		const renderCalls = typeFormSpy.calls.all();
 		const types = props.types;
 		renderCalls.forEach((c, i) => {
@@ -35,6 +32,16 @@ describe('TypeFormList', () => {
 				record_id: types[i].id
 			}));
 		})
+	});
+
+	it('renders lightbox links', () => {
+		const renderCalls = lightboxLinkSpy.calls.all();
+		renderCalls.forEach((c, i) => {
+			expect(c.object.props).toEqual({
+				url: `/types/${props.types[i].id}/edit`, 
+				link_type: 'more_types'
+			});
+		});
 	});
 
 	describe("#addNewTypeToList", () => {

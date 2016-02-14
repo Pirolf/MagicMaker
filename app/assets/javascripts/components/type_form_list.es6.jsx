@@ -27,7 +27,7 @@ class TypeFormList extends React.Component {
         const {auth_token} = this.props;
         let typeList = this.state.types.map((t) => {
             const {id, name} = t;
-            const lightboxLinkProps = {url: `/types/${id}/edit`, link_type: 'more_subtypes'};
+            const lightboxLinkProps = {url: `/types/${id}/edit`, link_type: 'more_types'};
             return(
                 <div key={id}>
                     <Errors {...{id}} type="type"/>
