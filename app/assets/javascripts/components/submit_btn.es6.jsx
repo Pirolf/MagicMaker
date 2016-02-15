@@ -23,7 +23,7 @@ class SubmitBtn extends React.Component {
     return (
       <div className="col-sm-2">
         <div className="actions">
-          <div className='btn btn-primary' id={btnId}>
+          <div className='btn btn-primary submit-btn' id={btnId}>
             <span>
             {this.props.value}
             </span>

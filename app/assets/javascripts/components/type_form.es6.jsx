@@ -1,6 +1,6 @@
 const DeleteBtn = require('./delete_btn.es6.jsx');
 const UpdateBtn = require('./update_btn.es6.jsx');
-
+const $ = require('jquery');
 const {Happens} = require('../components.js');
 class TypeForm extends React.Component {
     constructor(props) {
@@ -12,42 +12,49 @@ class TypeForm extends React.Component {
         this.setState({ name: e.target.value });
     }
 
+    submitCallback(newName, data) { 
+        const {record_id, auth_token, name} = this.props;
+        const {errors} = data;
+        if (errors) {
+            const errorEvent = `errors-type-${record_id}`;
+            Happens.emit(errorEvent, {errors});
+            this.setState({name, submission: 'error'});
+            return;
+        }
+
+        this.setState({name: newName, submission: 'success'}, () => {
+            const timer = setTimeout(() => { 
+              this.setState({submission: 'idle', timer: null})
+            }, 5000);
+            this.setState({timer});
+        });
+    }
+
+    submit(newName) {
+        const {record_id, auth_token, name} = this.props;
+        $.ajax({
+            url: `/types/${record_id}`,
+            type: 'PATCH',
+            data: { 
+                type: { 
+                    name: newName
+                },
+                commit: 'update',
+                utf8: "✓",
+                "authenticity_token": auth_token
+            },
+            dataType: 'json'
+        })
+        .done(this.submitCallback.bind(this, newName));
+    }
+
     handleSubmit (e) {
         e.preventDefault();
         const newName = this.state.name.trim();
         const {record_id, auth_token, name} = this.props;
-        const errorEvent = `errors-type-${record_id}`;
 
         clearTimeout(this.state.timer);
-        this.setState({timer: null, submission: 'sending'}, () => {
-            $.ajax({
-                url: `/types/${record_id}`,
-                type: 'PATCH',
-                data: { 
-                    type: { 
-                        name: newName
-                    },
-                    commit: 'update',
-                    utf8: "✓",
-                    "authenticity_token": auth_token
-                },
-                dataType: 'json'
-            })
-            .done((data) => {
-                const {errors} = data;
-                const {name} = this.props;
-                if (errors) {
-                  Happens.emit(errorEvent, {errors});
-                  this.setState({name, submission: 'error'});
-                  return;
-                }
-                
-                this.setState({name: newName, submission: 'success'}, () => {
-                  const timer = setTimeout(() => { this.setState({submission: 'idle', timer: null})}, 5000);
-                  this.setState({timer});
-                });
-            });
-        });
+        this.setState({timer: null, submission: 'sending'}, this.submit(newName));
     }
 
     render () {
