@@ -1,14 +1,8 @@
 <p class='notice' id='update-notice'></p>
 <div class="container">
-  <%= react_component('Success', { id: @type.id, type: 'type' }) %>
   <%= react_component('Errors', { id: @type.id, type: 'type' }) %>
   <%= react_component('TypeForm', { name: @type.name, record_id: @type.id, auth_token: form_authenticity_token}) %>
 
   <h2>Subtypes</h2>
-  <%= react_component('Success', { id: 'new', type: 'subtype' }) %>
-  <%= react_component('Errors', { id: 'new', type: 'subtype' }) %>
-  <div class="row">
-    <%= react_component('AddSubtypeForm', type_id: @type.id, auth_token: form_authenticity_token) %>
-  </div>
-  <%= react_component('SubtypeFormList', { subtypes: @type.ordered_subtypes, auth_token: form_authenticity_token } ) %>
+  <%= react_component('SubtypeSection', { type_id: @type.id, subtypes: @type.ordered_subtypes, auth_token: form_authenticity_token}) %>
 </div>

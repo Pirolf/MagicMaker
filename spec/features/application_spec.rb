@@ -7,6 +7,7 @@ describe 'Application', type: :feature, js: true  do
     end
 
     it 'has Log in' do
+        #TO FIX - sign out first
         expect(page).to have_content('Log in')
     end
 

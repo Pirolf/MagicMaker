@@ -12,7 +12,6 @@ class SubtypeSelect extends React.Component {
             dataType: 'json',
             data: { id: type_id },
             success: function(data) {
-                console.log(data)
                 var subtypes = []
                 data.forEach(function(subtype) {
                     subtypes.push({ id: subtype.id, name: subtype.name })

@@ -7,14 +7,14 @@ class Errors extends React.Component {
   }
 
   componentDidMount () {
-    this.setState({errors: []})
-    const {id, type} = this.props
-    Happens.on(`errors-${type}-${id}`, this.handleErrors.bind(this))
+    this.setState({errors: []});
+    const {id, type} = this.props;
+    Happens.on(`errors-${type}-${id}`, this.handleErrors.bind(this));
   }
 
   componentWillUnmount () {
-    const {id, type} = this.props
-    Happens.off(`errors-${type}-${id}`, this.handleErrors.bind(this))
+    const {id, type} = this.props;
+    Happens.off(`errors-${type}-${id}`, this.handleErrors.bind(this));
   }
 
   handleErrors (data) {

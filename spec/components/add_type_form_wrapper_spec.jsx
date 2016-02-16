@@ -108,13 +108,21 @@ describe('AddTypeFormWrapper', () => {
 		});
 
 		describe('success', () => {
+			const {Happens} = require('../../app/assets/javascripts/components.js');
+			let happensSpy;
+			const successData = {success: true};
 			beforeEach(() => {
-				spyOn($, 'ajax').and.returnValue($.Deferred().resolve({}).promise());
+				happensSpy = spyOn(Happens, 'emit').and.stub();
+				spyOn($, 'ajax').and.returnValue($.Deferred().resolve(successData).promise());
 				subject.submit('some name');
 			});
 
 			it('sets correct state', () => {
 				expect(subject.state).toEqual(jasmine.objectContaining({name: null, submission: 'success'}))
+			});
+
+			it('emits success event', () => {
+				expect(happensSpy).toHaveBeenCalledWith(`${type}-created`, successData);
 			});
 
 			it('in 5 seconds, sets state to submission: idle, timer: null', () => {

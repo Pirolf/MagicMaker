@@ -15,11 +15,11 @@ class SubtypeFormList extends React.Component {
     }
 
     componentDidMount() {
-        Happens.on('subtype-created', this.addNewSubtypeToList.bind(this))
+        Happens.on('subtype-created', this.addNewSubtypeToList.bind(this));
     }
 
     componentWillUnmount() {
-        Happens.off('subtype-created', this.addNewSubtypeToList.bind(this))
+        Happens.off('subtype-created', this.addNewSubtypeToList.bind(this));
     }
 
     render() {
@@ -45,4 +45,5 @@ SubtypeFormList.props = {
     auth_token: React.PropTypes.string
 }
 
+module.exports = SubtypeFormList;
 window.SubtypeFormList = SubtypeFormList;

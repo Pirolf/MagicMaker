@@ -26,6 +26,7 @@ class AddTypeFormWrapper extends React.Component {
     }
 
     this.setState({name: null, submission: 'success'}, () => {
+      Happens.emit(`${this.props.type}-created`, data);
       const timer = setTimeout(() => {
         this.setState({submission: 'idle', timer: null});
       }, 5000);
@@ -52,8 +53,8 @@ class AddTypeFormWrapper extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const name = this.state.name.trim();
-    if (!name || name === '') {
+    const {name} = this.state;
+    if (name === null || !name || name.trim() === '') {
       this.emitErrors([`${capitalize(this.props.type)} name cannot be empty`]);
       return;
     }
@@ -63,16 +64,17 @@ class AddTypeFormWrapper extends React.Component {
 
   render() {
     const {type} = this.props;
+    const {submission} = this.state;
     return (
-      <form className=`new_${type}` id=`new_${type}`>
+      <form className={`new_${type}`} id={`new_${type}`}>
         <div className="col-sm-3">
           <div className="field form-group">
             <input className="form-control" value={this.state.name} onChange={this.handleNameChange.bind(this)} type="text" 
-            name=`${type}[name]` id=`${type}_name`></input>
+            name={`${type}[name]`} id={`${type}_name`}></input>
           </div>
         </div>
         <div onClick={this.handleSubmit.bind(this)}>
-          <AddBtn />
+          <AddBtn {...{submission}}/>
         </div>
       </form>
     )
@@ -82,7 +84,8 @@ class AddTypeFormWrapper extends React.Component {
 AddTypeFormWrapper.propTypes = {
   type_id: React.PropTypes.number,
   auth_token: React.PropTypes.string.isRequired,
-  type: React.PropTypes.string.isRequired
+  type: React.PropTypes.string.isRequired,
+  url: React.PropTypes.string
 };
 
 module.exports = AddTypeFormWrapper;
