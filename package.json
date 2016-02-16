@@ -16,6 +16,7 @@
     "classname": "^0.0.0",
     "happens": "^0.6.0",
     "jquery": "^2.2.0",
+    "lodash.capitalize": "^4.1.0",
     "reactify": "^1.1.1"
   },
   "license": "MIT",

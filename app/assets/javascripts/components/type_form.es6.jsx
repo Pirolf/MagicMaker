@@ -12,13 +12,15 @@ class TypeForm extends React.Component {
         this.setState({ name: e.target.value });
     }
 
+    emitErrors(errors) {
+        Happens.emit(`errors-type-${this.props.record_id}`, {errors});
+        this.setState({name: this.props.name, submission: 'error'});
+    }
+
     submitCallback(newName, data) { 
-        const {record_id, auth_token, name} = this.props;
         const {errors} = data;
         if (errors) {
-            const errorEvent = `errors-type-${record_id}`;
-            Happens.emit(errorEvent, {errors});
-            this.setState({name, submission: 'error'});
+            this.emitErrors(errors);
             return;
         }
 
@@ -41,7 +43,7 @@ class TypeForm extends React.Component {
                 },
                 commit: 'update',
                 utf8: "✓",
-                "authenticity_token": auth_token
+                authenticity_token: auth_token
             },
             dataType: 'json'
         })
@@ -51,8 +53,10 @@ class TypeForm extends React.Component {
     handleSubmit (e) {
         e.preventDefault();
         const newName = this.state.name.trim();
-        const {record_id, auth_token, name} = this.props;
-
+        if (!newName || newName === '') {
+            this.emitErrors(['Type name cannot be empty!']);
+            return;
+        }
         clearTimeout(this.state.timer);
         this.setState({timer: null, submission: 'sending'}, this.submit(newName));
     }

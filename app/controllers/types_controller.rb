@@ -57,7 +57,7 @@ class TypesController < ApplicationController
       if @type.save
         format.json { render json: @type, status: :created, location: @type }
       else
-        format.json { render json: @type.errors, status: :unprocessable_entity }
+        format.json { render json: { errors: @type.errors.full_messages }, status: :ok }
       end
     end
   end

@@ -19,17 +19,46 @@ describe('TypeForm', () => {
 	describe('#handleSubmit', () => {
 		let submitSpy;
 		beforeEach(() => {
-			submitSpy = spyOn(TypeForm.prototype, 'submit').and.stub();
 			subject = ReactDOM.render(<TypeForm {...props}/>, root);
 			$('.submit-btn').simulate('click');
-		})
-
-		it('timer: null, submission: sending', () => {
-			expect(subject.state).toEqual(jasmine.objectContaining({timer: null, submission: 'sending'}));
 		});
 
-		it('calls submit', () => {
-			expect(submitSpy).toHaveBeenCalled();
+		describe('when current name is empty', () => {
+			let prevState, happensSpy;
+			const {Happens} = require('../../app/assets/javascripts/components.js');
+			beforeEach(() => {
+				happensSpy = spyOn(Happens, 'emit').and.stub();
+				submitSpy = spyOn(TypeForm.prototype, 'submit').and.stub();
+				subject.setState({name: ''});
+				prevState = subject.state;
+				subject = ReactDOM.render(<TypeForm {...props}/>, root);
+				$('.submit-btn').simulate('click');
+			});
+
+			it('does not call submit', () => {
+				expect(submitSpy).not.toHaveBeenCalled();
+			});
+
+			it('emits error event', () => {
+				expect(happensSpy).toHaveBeenCalled();
+			});
+		});
+
+		describe('when current name is not empty', () => {
+			beforeEach(() => {
+				submitSpy = spyOn(TypeForm.prototype, 'submit').and.stub();
+				subject.setState({name: 'cat name'});
+				subject = ReactDOM.render(<TypeForm {...props}/>, root);
+				$('.submit-btn').simulate('click');
+			});
+
+			it('timer: null, submission: sending', () => {
+				expect(subject.state).toEqual(jasmine.objectContaining({timer: null, submission: 'sending'}));
+			});
+
+			it('calls submit', () => {
+				expect(submitSpy).toHaveBeenCalled();
+			});
 		});
 	});
 	
