@@ -43,11 +43,7 @@ class AddTypeFormWrapper extends React.Component {
       authenticity_token: auth_token 
     };
 
-    if (type === 'type') {
-      data.type = payload;
-    } else {
-      data.subtype = payload;
-    }
+    data[type] = payload;
 
     $.ajax({
       url,
