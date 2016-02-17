@@ -37,15 +37,22 @@ class AddTypeFormWrapper extends React.Component {
   submit(name) {
     const {auth_token, type_id, type, url} = this.props;
     const payload = type === 'type' ? {name} : {name, type_id};
+    var data = {
+      commit: 'add', 
+      utf8: '✓', 
+      authenticity_token: auth_token 
+    };
+
+    if (type === 'type') {
+      data.type = payload;
+    } else {
+      data.subtype = payload;
+    }
+
     $.ajax({
       url,
       type: 'POST',
-      data: {
-        [type]: payload, 
-        commit: 'add', 
-        utf8: '✓', 
-        authenticity_token: auth_token 
-      },
+      data,
       dataType: 'json'
     })
     .done(this.submitCallback.bind(this));

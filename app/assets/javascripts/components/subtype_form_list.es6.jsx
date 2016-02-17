@@ -10,8 +10,8 @@ class SubtypeFormList extends React.Component {
     }
 
     addNewSubtypeToList(data) {
-        let subtypes = this.state.subtypes.concat(data.subtype)
-        this.setState({subtypes})
+        const subtypes = this.state.subtypes.concat(data.subtype);
+        this.setState({subtypes});
     }
 
     componentDidMount() {
@@ -24,7 +24,7 @@ class SubtypeFormList extends React.Component {
 
     render() {
         const {auth_token} = this.props
-        let subtypeList = this.state.subtypes.map((s) => {
+        const subtypeList = this.state.subtypes.map((s) => {
             const {id, name} = s
             return(
                 <div key={id}>
