@@ -43,3 +43,6 @@ class Lightbox extends React.Component {
         )
     }
 }
+
+module.exports = Lightbox;
+window.Lightbox = Lightbox;

@@ -2,7 +2,7 @@ const Errors = require('./errors.es6.jsx');
 const TypeForm = require('./type_form.es6.jsx');
 const LightboxLink = require('./lightbox_link.es6.jsx');
 
-const {Happens} = require('../components.js');
+const {Happens} = require('./shared.es6.jsx');
 
 class TypeFormList extends React.Component {
     constructor(props) {

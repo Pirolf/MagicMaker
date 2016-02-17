@@ -1,5 +1,5 @@
 const AddBtn = require('./add_btn.es6.jsx');
-const {Happens} = require('../components.js');
+const {Happens} = require('./shared.es6.jsx');
 const capitalize = require('lodash.capitalize');
 const $ = require('jquery');
 

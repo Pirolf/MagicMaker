@@ -108,7 +108,7 @@ describe('AddTypeFormWrapper', () => {
 		});
 
 		describe('success', () => {
-			const {Happens} = require('../../app/assets/javascripts/components.js');
+			const {Happens} = require('../../app/assets/javascripts/components/shared.es6.jsx');
 			let happensSpy;
 			const successData = {success: true};
 			beforeEach(() => {
@@ -147,7 +147,7 @@ describe('AddTypeFormWrapper', () => {
 	});
 
 	describe('#emitErrors', () => {
-		const {Happens} = require('../../app/assets/javascripts/components.js');
+		const {Happens} = require('../../app/assets/javascripts/components/shared.es6.jsx');
 		let happensSpy;
 		beforeEach(() => {
 			happensSpy = spyOn(Happens, 'emit').and.stub();

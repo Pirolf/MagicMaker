@@ -25,7 +25,7 @@ describe('TypeForm', () => {
 
 		describe('when current name is empty', () => {
 			let prevState, happensSpy;
-			const {Happens} = require('../../app/assets/javascripts/components.js');
+			const {Happens} = require('../../app/assets/javascripts/components/shared.es6.jsx');
 			beforeEach(() => {
 				happensSpy = spyOn(Happens, 'emit').and.stub();
 				submitSpy = spyOn(TypeForm.prototype, 'submit').and.stub();
@@ -81,7 +81,7 @@ describe('TypeForm', () => {
 		});
 
 		describe('on errors', () => {
-			const {Happens} = require('../../app/assets/javascripts/components.js');
+			const {Happens} = require('../../app/assets/javascripts/components/shared.es6.jsx');
 			let happensSpy;
 			const errors = {errors: ['some error']};
 			beforeEach(() => {

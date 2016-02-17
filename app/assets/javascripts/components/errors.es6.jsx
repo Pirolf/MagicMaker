@@ -1,4 +1,4 @@
-const {Happens} = require('../components.js');
+const {Happens} = require('./shared.es6.jsx');
 
 class Errors extends React.Component {
   constructor () {

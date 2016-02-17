@@ -1,7 +1,7 @@
 const DeleteBtn = require('./delete_btn.es6.jsx');
 const UpdateBtn = require('./update_btn.es6.jsx');
 const $ = require('jquery');
-const {Happens} = require('../components.js');
+const {Happens} = require('./shared.es6.jsx');
 class TypeForm extends React.Component {
     constructor(props) {
         super(props);

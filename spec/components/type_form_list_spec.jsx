@@ -57,7 +57,7 @@ describe('TypeFormList', () => {
 	});
 
 	describe('type-create event', () => {
-		const {Happens} = require('../../app/assets/javascripts/components.js');
+		const {Happens} = require('../../app/assets/javascripts/components/shared.es6.jsx');
 		beforeEach(() => {			
 			Happens.emit('type-created', {type});
 		});

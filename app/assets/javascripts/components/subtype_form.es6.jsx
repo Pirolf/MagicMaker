@@ -2,7 +2,7 @@ const DeleteBtn = require('./delete_btn.es6.jsx');
 const SubtypeName = require('./subtype_name.es6.jsx');
 const UpdateBtn = require('./update_btn.es6.jsx');
 
-const {Happens} = require('../components.js');
+const {Happens} = require('./shared.es6.jsx');
 
 class SubtypeForm extends React.Component {
   constructor(props) {

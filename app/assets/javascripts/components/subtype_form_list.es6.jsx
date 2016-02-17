@@ -1,7 +1,7 @@
 const Errors = require('./errors.es6.jsx')
 const SubtypeForm = require('./subtype_form.es6.jsx')
 
-const {Happens} = require('../components.js');
+const {Happens} = require('./shared.es6.jsx');
 
 class SubtypeFormList extends React.Component {
     constructor(props) {
