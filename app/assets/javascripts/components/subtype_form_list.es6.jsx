@@ -23,14 +23,14 @@ class SubtypeFormList extends React.Component {
     }
 
     render() {
-        const {auth_token} = this.props
+        const {auth_token, type_id} = this.props
         const subtypeList = this.state.subtypes.map((s) => {
             const {id, name} = s
             return(
                 <div key={id}>
                     <Errors {...{id}} type="subtype"/>
                     <div className="row">
-                        <SubtypeForm {...{name, auth_token}} record_id={id} />
+                        <SubtypeForm {...{name, auth_token, type_id}} record_id={id} />
                     </div>
                 </div>
             )
@@ -42,7 +42,8 @@ class SubtypeFormList extends React.Component {
 
 SubtypeFormList.props = {
     subtypes: React.PropTypes.array,
-    auth_token: React.PropTypes.string
+    auth_token: React.PropTypes.string,
+    type_id: React.PropTypes.number
 }
 
 module.exports = SubtypeFormList;

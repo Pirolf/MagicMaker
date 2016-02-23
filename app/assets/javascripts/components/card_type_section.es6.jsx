@@ -1,3 +1,4 @@
+const {Happens} = require('./shared.es6.jsx');
 class CardTypeSection extends React.Component {
     constructor(props) {
         super(props)
@@ -12,7 +13,11 @@ class CardTypeSection extends React.Component {
         this.setState({ subtype: data.subtype_name })
     }
     
+    click() {
+        console.log('click-backdrop received')
+    }
     componentDidMount() {
+        window.events.addListener('click-backdrop', this.click.bind(this));
         window.events.addListener('type-selection-changed', this.updateDisplayedType.bind(this))
         window.events.addListener('subtype-selection-changed', this.updateDisplayedSubtype.bind(this))
     }
@@ -43,3 +48,5 @@ CardTypeSection.props = {
     type: React.PropTypes.string,
     subtype: React.PropTypes.string
 }
+
+window.CardTypeSection = CardTypeSection;

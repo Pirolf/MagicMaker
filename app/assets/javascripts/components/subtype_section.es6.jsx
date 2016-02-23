@@ -4,7 +4,7 @@ class SubtypeSection extends React.Component {
 	render() {
 		const {auth_token, type_id, subtypes} = this.props;
 		const addSubtypeFormProps = {auth_token, type_id};
-		const subtypeFormListProps = {auth_token, subtypes};
+		const subtypeFormListProps = {auth_token, subtypes, type_id};
 
 		return (
 			<div>

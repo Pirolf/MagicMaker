@@ -1,12 +1,34 @@
 class TypeSelect extends React.Component {
     constructor(props) {
-        super(props)
-        this.state = { types: this.props.types }
+        super(props);
+        const {types, selected} = this.props;
+        this.state = {types, selected};
     }
 
     typeChangeHandler(e) {
-        //emit subtype change event
-        window.events.emit('type-selection-changed', { type_id: e.target.value, type_name: e.target.selectedOptions[0].text })
+        this.setState({selected: {id: e.target.value}});
+        window.events.emit('type-selection-changed', { type_id: e.target.value, type_name: e.target.selectedOptions[0].text });
+    }
+
+    handleNewSubtype(data) {
+        const {types} = this.props;
+        const {selected: currentSelected} = this.props;
+        if (currentSelected.id === data.subtype.type_id) return;
+        const selected = types.find((t) => { return t.id === data.subtype.type_id});
+        this.setState({selected});
+
+        window.events.emit('type-selection-changed', { 
+            type_id: selected.id, 
+            type_name: selected.name 
+        });
+    }
+
+    componentDidMount() {
+        window.events.addListener('subtype-created', this.handleNewSubtype.bind(this));
+    }
+
+    componentWillUnmount() {
+        window.events.removeListener('subtypes-created', this.handleNewSubtype.bind(this));
     }
 
     render() {
@@ -14,21 +36,14 @@ class TypeSelect extends React.Component {
         options.push(<option key='blank_type'></option>)
         this.state.types.forEach(function(t, index) {
             options.push(<option key={index} value={t.id}>{t.name}</option>)
-        })
+        });
 
-        var selectedType
-        if (!_.isNull(this.props.selected)){
-            selectedType = _.find(this.props.types, function(type) {
-                return type.id === this.props.selected.id
-            }, this)
-        }
+        const {selected} = this.state;
+        var selectedId;
+        if (selected !== null && selected !== undefined) selectedId = selected.id;
 
-        var selectedId
-        if (selectedType){
-            selectedId = selectedType.id
-        }
         return (
-            <select className="form-control" defaultValue={selectedId} onChange={this.typeChangeHandler.bind(this)} id="card_type" name="card[type_id]">
+            <select className="form-control" value={selectedId} onChange={this.typeChangeHandler.bind(this)} id="card_type" name="card[type_id]">
                 {options}
             </select>
         )

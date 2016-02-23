@@ -46,13 +46,13 @@ class SubtypeForm extends React.Component {
       })
       .done((data) => {
         const {errors} = data;
-        const {name} = this.props;
+        const {name, type_id} = this.props;
         if (errors) {
           Happens.emit(errorEvent, {errors});
           this.setState({name, submission: 'error'});
           return;
         }
-         
+        window.events.emit('subtypes-updated', {id: record_id, name: newName, type_id});
         this.setState({name: newName, submission: 'success'}, () => {
           const timer = setTimeout(() => { this.setState({submission: 'idle', timer: null})}, 5000);
           this.setState({timer});
@@ -81,7 +81,8 @@ class SubtypeForm extends React.Component {
 SubtypeForm.propTypes = {
   name: React.PropTypes.string,
   record_id: React.PropTypes.number,
-  auth_token: React.PropTypes.string
+  auth_token: React.PropTypes.string,
+  type_id: React.PropTypes.number
 };
 
 module.exports = SubtypeForm

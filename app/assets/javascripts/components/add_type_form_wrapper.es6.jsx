@@ -27,6 +27,7 @@ class AddTypeFormWrapper extends React.Component {
 
     this.setState({name: null, submission: 'success'}, () => {
       Happens.emit(`${this.props.type}-created`, data);
+      window.events.emit(`${this.props.type}-created`, data);
       const timer = setTimeout(() => {
         this.setState({submission: 'idle', timer: null});
       }, 5000);

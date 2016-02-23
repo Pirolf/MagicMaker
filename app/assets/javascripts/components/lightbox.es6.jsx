@@ -1,3 +1,4 @@
+const {Happens} = require('./shared.es6.jsx');
 class Lightbox extends React.Component {
     constructor(props) {
         super(props)
@@ -33,10 +34,14 @@ class Lightbox extends React.Component {
         window.events.removeListener('lightbox-exit', this.exitLightBoxHandler.bind(this))
     }
 
+    click() {
+        window.events.emit('lightbox-exit');
+    }
+
     render() {
         return (
             <div>
-                <div className={this.state.backdropClass}></div>
+                <div onClick={this.click} className={this.state.backdropClass}></div>
                 <div className={this.state.lightboxClass} dangerouslySetInnerHTML={{__html: this.state.html}}>
                 </div>
             </div>
