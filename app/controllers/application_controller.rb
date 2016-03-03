@@ -30,4 +30,12 @@ class ApplicationController < ActionController::Base
       ## render :file => File.join(Rails.root, 'public/404'), :formats => [:html], :status => 404, :layout => false
     end
   end
+
+  def authorize!
+    if user_signed_in?
+      authenticate_user!
+    else
+      render nothing: true, status: :unauthorized
+    end
+  end
 end

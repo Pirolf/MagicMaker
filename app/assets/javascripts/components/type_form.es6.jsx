@@ -62,10 +62,10 @@ class TypeForm extends React.Component {
     }
 
     render () {
-        const {record_id} = this.props;
+        const {auth_token, record_id} = this.props;
         const {submission} = this.state;
         const id = `edit_type_${record_id}`;
-        const deleteLink = `/types/${record_id}`;
+        const url = `/types/${record_id}.json`;
         return (
             <form className="edit_type" id={id} onSubmit={this.handleSubmit.bind(this)}>
                 <div className="row">
@@ -77,7 +77,7 @@ class TypeForm extends React.Component {
                     <div onClick={this.handleSubmit.bind(this)}>
                         <UpdateBtn {...{submission}}/>
                     </div>
-                    <DeleteBtn {...{record_id}}/>
+                    <DeleteBtn {...{auth_token, id: record_id, type: 'type', url}}/>
                 </div>                
             </form>
         );

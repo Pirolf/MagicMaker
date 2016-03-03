@@ -142,18 +142,39 @@ RSpec.describe SubtypesController, type: :controller do
   end
 
   describe "DELETE #destroy" do
-    it "destroys the requested subtype" do
-      subtype = Subtype.create! valid_attributes
-      expect {
-        delete :destroy, {:id => subtype.to_param}, valid_session
-      }.to change(Subtype, :count).by(-1)
+    before(:each) do
+      @user = FactoryGirl.create(:user)
+      @subtype = @user.subtypes.last
     end
 
-    it "redirects to the subtypes list" do
-      subtype = Subtype.create! valid_attributes
-      delete :destroy, {:id => subtype.to_param}, valid_session
-      expect(response).to redirect_to(subtypes_url)
+    describe 'unauthenticated' do
+      it 'return 401' do
+        sign_in nil
+        delete :destroy, { id: @subtype.to_param, format: :json }
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
+    describe 'authenticated as other user/user does not own subtype' do
+      it 'return 400' do
+        sign_in FactoryGirl.create(:user)
+        delete :destroy, { id: @subtype.to_param, format: :json}
+        expect(response).to have_http_status(:bad_request)
+      end
+    end
+
+    describe 'authenticated' do
+      it "destroys the requested subtype" do
+        sign_in @user
+        expect {
+          delete :destroy, { id: @subtype.to_param, format: :json }
+        }.to change(Subtype, :count).by(-1)
+
+        require 'json'
+        deleted_subtype = JSON.parse(response.body)
+        expect(deleted_subtype['id']).to be(@subtype.id)
+        expect(response).to have_http_status(:ok)
+      end
     end
   end
-
 end

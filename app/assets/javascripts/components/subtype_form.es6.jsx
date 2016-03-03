@@ -62,17 +62,17 @@ class SubtypeForm extends React.Component {
   }
 
   render () {
-    const {record_id} = this.props;
+    const {auth_token, record_id} = this.props;
     const {name, submission} = this.state;
     const id = `edit_subtype_${record_id}`;
-    const action = `/subtypes/${record_id}`;
+    const url = `/subtypes/${record_id}.json`;
     return (
       <form className="edit_subtype" {...{id}} >
         <SubtypeName subtype_name={name} subtype_id={record_id} onChange={this.handleNameChange.bind(this)}/>
         <div onClick={this.handleSubmit.bind(this)}>
           <UpdateBtn {...{submission}}/>
         </div>
-        <DeleteBtn {...{record_id}}/>
+        <DeleteBtn {...{auth_token, id: record_id, type: 'subtype', url}}/>
       </form>
     );
   }

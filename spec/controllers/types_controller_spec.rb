@@ -281,28 +281,31 @@ RSpec.describe TypesController, type: :controller do
   describe "DELETE #destroy" do
     before(:each) do
       @user = FactoryGirl.create(:user)
-      @type = @user.types.first
+      @type = @user.types.last
     end
 
     describe 'unauthenticated' do
-      it 'redirects to sign up page' do
+      it 'returns 401' do
         sign_in nil
         delete :destroy, { id: @type.to_param, format: :json }
-        expect(response).to redirect_to new_user_session_url
+        expect(response).to have_http_status :unauthorized
       end
     end
 
-    describe 'authenticated as other user' do
-      it 'redirects to sign up page' do
+    describe 'authenticated as other user/user does not have type' do
+      it 'returns 400' do
         sign_in FactoryGirl.create(:user)
         delete :destroy, { id: @type.to_param, format: :json}
-        expect(response).to redirect_to new_user_session_url
+        expect(response).to have_http_status :bad_request
       end
     end
 
     describe 'authenticated' do
-      it "destroys the requested type" do
+      it "destroys the requested type and subtypes" do
         sign_in @user
+        prev_subtype_count = Subtype.count
+        subtypes_count = @type.subtypes.count
+
         expect {
           delete :destroy, { id: @type.to_param, format: :json }
         }.to change(Type, :count).by(-1)
@@ -310,6 +313,8 @@ RSpec.describe TypesController, type: :controller do
         require 'json'
         deleted_type = JSON.parse(response.body)
         expect(deleted_type['id']).to eq(@type.id)
+        expect(Subtype.where(type_id: @type.id).count).to eq(0)
+        expect(prev_subtype_count - Subtype.count).to eq(subtypes_count)
         expect(response).to have_http_status(:ok)
       end
     end

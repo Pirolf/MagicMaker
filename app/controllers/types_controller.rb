@@ -1,7 +1,7 @@
 class TypesController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :destroy, :index, :show, :update, :set_type]
+  before_action :authenticate_user!, only: [:create, :index, :show, :update, :set_type]
   before_action :set_type, only: [:show, :edit, :update, :destroy]
-
+  before_action :authorize!, only: [:destroy]
   # GET /types
   # GET /types.json
   def index
@@ -83,14 +83,12 @@ class TypesController < ApplicationController
   # DELETE /types/1.json
   def destroy
     if @type == nil
-      redirect_to new_user_session_url
+      render nothing: true, status: :bad_request
       return
     end
 
     @type.destroy
-    respond_to do |format|
-      format.json { render json: @type, status: :ok }
-    end
+    render json: @type, status: :ok
   end
 
   private

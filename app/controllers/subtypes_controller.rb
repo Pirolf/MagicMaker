@@ -1,6 +1,6 @@
 class SubtypesController < ApplicationController
   before_action :set_subtype, only: [:show, :edit, :update, :destroy]
-
+  before_action :authorize!, only: [:destroy]
   # GET /subtypes
   # GET /subtypes.json
   def index
@@ -31,8 +31,6 @@ class SubtypesController < ApplicationController
     @subtype = current_user.subtypes.build(subtype_params)
     respond_to do |format|
       if @subtype.save
-        #format.html { redirect_to @subtype, notice: 'Subtype was successfully created.' }
-        #format.json { render :show, status: :created, location: @subtype }
         format.json   { render json: { subtype: @subtype, status: "ok" } }
       else
         format.json  { render json: { errors: @subtype.errors.full_messages }, status: :ok}
@@ -59,17 +57,22 @@ class SubtypesController < ApplicationController
   # DELETE /subtypes/1
   # DELETE /subtypes/1.json
   def destroy
-    @subtype.destroy
-    respond_to do |format|
-      format.html { redirect_to subtypes_url, notice: 'Subtype was successfully destroyed.' }
-      format.json { head :no_content }
+    if @subtype === nil
+      render nothing: true, status: :bad_request
+      return
     end
+
+    @subtype.destroy
+    render json: @subtype, status: :ok
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_subtype
-      @subtype = Subtype.find(params[:id])
+      subtype = Subtype.find(params[:id])
+      if subtype.user == current_user
+        @subtype = subtype
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
