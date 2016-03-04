@@ -11,8 +11,7 @@ class TypeSelect extends React.Component {
     }
 
     handleNewSubtype(data) {
-        const {types} = this.props;
-        const {selected: currentSelected} = this.props;
+        const {types, selected: currentSelected} = this.state;
         if (currentSelected.id === data.subtype.type_id) return;
         const selected = types.find((t) => { return t.id === data.subtype.type_id});
         this.setState({selected});

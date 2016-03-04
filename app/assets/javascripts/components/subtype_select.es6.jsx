@@ -47,16 +47,24 @@ class SubtypeSelect extends React.Component {
         window.events.emit('subtype-selection-changed', { subtype_name: data.subtype.name })
     }
 
+    removeSubtype(data) {
+        const {subtypes} = this.state;
+        const newSubtypes = subtypes.filter((s) => s.id !== data.id);
+        this.setState({subtypes: newSubtypes, selected: null});
+    }
+
     componentDidMount() {
         window.events.addListener('type-selection-changed', this.changeSubtype.bind(this));
         window.events.addListener('subtypes-updated', this.updateSubtypes.bind(this));
         window.events.addListener('subtype-created', this.addSubtype.bind(this));
+        window.events.addListener('remove-subtype', this.removeSubtype.bind(this));
     }
 
     componentWillUnmount() {
         window.events.removeListener('type-selection-changed', this.changeSubtype.bind(this));
         window.events.removeListener('subtypes-updated', this.updateSubtypes.bind(this));
         window.events.removeListener('subtype-created', this.addSubtype.bind(this));
+        window.events.removeListener('remove-subtype', this.removeSubtype.bind(this));
     }
 
     render() {

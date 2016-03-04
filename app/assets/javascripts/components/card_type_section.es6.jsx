@@ -12,26 +12,29 @@ class CardTypeSection extends React.Component {
     updateDisplayedSubtype(data) {
         this.setState({ subtype: data.subtype_name })
     }
-    
-    click() {
-        console.log('click-backdrop received')
+
+    removeSubtype() {
+        this.setState({subtype: null});
     }
+
     componentDidMount() {
-        window.events.addListener('click-backdrop', this.click.bind(this));
-        window.events.addListener('type-selection-changed', this.updateDisplayedType.bind(this))
-        window.events.addListener('subtype-selection-changed', this.updateDisplayedSubtype.bind(this))
+        window.events.addListener('type-selection-changed', this.updateDisplayedType.bind(this));
+        window.events.addListener('subtype-selection-changed', this.updateDisplayedSubtype.bind(this));
+        window.events.addListener('remove-subtype', this.removeSubtype.bind(this));
     }
 
     componentWillUnmount() {
-        window.events.removeListener('type-selection-changed', this.updateDisplayedType.bind(this))
-        window.events.removeListener('subtype-selection-changed', this.updateDisplayedSubtype.bind(this))
+        window.events.removeListener('type-selection-changed', this.updateDisplayedType.bind(this));
+        window.events.removeListener('subtype-selection-changed', this.updateDisplayedSubtype.bind(this));
+        window.events.removeListener('remove-subtype', this.removeSubtype.bind(this));
     }
 
     render() {
-        var hyphen
+        var hyphen;
         if (_.isString(this.state.subtype) && this.state.subtype !== '') {
-            hyphen = '-'
+            hyphen = '-';
         }
+
         return (
             <div className="type_name_text type_subtype">
                 <span id="type_text">{ this.state.type }</span>
