@@ -1,5 +1,5 @@
 <% javascript 'card_show.js' %>
-<%= render partial: 'shared/card', locals: {card: @card} %>
+<%= render partial: 'shared/card', locals: {card: @card, lastClass: ''} %>
 
 <%= link_to 'Edit', edit_card_path(@card) %> |
 <%= link_to 'Delete', @card, method: :delete, data: { confirm: 'Are you sure?' } %> |

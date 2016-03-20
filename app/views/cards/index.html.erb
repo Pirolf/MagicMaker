@@ -1,22 +1,17 @@
 <% javascript 'card_all.js' %>
-<p id="notice"><%= notice %></p>
 
 <h1>My Cards</h1>
-<div class='container'>
+
+<div class="cards-all">
     <% @cards.each_with_index do |card, i| %>
-        <% if i % 4 == 0 %>
-          <div class='row'>
-        <% end %>
-          <div class='col-lg-3' >
-            <%= render partial: 'shared/card', locals: {card: card} %>
-            <!--%= link_to 'Edit', edit_card_path(card) %-->
-            <!--%= link_to 'Destroy', card, method: :delete, data: { confirm: 'Are you sure?' } %-->
-          </div>
-        <% if i % 4 == 0 %>
-          <div/>
-        <% end %>
+        <% lastKlass = '' %>
+        <% lastKlass = "last#{(@cards.count)%3}" if i == @cards.count - 1 %>
+        <%= render partial: 'shared/card', locals: { card: card, lastClass: lastKlass} %>
+        <!--%= link_to 'Edit', edit_card_path(card) %-->
+        <!--%= link_to 'Destroy', card, method: :delete, data: { confirm: 'Are you sure?' } %--> 
     <% end %>
-    <!--load more -->
-    
 </div>
-<%= link_to 'New Card', new_card_path %>
+<a href=<%= new_card_path %>>
+  <div class="glyphicon glyphicon-plus-sign medium-glyph"></div>
+  New Card
+</a>

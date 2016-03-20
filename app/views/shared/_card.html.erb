@@ -1,4 +1,4 @@
-<%= div_for(card, class: "card_container", "data-image-url" => compute_asset_path('images')) do %>
+<%= div_for(card, class: "card_container #{lastClass}", "data-image-url" => compute_asset_path('images')) do %>
     <%= image_tag('', 'data-frame-url' => card.get_frame_url, class: "card_frame") %>
     
     <%= content_tag(:div, nil, class: "card_art_container",

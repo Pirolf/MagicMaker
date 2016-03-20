@@ -16,30 +16,7 @@ $desc_height_ratio: 23.3/95.4;
 
 $text_left_align: 36.3px;
 
-@font-face {
-	font-family: 'matrixb'; /*a name to be used later*/
-    	src: url('/fonts/matrixb.ttf'); /*URL to font*/
-}
-@font-face{
-	font-family: 'matrix-bold';
-	src: url('/fonts/matrix-bold.ttf'); 
-}
-@font-face{
-	font-family: 'mplantin';
-	src: url('/fonts/mplantin.ttf');
-}
-@font-face{
-	font-family: 'beleren-bold';
-	src: url('/fonts/beleren-bold.ttf');
-}
-@font-face{
-	font-family: 'belerensmallcaps-bold';
-	src: url('/fonts/belerensmallcaps-bold.ttf');
-}
-@font-face{
-	font-family: 'keyrune';
-	src: url('/fonts/keyrune.ttf');
-}
+@import "fonts";
 @mixin manaFont{
 	font-family: 'mplantin';
 	font-weight: bold;
@@ -79,29 +56,33 @@ $text_left_align: 36.3px;
 }
 .mana_cost_list{
 	img{
-		@include smallSymbol(24px)
+		@include smallSymbol(24px);
 	}
 }
+
 .insertable_symbol{
-	@include smallSymbol(24px)
+	@include smallSymbol(24px);
 }
+
 .embedded_mana_symbol{
-	@include smallSymbol(16px)
+	@include smallSymbol(16px);
 }
-.card_container{
+
+@mixin card($scale: 1.0) {
 	position:relative;
+	flex: 1;
 	.card_frame{
-		width: $card_width;
+		width: $card_width * $scale;
 	}
 	.card_desc{
 		position: absolute;
-		left: $text_left_align;
-		top: 330px;
+		left: $text_left_align * $scale;
+		top: 330px * $scale;
 
-		width:$art_width - 7px; //save some room in right
-		height: $desc_height_ratio * $card_height;
+		width: $scale * ($art_width - 7px); //save some room in right
+		height: $scale * $desc_height_ratio * $card_height;
 		font-family: 'mplantin';
-		font-size: 1.1em;
+		font-size: 1.1em * $scale;
 		color: #000;
 		text-overflow: ellipsis;
 		overflow: hidden;
@@ -109,13 +90,13 @@ $text_left_align: 36.3px;
 	}
 	.mana_symbols_container{
 		position: absolute;
-		top: 33px;
-		left: $art_left_align;
-		width: $art_width;
+		top: 33px * $scale;
+		left: $art_left_align * $scale;
+		width: $art_width * $scale;
 	}
 	.mana_symbol{
 		position: absolute;
-		width: 19px;
+		width: 19px * $scale;
 		height: auto;
 	}
 	.symbol_number{
@@ -123,28 +104,28 @@ $text_left_align: 36.3px;
 	}
 	.type_subtype{
 		position:absolute;
-		left: $text_left_align;
-		bottom: 241px;
-		font-size: 1.15em;
+		left: $text_left_align * $scale;
+		bottom: 241px * $scale;
+		font-size: 1.15em * $scale;
 	}
 	.card_art_container{
 		background-size: cover;
 		background-position: center;
-		width: $art_width;
-		height: $art_height;
+		width: $art_width * $scale;
+		height: $art_height * $scale;
 		position: absolute;
-		top: 63px;
-		left: $art_left_align;
+		top: 63px * $scale;
+		left: $art_left_align * $scale;
 	}
 	.card_name{
-		font-size: 1.4em;
-		font-weight:bold;
+		font-size: 1.4em * $scale;
+		font-weight: bold;
 		position: absolute;
-		top: 30px;
-		left: $text_left_align;
+		top: 30px * $scale;
+		left: $text_left_align * $scale;
 	}
 	.attack_defense{
-		font-size: 2em;
+		font-size: 2em * $scale;
 		font-family: 'matrix-bold';
 		color: #000;
 		position: absolute;
@@ -157,15 +138,54 @@ $text_left_align: 36.3px;
 	}
 	.attack_defense_container{
 		position:relative;
-		width: $ad_width_ratio * $card_width;
+		width: $ad_width_ratio * $card_width * $scale;
 		height: auto;
-		left: $ad_left_ratio* $card_width;
-		bottom: $ad_bottom_ratio * $card_height;
-		//text-align:center;
+		left: $ad_left_ratio* $card_width * $scale;
+		bottom: $ad_bottom_ratio * $card_height * $scale;
 		.attack_defense_box{
 			width: inherit;
 			height: auto;
 		}
 	}
 }
+.card_container {
+	@include card(1);
+    margin-right: auto;
+    margin-left: auto;
+}
 
+.cards-all {
+	display: flex; 
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	width: 90%;
+	max-width: 900px;
+    margin-right: auto;
+    margin-left: auto;
+
+    @media (max-width: 932px) {
+    	max-width: 572px;
+    }
+
+    @media (max-width: 605px) {
+    	flex-direction: column;
+		justify-content: center;
+	}
+
+    .card_container {
+		display: inline-block;
+		flex: 1;
+		&.last1 {
+			flex: 2;
+		}
+		
+		&.last2 {
+			flex: 3;
+		}
+
+		@media (min-width: 605px) {
+			@include card(0.7);
+		}
+	}
+}
