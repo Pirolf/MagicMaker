@@ -122,7 +122,7 @@ Card.prototype.loadCardFrame = function(){
     if (this.colorSelect === undefined || this.colorSelect === null)return;
     var selectedColor = this.colorSelect.val().toLowerCase();
     //get card frame url
-    var cardFrameUrl = magicMaker.imagesPath + '/' + selectedColor + '/frame.jpg';
+    var cardFrameUrl = magicMaker.imagesPath + '/' + selectedColor + '/frame.png';
     var frameImage = new Image();
     frameImage.onload = function(){
       this.frameImage.attr('src', cardFrameUrl);

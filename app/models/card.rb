@@ -31,7 +31,7 @@ class Card < ActiveRecord::Base
 	end
 
   def get_frame_url
-    color.downcase + '/frame.jpg'
+    color.downcase + '/frame.png'
   end
 
   def get_attack_defense_box_url

@@ -27,7 +27,11 @@
         @content;
     }
 }
-/* custom responsive stuff */
+
+body {
+    background-color: rgb(233, 233, 233);
+}
+
 .small-padding {
     padding-left: 5px;
     padding-right: 5px;

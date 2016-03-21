@@ -27,18 +27,6 @@ $text_left_align: 36.3px;
 	height: auto;
 }
 
-//for [0, 9]
-.smallManaText{
-	font-size: 1.3em;
-	transform: translate(-60%, -2px);//5*0.8*0.5
-	@include manaFont;
-}
-.largeManaText{
-    font-size: 1.1em;
-    transform: translate(-15%, 2%);
-    @include manaFont;
-}
-
 .type_name_text{
 	font-family: 'beleren-bold';
 	color: #000;
@@ -68,12 +56,29 @@ $text_left_align: 36.3px;
 	@include smallSymbol(16px);
 }
 
+$max-symbols: 15;
+@mixin manaSymbols($scale: 1.0) {
+	@for $i from 0 through $max-symbols - 1 {
+		.symbol-number-#{$i} {
+			position: absolute;
+			right: $i * 21px * $scale;
+		}
+  	}
+}
+
 @mixin card($scale: 1.0) {
 	position:relative;
 	flex: 1;
+    margin-right: auto;
+    margin-left: auto;
+    @include manaSymbols($scale);
+
 	.card_frame{
 		width: $card_width * $scale;
+		box-shadow: rgba(0, 0, 0, 0.3) 2px 2px 6px 2px;
+		border-radius: 19px;
 	}
+
 	.card_desc{
 		position: absolute;
 		left: $text_left_align * $scale;
@@ -94,14 +99,25 @@ $text_left_align: 36.3px;
 		left: $art_left_align * $scale;
 		width: $art_width * $scale;
 	}
+
 	.mana_symbol{
 		position: absolute;
 		width: 19px * $scale;
 		height: auto;
 	}
-	.symbol_number{
-		position: absolute;
+	//for [0, 9]
+	.smallManaText{
+		font-size: 1.3em * $scale;
+		transform: translate(-60%, -2px);//5*0.8*0.5
+		@include manaFont;
 	}
+
+	.largeManaText{
+	    font-size: 1.1em * $scale;
+	    transform: translate(-15%, 2%);
+	    @include manaFont;
+	}
+
 	.type_subtype{
 		position:absolute;
 		left: $text_left_align * $scale;
@@ -148,6 +164,7 @@ $text_left_align: 36.3px;
 		}
 	}
 }
+
 .card_container {
 	@include card(1);
     margin-right: auto;
@@ -160,7 +177,6 @@ $text_left_align: 36.3px;
 	flex-wrap: wrap;
 	justify-content: space-between;
 	width: 90%;
-	max-width: 900px;
     margin-right: auto;
     margin-left: auto;
 
@@ -173,19 +189,36 @@ $text_left_align: 36.3px;
 		justify-content: center;
 	}
 
+	.new-card-container {
+		flex: 1;
+		min-width: $card_width * 0.7;
+		margin: 0 auto;
+	}
+
     .card_container {
 		display: inline-block;
 		flex: 1;
-		&.last1 {
-			flex: 2;
+		@media (min-width: $card_width * 4 * 0.7 / 0.9) {
+			&.last-4-2 {
+				flex: 3;
+			}
+
+			&.last-4-3 {
+				flex: 2;
+			}
 		}
-		
-		&.last2 {
-			flex: 3;
+
+		@media (min-width: 932px) and (max-width: $card_width * 4 * 0.7 / 0.9) {
+			&.last-3-2 {
+				flex: 2;
+			}
 		}
 
 		@media (min-width: 605px) {
 			@include card(0.7);
+			.card_frame {
+				border-radius: 13px;
+			}
 		}
 	}
 }

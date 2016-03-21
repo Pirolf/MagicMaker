@@ -93,14 +93,14 @@ CardPresenter.prototype.loadManaSymbols = function(imagesUrl){
 			break;
 		}
 	}//end for
+
 	for(var i=0; i < symbolsArr.length; i++){
-		var right = (symbolsArr.length - 1 - i) * 21;
-		var symbol = symbolsArr[i].find('.mana_symbol');
+		var index = symbolsArr.length - 1 - i;
 		var symbolNumber = symbolsArr[i].find('.symbol_number');
 		if (symbolNumber !== undefined && symbolNumber !== null){
-			symbolNumber.css('right', right + 'px');
+			symbolNumber.addClass("symbol-number-" + index);
 		}
-		symbol.css('right', right + 'px');
+		symbolsArr[i].find('.mana_symbol').addClass("symbol-number-" + index);
 		this.manaSymbolsContainer.append(symbolsArr[i]);
 	}
 }

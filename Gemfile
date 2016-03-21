@@ -48,7 +48,7 @@ gem 'thin', '~> 1.6', '>= 1.6.4'
 
 group :development, :test do
   gem 'sqlite3',  '1.3.10'
-  gem 'selenium-webdriver', '~> 2.48'
+  gem 'selenium-webdriver', '~> 2.52'
   gem 'database_cleaner', '~> 1.5'
   gem 'rspec', '3.3.0'
   gem 'rspec-rails', '~> 3.3.3'
