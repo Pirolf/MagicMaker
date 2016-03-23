@@ -165,11 +165,9 @@ $max-symbols: 15;
 	}
 }
 
-.card_container {
-	@include card(1);
-    margin-right: auto;
-    margin-left: auto;
-}
+$card-column-width: 605px;
+$card-small-scale: 0.7;
+$flex-to-window-width: 0.9;
 
 .cards-all {
 	display: flex; 
@@ -184,40 +182,47 @@ $max-symbols: 15;
     	max-width: 572px;
     }
 
-    @media (max-width: 605px) {
+    @media (max-width: $card-column-width) {
     	flex-direction: column;
 		justify-content: center;
 	}
 
 	.new-card-container {
 		flex: 1;
-		min-width: $card_width * 0.7;
+		min-width: $card_width * $card-small-scale;
 		margin: 0 auto;
 	}
 
     .card_container {
-		display: inline-block;
 		flex: 1;
-		@media (min-width: $card_width * 4 * 0.7 / 0.9) {
-			&.last-4-2 {
-				flex: 3;
-			}
-
-			&.last-4-3 {
-				flex: 2;
-			}
+		$per-card-width: $card_width * $card-small-scale / $flex-to-window-width;
+		
+		@media (max-width: $card-column-width) {
+			@include card(1);
+		    margin-right: auto;
+		    margin-left: auto;
 		}
 
-		@media (min-width: 932px) and (max-width: $card_width * 4 * 0.7 / 0.9) {
-			&.last-3-2 {
-				flex: 2;
-			}
-		}
-
-		@media (min-width: 605px) {
-			@include card(0.7);
+		@media (min-width: $card-column-width) {
+			@include card($card-small-scale);
 			.card_frame {
 				border-radius: 13px;
+			}
+
+			@media (min-width: $per-card-width * 3) and (max-width: $per-card-width * 4) {
+				&.last-3-2 {
+					flex: 2;
+				}
+			}
+
+			@media (min-width: $per-card-width * 4) {
+				&.last-4-2 {
+					flex: 3;
+				}
+
+				&.last-4-3 {
+					flex: 2;
+				}
 			}
 		}
 	}
