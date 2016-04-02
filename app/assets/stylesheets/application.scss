@@ -15,6 +15,7 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "variables";
 /* media query */
 @mixin mobile {
     @media (max-width: 700px) {
@@ -30,6 +31,10 @@
 
 body {
     background-color: rgb(233, 233, 233);
+}
+
+h3 {
+    margin: 0;
 }
 
 .small-padding {

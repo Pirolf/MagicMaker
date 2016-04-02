@@ -3,6 +3,10 @@ module ApplicationHelper
   		content_for(:head) { javascript_include_tag(*files) }
 	end
 
+	def header(page_title)
+		content_for :title, page_title
+	end
+
 	def resource_name
 		:user
 	end

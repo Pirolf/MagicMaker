@@ -28,7 +28,7 @@ class Glyphicon extends React.Component {
                 <div id="log_in">Log in</div>
             );
         }
-        return false
+        return false;
     }
 }
 

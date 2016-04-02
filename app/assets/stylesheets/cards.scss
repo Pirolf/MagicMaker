@@ -165,6 +165,12 @@ $max-symbols: 15;
 	}
 }
 
+.card_container {
+	@include card(1);
+  	margin-right: auto;		
+    margin-left: auto;		
+}
+
 $card-column-width: 605px;
 $card-small-scale: 0.7;
 $flex-to-window-width: 0.9;

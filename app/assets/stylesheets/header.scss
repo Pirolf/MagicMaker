@@ -1,0 +1,16 @@
+@import "variables";
+@import "fonts";
+
+.header {
+	background: white;
+    width: 100%;
+    height: $header-height;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.22);
+    display: flex;
+    align-items: center;
+ }
+
+ h3 {
+ 	font-family: 'beleren-bold';
+ }
+ 
