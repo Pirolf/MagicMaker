@@ -6,6 +6,7 @@ capybara-*.html
 #RubyMine
 .idea
 
+*browserify-cache.json
 /dist
 /log
 /tmp
