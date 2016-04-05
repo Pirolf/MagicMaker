@@ -8,9 +8,39 @@
     box-shadow: 0 1px 2px 0 rgba(0,0,0,0.22);
     display: flex;
     align-items: center;
- }
+    @media (max-width: $header-width-small-screen) {
+		height: $header-height-small-screen;
+	}
 
- h3 {
- 	font-family: 'beleren-bold';
- }
- 
+    .header-row {
+    	display: flex;
+    	flex-direction: row;
+	    @media (max-width: $header-width-small-screen) {
+			flex-direction: column;
+            .auth-container {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+		}
+        
+    	.auth {
+    		flex: 1;
+    		display: inline-flex;
+    		
+			&.sign-in {
+                flex-basis: 100%;
+                @media (min-width: $header-width-small-screen) {
+                    margin-right: 10px;
+                }
+			}
+    	}
+    }
+    
+    h3 {
+ 		flex: 1;
+ 		font-family: 'cardinal';
+ 		font-size: 28px;
+ 		margin-top: 4px;
+ 	}
+}

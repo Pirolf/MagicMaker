@@ -1,4 +1,5 @@
 <%= div_for(card, class: "card_container #{lastClass}", "data-image-url" => compute_asset_path('images')) do %>
+    <div class='overlay'>
     <%= image_tag('', 'data-frame-url' => card.get_frame_url, class: "card_frame") %>
     
     <%= content_tag(:div, nil, class: "card_art_container",
@@ -25,5 +26,6 @@
         <!--%= image_tag("symbols/red.png", class: "mana_symbol") %>
         <div id='symbol_number'></div-->
       </div>
+    </div>
     </div>
 <% end %>

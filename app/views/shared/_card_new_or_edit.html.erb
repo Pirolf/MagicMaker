@@ -1,11 +1,11 @@
 <%= react_component('Lightbox') %>
 <div class="container">
-	<div class="row">
-		<div class="col-sm-3 col-sm-push-6">
-			<%= render partial: 'shared/card', locals: { card: @card, lastClass: '' } %>
-		</div>
-		<div class="col-sm-6 col-sm-pull-3">
+	<div class="card-content">
+		<div class="card-form">
 			<%= render 'form' %>
+		</div>
+		<div class="card-view">
+			<%= render partial: 'shared/card', locals: { card: @card, lastClass: '' } %>
 		</div>
 	</div>
 </div>

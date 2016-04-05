@@ -1,8 +1,10 @@
 const Glyphicon = require('./glyphicon.es6.jsx')
 class LightboxLink extends React.Component {
-    constructor(props) {
-        super(props)
+    static propsTypes = {
+        url: React.PropTypes.string.isRequired,
+        link_type: React.PropTypes.string
     }
+
     requestHtml() {
         $.ajax({
             method: "GET",
@@ -19,15 +21,11 @@ class LightboxLink extends React.Component {
         return (
             <div onClick={ this.requestHtml.bind(this) }>
                 <Glyphicon type={ this.props.link_type } />
+                {this.props.children}
             </div>
         )
     }
 }
 
-LightboxLink.props = {
-    url: React.PropTypes.string,
-    link_type: React.PropTypes.string
-}
-
-module.exports = LightboxLink
-window.LightboxLink = LightboxLink
+module.exports = LightboxLink;
+window.LightboxLink = LightboxLink;

@@ -171,6 +171,21 @@ $max-symbols: 15;
     margin-left: auto;		
 }
 
+.card-content {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+
+	.card-form {
+		flex: 1;
+    	max-width: 600px;
+    	margin-right: 20px;
+	}
+	.card-view {
+		flex-grow: 0;
+	}
+}
+
 $card-column-width: 605px;
 $card-small-scale: 0.7;
 $flex-to-window-width: 0.9;
@@ -203,6 +218,14 @@ $flex-to-window-width: 0.9;
 		flex: 1;
 		$per-card-width: $card_width * $card-small-scale / $flex-to-window-width;
 		
+		.overlay {
+			max-width: $card_width * $card-small-scale;
+			&:hover {
+				opacity: 0.7;
+			}
+		}
+		
+
 		@media (max-width: $card-column-width) {
 			@include card(1);
 		    margin-right: auto;
