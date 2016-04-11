@@ -17,6 +17,8 @@ $desc_height_ratio: 23.3/95.4;
 $text_left_align: 36.3px;
 
 @import "fonts";
+@import "overlay";
+
 @mixin manaFont{
 	font-family: 'mplantin';
 	font-weight: bold;
@@ -216,12 +218,29 @@ $flex-to-window-width: 0.9;
 
     .card_container {
 		flex: 1;
+		z-index: 10;
 		$per-card-width: $card_width * $card-small-scale / $flex-to-window-width;
 		
 		.overlay {
-			max-width: $card_width * $card-small-scale;
+			position: absolute;
+		    z-index: 5;
+			width: $card_width;
+			height: $card_height;
+
+		    @include overlayAnchor;
+			@media (min-width: $card-column-width) {
+				width: $card_width * $card-small-scale;
+				height: $card_height * $card-small-scale;
+		    	@include overlayAnchor(0.7);
+		    }
+
 			&:hover {
-				opacity: 0.7;
+				display: flex;
+			    background: rgba(233,233,233,0.7);
+			    border-radius: 19px;
+			    @media (min-width: $card-column-width) {
+					border-radius: 13px;
+			    }
 			}
 		}
 		

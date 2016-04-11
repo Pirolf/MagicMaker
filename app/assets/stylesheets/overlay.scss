@@ -1,0 +1,19 @@
+@mixin overlayAnchor($scale: 1.0){
+	a {
+		width: 35px;
+		height: 35px;
+		position: absolute;
+		left: 291px * $scale;
+		top: 67px * $scale;
+		color: #666;
+
+		&:visited {
+			color: #666;
+		}
+		
+		&:hover {
+			background-color: transparent;
+			color: black;
+		}
+	}
+}

@@ -12,6 +12,8 @@ class Glyphicon extends React.Component {
                 return (<span className='glyphicon glyphicon-menu-hamburger medium-glyph more-types'></span> );
             case 'add_types':
                 return (<div className="glyphicon glyphicon-plus-sign medium-glyph" id="add-types"></div> );
+            case 'edit':
+                return (<div className="glyphicon glyphicon-pencil medium-glyph" /> ); 
             default: break;
         }
         return null;
