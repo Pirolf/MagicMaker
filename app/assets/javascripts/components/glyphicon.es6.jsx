@@ -14,6 +14,8 @@ class Glyphicon extends React.Component {
                 return (<div className="glyphicon glyphicon-plus-sign medium-glyph" id="add-types"></div> );
             case 'edit':
                 return (<div className="glyphicon glyphicon-pencil medium-glyph" /> ); 
+            case 'delete':
+                return (<div className="glyphicon glyphicon-remove-circle medium-glyph" /> ); 
             default: break;
         }
         return null;

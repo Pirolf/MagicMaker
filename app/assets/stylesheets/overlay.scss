@@ -1,11 +1,15 @@
 @mixin overlayAnchor($scale: 1.0){
 	a {
-		width: 35px;
-		height: 35px;
+		width: 50px * $scale;
+		height: 50px * $scale;
 		position: absolute;
 		left: 291px * $scale;
 		top: 67px * $scale;
 		color: #666;
+
+		.medium-glyph {
+			font-size: 2.7em * $scale; 
+		}
 
 		&:visited {
 			color: #666;
@@ -14,6 +18,10 @@
 		&:hover {
 			background-color: transparent;
 			color: black;
+		}
+
+		&:last-child {
+			top: 125px * $scale;
 		}
 	}
 }

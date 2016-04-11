@@ -17,6 +17,9 @@ class CardOverlay extends React.Component {
 		    	<a href={`/cards/${cardId}/edit`}>
 					<Glyphicon type="edit"/>
 				</a>
+				<a href={`/cards/${cardId}`} data-method="delete">
+					<Glyphicon type="delete"/>
+				</a>
 		    </div>
 	    );
 	}
