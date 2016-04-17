@@ -6,7 +6,6 @@ describe('AddBtn', () => {
 	beforeEach(() => {
 		spy = spyOn(AddBtn.prototype, 'render').and.callThrough();
 		ReactDOM.render(<AddBtn />, root);
-		console.log(window);
 	});
 
 	it('renders submit button', () => {

@@ -16,10 +16,6 @@
     </div>
   <% end %>
   
-  <div class="field form-group">
-      <div>Special Abilities</div>
-        <%= collection_check_boxes('card', :special_ability_ids, SpecialAbility.all, :id, :name) %>
-  </div>
   <div class="field btn btn-default btn-file">
     <%= f.file_field :image_art, id: "card_image_file_field" %>
   </div>

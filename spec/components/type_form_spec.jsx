@@ -1,10 +1,6 @@
 describe('TypeForm', () => {
 	const TypeForm = require('../../app/assets/javascripts/components/type_form.es6.jsx');
-	const ReactDOM = require('react-dom');
-	const $ = require('jquery');
-
 	let subject, request, doneSpy;
-
 	const record_id = 1;
 	const props = {
 		name: 'some-type',
@@ -19,7 +15,6 @@ describe('TypeForm', () => {
 	describe('#handleSubmit', () => {
 		let submitSpy;
 		beforeEach(() => {
-			subject = ReactDOM.render(<TypeForm {...props}/>, root);
 			$('.submit-btn').simulate('click');
 		});
 
