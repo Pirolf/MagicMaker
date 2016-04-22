@@ -39,8 +39,7 @@ class CardsController < ApplicationController
       @card = current_user.cards.build(card_params)
       respond_to do |format|
         if @card.save
-          success_notice = "card created"
-          format.html { redirect_to @card, notice: success_notice }
+          format.html { redirect_to new_card_url, notice: "Card Created!" }
           format.json { render :show, status: :created, location: @card }
         else
           format.html { render :new }
@@ -58,7 +57,7 @@ class CardsController < ApplicationController
     if user_signed_in?
       respond_to do |format|
         if @card.update(card_params)
-          format.html { redirect_to @card, notice: 'Card was successfully updated.' }
+          format.js { render 'success', locals: { message: 'Card Updated!'} }
           format.json { render :show, status: :ok, location: @card }
         else
           format.html { render :edit }

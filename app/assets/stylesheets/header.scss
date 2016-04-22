@@ -5,12 +5,30 @@
 	background: white;
     width: 100%;
     height: $header-height;
+    position: fixed;
+    top: 0;
+    z-index: 20;
     box-shadow: 0 1px 2px 0 rgba(0,0,0,0.22);
     display: flex;
     align-items: center;
     @media (max-width: $header-width-small-screen) {
 		height: $header-height-small-screen;
 	}
+
+    .notice {
+        background: #3E9667;
+        color: white;
+        font-size: 18px;
+        width: 350px;
+        text-align: center;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        border-radius: 3px;
+    }
+
+    .gutter {
+        flex: 1;
+    }
 
     .header-row {
     	display: flex;
@@ -39,6 +57,7 @@
     
     h3 {
  		flex: 1;
+        max-width: 200px;
  		font-family: 'cardinal';
  		font-size: 28px;
  		margin-top: 4px;

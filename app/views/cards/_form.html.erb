@@ -2,7 +2,7 @@
 <% javascript 'types.js' %>
 <% images_path = compute_asset_path('images') %>
 
-<%= form_for(@card, multipart: true) do |f| %>
+<%= form_for(@card, multipart: true, remote: true) do |f| %>
   <% locals = { images_path: images_path, f: f} %>
   <% if @card.errors.any? %>
     <div id="error_explanation">

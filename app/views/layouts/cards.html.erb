@@ -7,7 +7,8 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<%= react_component('Header', {title: yield(:title), authorized: user_signed_in?}, {prerender: true}) %>
+	<%= react_component('Header', {title: yield(:title), authorized: user_signed_in?}) %>
+	<p class="notice"/>
 	<div class="main-container">
 		<%= yield(:head) %>
 		<%= yield %>

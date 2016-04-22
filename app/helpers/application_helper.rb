@@ -6,7 +6,7 @@ module ApplicationHelper
 	def header(page_title)
 		content_for :title, page_title
 	end
-
+	
 	def resource_name
 		:user
 	end
