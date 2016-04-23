@@ -17,7 +17,7 @@ class Auth extends React.Component {
 		const {authorized} = this.props;
 		if (authorized) {
 			return (
-				<div className="btn btn-primary">
+				<div className="auth btn btn-primary">
 					<a rel="nofollow" data-method="delete" href="/users/sign_out">Log out</a>
             	</div>
 			);

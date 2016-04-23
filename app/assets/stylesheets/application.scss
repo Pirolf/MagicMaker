@@ -39,6 +39,9 @@ h3 {
 
 .main-container {
     margin-top: $header_height + 25px;
+    @media (max-width: $header-width-small-screen) {
+        margin-top: $header-height-small-screen + 25px;
+    }
 }
 
 .small-padding {

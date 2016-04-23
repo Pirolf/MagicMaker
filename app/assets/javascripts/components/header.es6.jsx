@@ -50,7 +50,7 @@ class Header extends React.Component {
 			<div className="header">
 				<div className="container">
 					<div className="header-row">
-						<h3>Magic Maker</h3>
+						<h3 className="main-title">Magic Maker</h3>
 						<HeaderDropdown {...{title}}/>
 						<div style={opacity} className='notice'>{message}</div>
 						<div className="gutter" />

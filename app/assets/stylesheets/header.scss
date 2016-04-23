@@ -43,9 +43,19 @@
 		}
         
     	.auth {
-    		flex: 1;
     		display: inline-flex;
-    		
+            min-width: 80px;
+            max-width: 80px;
+            @media (max-width: $header-width-small-screen) {
+        		margin: auto;
+                min-width: 314px;   
+                max-width: 314px;
+            }
+            
+            a {
+                margin: auto;
+            }
+
 			&.sign-in {
                 flex-basis: 100%;
                 @media (min-width: $header-width-small-screen) {
@@ -57,17 +67,31 @@
 
     .action-bar {
         display: flex;
+        @media (max-width: $header-width-small-screen) {
+            margin: auto;
+            margin-top: 10px;
+        }
+    }
+
+    .arrow {
+        @media (max-width: $header-width-small-screen) {
+            display: none;
+        }
     }
 
     .action-picker {
         background: #eeeef1;
         width: 200px;
-        height: 32px;
+        height: 34px;
         padding-left: 10px;
         margin: auto;
         border-top-left-radius: 2px;
         border-bottom-left-radius: 2px;
         border-right: none;
+
+        @media (max-width: $header-width-small-screen) {
+            width: 270px;
+        }
     }
 
     .action-dropdown {
@@ -77,11 +101,20 @@
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
         border-left: none;
-        height: 32px;
+        height: 34px;
         font-size: 15px;
         width: 44px;
         text-align: center;
         padding-top: 7px;
+    }
+
+    .main-title {
+        min-width: 216px;
+        max-width: 500px;
+        
+        @media (max-width: $header-width-small-screen) {
+            text-align: center;
+        }
     }
 
     .subtitle {
@@ -95,7 +128,6 @@
     h3 {
  		flex: 1;
         color: #2a3757;
-        max-width: 270px;
  		font-family: 'cardinal';
  		font-size: 28px;
  		margin-top: 4px;
