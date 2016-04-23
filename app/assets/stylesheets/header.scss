@@ -54,10 +54,48 @@
 			}
     	}
     }
-    
+
+    .action-bar {
+        display: flex;
+    }
+
+    .action-picker {
+        background: #eeeef1;
+        width: 200px;
+        height: 32px;
+        padding-left: 10px;
+        margin: auto;
+        border-top-left-radius: 2px;
+        border-bottom-left-radius: 2px;
+        border-right: none;
+    }
+
+    .action-dropdown {
+        margin: auto;
+        border-top-right-radius: 2px;
+        border-bottom-right-radius: 2px;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border-left: none;
+        height: 32px;
+        font-size: 15px;
+        width: 44px;
+        text-align: center;
+        padding-top: 7px;
+    }
+
+    .subtitle {
+        color: #606f8e;
+        font-size: 22px;
+        padding-top: 5px;
+        margin: auto;
+        margin-right: 12px;
+    }
+
     h3 {
  		flex: 1;
-        max-width: 200px;
+        color: #2a3757;
+        max-width: 270px;
  		font-family: 'cardinal';
  		font-size: 28px;
  		margin-top: 4px;

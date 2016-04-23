@@ -1,13 +1,13 @@
 const Auth = require('./auth.es6.jsx');
 const ReactMixin = require('react-mixin');
 const AnimationMixin = require('pui-react-animation');
+const HeaderDropdown = require('./header_dropdown.es6.jsx');
 const PureRenderMixin = require('react-addons-pure-render-mixin');
 const types = React.PropTypes;
 
 class Header extends React.Component {
 	constructor(props) {
     	super(props);
-    	this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     	this.state = {};
   	}
 
@@ -45,12 +45,13 @@ class Header extends React.Component {
 		const {authorized, title} = this.props;
 		const {message, invisible} = this.state;
 		const opacity = invisible ? this.fadeNotice() : this.animateNotice(message);
-		console.log(opacity)
+
 		return (
 			<div className="header">
 				<div className="container">
 					<div className="header-row">
-						<h3>{title}</h3>
+						<h3>Magic Maker</h3>
+						<HeaderDropdown {...{title}}/>
 						<div style={opacity} className='notice'>{message}</div>
 						<div className="gutter" />
 						<Auth {...{authorized}}/>
@@ -62,6 +63,7 @@ class Header extends React.Component {
 }
 
 ReactMixin(Header.prototype, AnimationMixin);
+ReactMixin(Header.prototype, PureRenderMixin);
 
 window.Header = Header;
 module.exports = Header;
